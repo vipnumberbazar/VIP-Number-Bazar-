@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>VIP Number Bazar</title>
 
 <style>
@@ -23,7 +22,7 @@ background:#ff6600;
 color:white;
 padding:20px;
 text-align:center;
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 }
 
@@ -35,7 +34,7 @@ text-align:center;
 .search input{
 width:95%;
 max-width:500px;
-padding:14px;
+padding:15px;
 font-size:18px;
 border:1px solid #ddd;
 border-radius:8px;
@@ -74,11 +73,12 @@ background:#25D366;
 color:white;
 border:none;
 padding:12px 20px;
-border-radius:8px;
 font-size:18px;
+border-radius:8px;
 cursor:pointer;
 }
 </style>
+
 </head>
 
 <body>
@@ -103,35 +103,48 @@ getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-  projectId: "vipnumberbazar-73e51",
-  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-  messagingSenderId: "756745745147",
-  appId: "1:756745745147:web:e8dcd216eda572c440f65e",
-  measurementId: "G-ZTB2EEZVQ1"
-};6745745147:web:e8dcd216eda572c440f65e"
+apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
+authDomain: "vipnumberbazar-73e51.firebaseapp.com",
+projectId: "vipnumberbazar-73e51",
+storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
+messagingSenderId: "756745745147",
+appId: "1:756745745147:web:e8dcd216eda572c440f65e"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const container = document.getElementById("numbers");
+const search = document.getElementById("search");
+
+let allNumbers = [];
 
 async function loadNumbers(){
 
 const snapshot = await getDocs(collection(db,"numbers"));
 
 snapshot.forEach((doc)=>{
+allNumbers.push(doc.data());
+});
 
-const data = doc.data();
+showNumbers(allNumbers);
+
+}
+
+function showNumbers(list){
+
+container.innerHTML="";
+
+list.forEach((data)=>{
 
 container.innerHTML += `
 <div class="card">
+
 <div class="number">${data.number}</div>
+
 <div class="price">₹${data.Price}</div>
 
-<button onclick="window.open('https://wa.me/91YOURNUMBER?text=I want VIP Number ${data.number}')">
+<button onclick="window.open('https://wa.me/6354312829?text=I want VIP Number ${data.number}')">
 WhatsApp
 </button>
 
@@ -141,6 +154,17 @@ WhatsApp
 });
 
 }
+search.addEventListener("input", () => {
+
+const value = search.value.toLowerCase();
+
+const filtered = allNumbers.filter(item =>
+item.number.toLowerCase().includes(value)
+);
+
+showNumbers(filtered);
+
+});
 
 loadNumbers();
 
@@ -148,5 +172,4 @@ loadNumbers();
 
 </body>
 </html>
-
 
