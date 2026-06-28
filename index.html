@@ -3,12 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>VIP Number Bazar</title>
 
 <style>
-body{
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
+}
+
+body{
 background:#f5f5f5;
 }
 
@@ -26,11 +32,13 @@ padding:20px;
 text-align:center;
 }
 
-input{
-width:90%;
-max-width:400px;
-padding:12px;
+.search input{
+width:95%;
+max-width:500px;
+padding:14px;
 font-size:18px;
+border:1px solid #ddd;
+border-radius:8px;
 }
 
 .container{
@@ -44,7 +52,7 @@ padding:20px;
 background:white;
 padding:20px;
 border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.2);
+box-shadow:0 2px 10px rgba(0,0,0,.15);
 text-align:center;
 }
 
@@ -52,20 +60,22 @@ text-align:center;
 font-size:28px;
 font-weight:bold;
 color:#ff6600;
+margin-bottom:10px;
 }
 
 .price{
 font-size:22px;
-margin:10px;
+font-weight:bold;
+margin-bottom:15px;
 }
 
 button{
 background:#25D366;
 color:white;
 border:none;
-padding:12px 25px;
+padding:12px 20px;
+border-radius:8px;
 font-size:18px;
-border-radius:6px;
 cursor:pointer;
 }
 </style>
@@ -78,18 +88,63 @@ VIP Number Bazar
 </header>
 
 <div class="search">
-<input type="text" placeholder="Search VIP Number...">
+<input type="text" id="search" placeholder="Search VIP Number...">
 </div>
 
-<div class="container">
+<div class="container" id="numbers">
+</div>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+getFirestore,
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "તમારો apiKey",
+authDomain: "vipnumberbazar-73e51.firebaseapp.com",
+projectId: "vipnumberbazar-73e51",
+storageBucket: "vipnumberbazar-73e51.appspot.com",
+messagingSenderId: "756745745147",
+appId: "1:756745745147:web:e8dcd216eda572c440f65e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const container = document.getElementById("numbers");
+
+async function loadNumbers(){
+
+const snapshot = await getDocs(collection(db,"numbers"));
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+container.innerHTML += `
 <div class="card">
-<div class="number">9999999999</div>
-<div class="price">₹5000</div>
-<button>WhatsApp</button>
-</div>
+<div class="number">${data.number}</div>
+<div class="price">₹${data.Price}</div>
+
+<button onclick="window.open('https://wa.me/91YOURNUMBER?text=I want VIP Number ${data.number}')">
+WhatsApp
+</button>
 
 </div>
+`;
+
+});
+
+}
+
+loadNumbers();
+
+</script>
 
 </body>
 </html>
+
+
