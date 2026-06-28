@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Number Bazar Admin</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#ff6600;
+}
+
+.box{
+max-width:500px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#ff6600;
+color:#fff;
+border:none;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+
+<h1>VIP Number Bazar</h1>
+
+<input id="number" placeholder="VIP Number">
+
+<input id="price" type="number" placeholder="Price">
+
+<select id="status">
+<option value="Available">Available</option>
+<option value="Sold">Sold</option>
+</select>
+
+<button id="saveBtn">Save Number</button>
+
+</div>
+  
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+getFirestore,
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
+  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
+  projectId: "vipnumberbazar-73e51",
+  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
+  messagingSenderId: "756745745147",
+  appId: "1:756745745147:web:e8dcd216eda572c440f65e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("saveBtn").onclick = async () => {
+
+const number = document.getElementById("number").value;
+const price = Number(document.getElementById("price").value);
+const status = document.getElementById("status").value;
+
+await addDoc(collection(db,"numbers"),{
+number:number,
+Price:price,
+status:status
+});
+
+alert("Number Saved Successfully");
+
+};
+
+</script>
+
+</body>
+</html>
+window.addEventListener("load", () => {
+  document.getElementById("number").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("status").value = "Available";
+});
