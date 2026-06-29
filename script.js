@@ -30,6 +30,7 @@ alert("Docs: " + snapshot.size);
 console.log(snapshot.size);
 
 snapshot.forEach((item)=>{
+vipGrid.innerHTML += "<h1 style='color:red'>TEST</h1>";
   
 alert(item.data().number);
 
