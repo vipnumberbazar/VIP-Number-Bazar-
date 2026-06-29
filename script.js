@@ -1,304 +1,221 @@
 import { db } from "./firebase.js";
-// =======================================
-// VIP Number Bazar V3
-// script.js - Part 1
-// =======================================
 
-// Page Loaded
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded");
+import {
+collection,
+getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const vipCollection = collection(db,"numbers");
+
+// ===========================
+// Load VIP Numbers
+// ===========================
+
+async function loadVIPNumbers(){
+
+const vipGrid =
+document.querySelector(".vip-grid");
+
+if(!vipGrid) return;
+
+vipGrid.innerHTML="";
+
+const snapshot =
+await getDocs(vipCollection);
+
+snapshot.forEach((item)=>{
+
+const data=item.data();
+
+vipGrid.innerHTML += `
+
+<div class="vip-card reveal"
+data-category="${data.category.toLowerCase()}">
+
+<div class="vip-badge">
+
+${data.category}
+
+</div>
+
+<h2>${data.number}</h2>
+
+<h3>₹${Number(data.price).toLocaleString()}</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn"
+data-number="${data.number}">
+
+📋 Copy
+
+</button>
+
+<a class="whatsapp-btn"
+data-number="${data.number}"
+data-price="${data.price}">
+
+WhatsApp
+
+</a>
+
+<button class="buy-btn">
+
+Buy Now
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
 });
 
-// =========================
-// Dark Mode
-// =========================
-
-const darkModeBtn = document.getElementById("darkModeBtn");
-
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
 }
+// ===========================
+// Copy Button
+// ===========================
 
-if (darkModeBtn) {
+document.addEventListener("click", (e) => {
 
-    darkModeBtn.addEventListener("click", () => {
+if (e.target.classList.contains("copy-btn")) {
 
-        document.body.classList.toggle("dark-mode");
+const number = e.target.dataset.number;
 
-        if (document.body.classList.contains("dark-mode")) {
+navigator.clipboard.writeText(number);
 
-            localStorage.setItem("theme", "dark");
+e.target.innerHTML = "✅ Copied";
 
-        } else {
+setTimeout(() => {
 
-            localStorage.setItem("theme", "light");
+e.target.innerHTML = "📋 Copy";
 
-        }
-
-    });
+}, 2000);
 
 }
-
-// =========================
-// Back To Top
-// =========================
-
-const topBtn = document.getElementById("topBtn");
-
-window.addEventListener("scroll", () => {
-
-    if (!topBtn) return;
-
-    if (window.scrollY > 300) {
-
-        topBtn.style.display = "block";
-
-    } else {
-
-        topBtn.style.display = "none";
-
-    }
 
 });
 
-if (topBtn) {
+// ===========================
+// WhatsApp Button
+// ===========================
 
-    topBtn.addEventListener("click", () => {
+document.addEventListener("click", (e) => {
 
-        window.scrollTo({
+if (e.target.classList.contains("whatsapp-btn")) {
 
-            top: 0,
+e.preventDefault();
 
-            behavior: "smooth"
+const number = e.target.dataset.number;
+const price = e.target.dataset.price;
 
-        });
+const msg =
 
-    });
+`Hello VIP Number Bazar,
 
-}
+I want this VIP Number.
 
-// =========================
-// Reveal Animation
-// =========================
+📱 Number : ${number}
+💰 Price : ₹${price}`;
 
-const reveals = document.querySelectorAll(".reveal");
+window.open(
 
-function revealOnScroll() {
+"https://wa.me/918070424242?text=" +
+encodeURIComponent(msg),
 
-    reveals.forEach(item => {
+"_blank"
 
-        const top = item.getBoundingClientRect().top;
-
-        if (top < window.innerHeight - 100) {
-
-            item.classList.add("active");
-
-        }
-
-    });
+);
 
 }
 
-window.addEventListener("scroll", revealOnScroll);
+});
 
-revealOnScroll();
-// =========================
-// Live Search
-// =========================
+// ===========================
+// Favorite Button
+// ===========================
+
+document.addEventListener("click", (e) => {
+
+if (e.target.classList.contains("fav-btn")) {
+
+e.target.innerHTML =
+e.target.innerHTML === "🤍" ? "❤️" : "🤍";
+
+}
+
+});
+
+// ===========================
+// Search
+// ===========================
 
 const searchInput = document.getElementById("searchInput");
-const vipCards = document.querySelectorAll(".vip-card");
 
 if (searchInput) {
 
-    searchInput.addEventListener("keyup", function () {
+searchInput.addEventListener("keyup", function () {
 
-        const value = this.value.toLowerCase();
+const value = this.value.toLowerCase();
 
-        vipCards.forEach(card => {
+document.querySelectorAll(".vip-card").forEach(card => {
 
-            if (card.innerText.toLowerCase().includes(value)) {
+card.style.display =
 
-                card.style.display = "";
+card.innerText.toLowerCase().includes(value)
 
-            } else {
+? ""
 
-                card.style.display = "none";
+: "none";
 
-            }
+});
 
-        });
-
-    });
+});
 
 }
 
-// =========================
-// Category Filter
-// =========================
+// ===========================
+// Dark Mode
+// ===========================
 
-const filterButtons = document.querySelectorAll(".filter-btn");
+const darkBtn = document.getElementById("darkModeBtn");
 
-filterButtons.forEach(button => {
+if (darkBtn) {
 
-    button.addEventListener("click", () => {
+if (localStorage.getItem("theme") === "dark") {
 
-        filterButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
+document.body.classList.add("dark-mode");
 
-        button.classList.add("active");
+}
 
-        const category = button.dataset.filter;
+darkBtn.onclick = () => {
 
-        vipCards.forEach(card => {
+document.body.classList.toggle("dark-mode");
 
-            if (
-                category === "all" ||
-                card.dataset.category === category
-            ) {
+localStorage.setItem(
 
-                card.style.display = "";
+"theme",
 
-            } else {
+document.body.classList.contains("dark-mode")
 
-                card.style.display = "none";
+? "dark"
 
-            }
+: "light"
 
-        });
-
-    });
-
-});
-
-// =========================
-// Copy VIP Number
-// =========================
-
-document.querySelectorAll(".copy-btn").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const number = button.dataset.number;
-
-        navigator.clipboard.writeText(number);
-
-        button.innerHTML = "✅ Copied";
-
-        setTimeout(() => {
-
-            button.innerHTML = "📋 Copy";
-
-        }, 2000);
-
-    });
-
-});
-
-// =========================
-// Favorite Button
-// =========================
-
-document.querySelectorAll(".fav-btn").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        if (button.innerHTML === "🤍") {
-
-            button.innerHTML = "❤️";
-
-        } else {
-
-            button.innerHTML = "🤍";
-
-        }
-
-    });
-
-});
-// =========================
-// WhatsApp Button
-// =========================
-
-document.querySelectorAll(".whatsapp-btn").forEach(button => {
-
-    button.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        const number = button.dataset.number;
-        const price = button.dataset.price;
-
-        const message =
-`Hello VIP Number Bazar,
-
-I want to buy this VIP Number.
-
-📱 Number : ${number}
-💰 Price : ₹${price}
-
-Please send complete details.`;
-
-        const url =
-"https://wa.me/918070424242?text=" +
-encodeURIComponent(message);
-
-        window.open(url, "_blank");
-
-    });
-
-});
-
-// =========================
-// Buy Now
-// =========================
-
-document.querySelectorAll(".buy-btn").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        alert(
-"Thank you for your interest!\n\nPlease contact us on WhatsApp to complete your purchase."
-        );
-
-    });
-
-});
-
-// =========================
-// Smooth Scroll
-// =========================
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-    link.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        const target =
-        document.querySelector(
-            this.getAttribute("href")
-        );
-
-        if(target){
-
-            target.scrollIntoView({
-
-                behavior:"smooth"
-
-            });
-
-        }
-
-    });
-
-});
-
-// =========================
-// Console
-// =========================
-
-console.log(
-"✅ VIP Number Bazar V3 Loaded Successfully"
 );
+
+};
+
+}
+
+// ===========================
+// Load Firebase Data
+// ===========================
+
+loadVIPNumbers();
+
+console.log("✅ Website Connected To Firebase");
