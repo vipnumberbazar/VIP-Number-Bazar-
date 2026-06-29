@@ -23,6 +23,12 @@
 
 <body>
 
+  <script>
+if (sessionStorage.getItem("adminLogin") !== "true") {
+    window.location.href = "login.html";
+}
+  </script>
+
 <header class="admin-header">
 
 <h1>
