@@ -24,7 +24,7 @@ async function loadVIPNumbers() {
       const data = item.data();
 
       const card = `
-      <div class="vip-card reveal" data-category="${String(data.category).toLowerCase()}">
+      <div class="vip-card reveal active" data-category="${String(data.category).toLowerCase()}">
 
         <div class="vip-badge">${data.category}</div>
 
