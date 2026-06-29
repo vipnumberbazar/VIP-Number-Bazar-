@@ -20,8 +20,13 @@ if(!vipGrid) return;
 
 vipGrid.innerHTML="";
 
+alert("Script Loaded");
+
 const snapshot =
 await getDocs(vipCollection);
+
+alert("Docs: " + snapshot.size);
+
 console.log(snapshot.size);
 
 snapshot.forEach((item)=>{
