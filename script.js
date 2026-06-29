@@ -30,6 +30,8 @@ alert("Docs: " + snapshot.size);
 console.log(snapshot.size);
 
 snapshot.forEach((item)=>{
+  
+alert(item.data().number);
 
 const data=item.data();
 
