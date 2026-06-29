@@ -1,161 +1,105 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  updateDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const searchInput = document.getElementById("searchInput");
+const cards = document.getElementById("numberContainer");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-  projectId: "vipnumberbazar-73e51",
-  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-  messagingSenderId: "756745745147",
-  appId: "1:756745745147:web:e8dcd216eda572c440f65e"
-};
+searchInput.addEventListener("keyup", function () {
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  const value = this.value.toLowerCase();
 
-const numbersRef = collection(db, "numbers");
-let editId = null;
+  const allCards = document.querySelectorAll(".vip-card");
 
-async function saveNumber() {
+  allCards.forEach(card => {
 
-  const number = document.getElementById("number").value;
-  const price = Number(document.getElementById("price").value);
-  const status = document.getElementById("status").value;
+    const number = card.querySelector(".number").innerText.toLowerCase();
 
-  if (!number || !price) {
-    alert("Number અને Price લખો");
-    return;
-  }
-
-  if (editId) {
-
-    await updateDoc(doc(db, "numbers", editId), {
-      number: number,
-      Price: price,
-      status: status
-    });
-
-    editId = null;
-
-  } else {
-
-    await addDoc(numbersRef, {
-      number: number,
-      Price: price,
-      status: status
-    });
-
-  }
-
-  document.getElementById("number").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("status").value = "Available";
-
-  loadNumbers();
-
-}
-
-document.getElementById("saveBtn").onclick = saveNumber;
-async function loadNumbers() {
-
-  const snapshot = await getDocs(numbersRef);
-
-  let html = "";
-
-  snapshot.forEach((d) => {
-
-    const data = d.data();
-
-    html += `
-      <tr>
-        <td>${data.number}</td>
-        <td>₹${data.Price}</td>
-        <td>${data.status}</td>
-
-        <td>
-          <button class="edit-btn"
-            onclick="editNumber('${d.id}',
-            '${data.number}',
-            '${data.Price}',
-            '${data.status}')">
-            Edit
-          </button>
-
-          <button class="delete-btn"
-            onclick="deleteNumber('${d.id}')">
-            Delete
-          </button>
-        </td>
-      </tr>
-    `;
+    if (number.includes(value)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
 
   });
 
-  document.getElementById("tableBody").innerHTML = html;
+});
+
+document.querySelectorAll(".whatsappBtn").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    window.open(
+      "https://wa.me/916354312829?text=Hello, I want to book a VIP Number",
+      "_blank"
+    );
+
+  });
+
+});
+
+document.querySelectorAll(".buyBtn").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    alert("Booking System Coming Soon");
+
+  });
+
+});
+// Operator Filter
+
+const filterButtons = document.querySelectorAll(".filter");
+
+filterButtons.forEach(button => {
+
+button.addEventListener("click", () => {
+
+document.querySelector(".filter.active")?.classList.remove("active");
+
+button.classList.add("active");
+
+const operator = button.innerText.toLowerCase();
+
+document.querySelectorAll(".vip-card").forEach(card => {
+
+const cardOperator = card.querySelector(".operator").innerText.toLowerCase();
+
+if(operator==="all"){
+
+card.style.display="block";
+
+}else{
+
+card.style.display =
+cardOperator===operator ? "block":"none";
 
 }
 
-window.editNumber = function(id, number, price, status) {
+});
 
-  editId = id;
+});
 
-  document.getElementById("number").value = number;
-  document.getElementById("price").value = price;
-  document.getElementById("status").value = status;
+});
 
-};
+// Book Now
 
-window.deleteNumber = async function(id) {
+document.querySelectorAll(".buyBtn").forEach(btn=>{
 
-  if(confirm("Delete this number?")){
+btn.addEventListener("click",()=>{
 
-    await deleteDoc(doc(db,"numbers",id));
+window.open(
+"https://wa.me/916354312829?text=I want to book this VIP Number",
+"_blank"
+);
 
-    loadNumbers();
+});
 
-  }
+});
 
-};
+// Auto Year
 
-loadNumbers();
-window.changeStatus = async function(id, currentStatus) {
+const footer=document.querySelector("footer p");
 
-  const newStatus =
-    currentStatus === "Available" ? "Sold" : "Available";
+if(footer){
 
-  await updateDoc(doc(db, "numbers", id), {
-    status: newStatus
-  });
+footer.innerHTML=
+`© ${new Date().getFullYear()} VIP Number Bazar. All Rights Reserved.`;
 
-  loadNumbers();
-};
-
-const searchBox = document.getElementById("search");
-
-if (searchBox) {
-  searchBox.addEventListener("keyup", function () {
-
-    const value = this.value.toLowerCase();
-
-    const rows = document.querySelectorAll("#tableBody tr");
-
-    rows.forEach(row => {
-      if (row.innerText.toLowerCase().includes(value)) {
-        row.style.display = "";
-      } else {
-        row.style.display = "none";
-      }
-    });
-
-  });
 }
-
-setInterval(loadNumbers, 5000);
