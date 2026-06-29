@@ -1,111 +1,89 @@
 import { db } from "./firebase.js";
 
 import {
-collection,
-getDocs
+  collection,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const vipCollection = collection(db,"numbers");
+const vipCollection = collection(db, "numbers");
 
-// ===========================
-// Load VIP Numbers
-// ===========================
+async function loadVIPNumbers() {
 
-async function loadVIPNumbers(){
+  const vipGrid = document.querySelector(".vip-grid");
 
-const vipGrid =
-document.querySelector(".vip-grid");
+  if (!vipGrid) return;
 
-if(!vipGrid) return;
+  vipGrid.innerHTML = "";
 
-vipGrid.innerHTML="";
+  try {
 
-alert("Script Loaded");
+    const snapshot = await getDocs(vipCollection);
 
-const snapshot =
-await getDocs(vipCollection);
+    snapshot.forEach((item) => {
 
-alert("Docs: " + snapshot.size);
+      const data = item.data();
 
-console.log(snapshot.size);
+      const card = `
+      <div class="vip-card reveal" data-category="${String(data.category).toLowerCase()}">
 
-snapshot.forEach((item)=>{
-vipGrid.innerHTML += "<h1 style='color:red'>TEST</h1>";
-  
-alert(item.data().number);
+        <div class="vip-badge">${data.category}</div>
 
-const data=item.data();
+        <h2>${data.number}</h2>
 
-vipGrid.innerHTML += `
+        <h3>₹${Number(data.price).toLocaleString()}</h3>
 
-<div class="vip-card reveal"
-data-category="${data.category.toLowerCase()}">
+        <div class="vip-buttons">
 
-<div class="vip-badge">
+          <button class="fav-btn">🤍</button>
 
-${data.category}
+          <button class="copy-btn" data-number="${data.number}">
+            📋 Copy
+          </button>
 
-</div>
+          <a href="#" class="whatsapp-btn"
+             data-number="${data.number}"
+             data-price="${data.price}">
+             WhatsApp
+          </a>
 
-<h2>${data.number}</h2>
+          <button class="buy-btn">
+            Buy Now
+          </button>
 
-<h3>₹${Number(data.price).toLocaleString()}</h3>
+        </div>
 
-<div class="vip-buttons">
+      </div>
+      `;
 
-<button class="fav-btn">🤍</button>
+      vipGrid.insertAdjacentHTML("beforeend", card);
 
-<button class="copy-btn"
-data-number="${data.number}">
+    });
 
-📋 Copy
+  } catch (err) {
 
-</button>
+    console.error(err);
 
-<a class="whatsapp-btn"
-data-number="${data.number}"
-data-price="${data.price}">
-
-WhatsApp
-
-</a>
-
-<button class="buy-btn">
-
-Buy Now
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
+  }
 
 }
+
 // ===========================
 // Copy Button
 // ===========================
 
 document.addEventListener("click", (e) => {
 
-if (e.target.classList.contains("copy-btn")) {
+  if (e.target.classList.contains("copy-btn")) {
 
-const number = e.target.dataset.number;
+    navigator.clipboard.writeText(e.target.dataset.number);
 
-navigator.clipboard.writeText(number);
+    e.target.innerHTML = "✅ Copied";
 
-e.target.innerHTML = "✅ Copied";
+    setTimeout(() => {
+      e.target.innerHTML = "📋 Copy";
+    }, 2000);
 
-setTimeout(() => {
-
-e.target.innerHTML = "📋 Copy";
-
-}, 2000);
-
-}
+  }
 
 });
 
@@ -115,15 +93,14 @@ e.target.innerHTML = "📋 Copy";
 
 document.addEventListener("click", (e) => {
 
-if (e.target.classList.contains("whatsapp-btn")) {
+  if (e.target.classList.contains("whatsapp-btn")) {
 
-e.preventDefault();
+    e.preventDefault();
 
-const number = e.target.dataset.number;
-const price = e.target.dataset.price;
+    const number = e.target.dataset.number;
+    const price = e.target.dataset.price;
 
-const msg =
-
+    const msg =
 `Hello VIP Number Bazar,
 
 I want this VIP Number.
@@ -131,31 +108,30 @@ I want this VIP Number.
 📱 Number : ${number}
 💰 Price : ₹${price}`;
 
-window.open(
+    window.open(
+      "https://wa.me/918070424242?text=" +
+      encodeURIComponent(msg),
+      "_blank"
+    );
 
-"https://wa.me/918070424242?text=" +
-encodeURIComponent(msg),
-
-"_blank"
-
-);
-
-}
+  }
 
 });
 
 // ===========================
-// Favorite Button
+// Favourite Button
 // ===========================
 
 document.addEventListener("click", (e) => {
 
-if (e.target.classList.contains("fav-btn")) {
+  if (e.target.classList.contains("fav-btn")) {
 
-e.target.innerHTML =
-e.target.innerHTML === "🤍" ? "❤️" : "🤍";
+    e.target.innerHTML =
+      e.target.innerHTML === "🤍"
+      ? "❤️"
+      : "🤍";
 
-}
+  }
 
 });
 
@@ -163,27 +139,27 @@ e.target.innerHTML === "🤍" ? "❤️" : "🤍";
 // Search
 // ===========================
 
-const searchInput = document.getElementById("searchInput");
+const searchInput =
+document.getElementById("searchInput");
 
 if (searchInput) {
 
-searchInput.addEventListener("keyup", function () {
+  searchInput.addEventListener("keyup", function () {
 
-const value = this.value.toLowerCase();
+    const value =
+    this.value.toLowerCase();
 
-document.querySelectorAll(".vip-card").forEach(card => {
+    document.querySelectorAll(".vip-card")
+    .forEach((card) => {
 
-card.style.display =
+      card.style.display =
+      card.innerText.toLowerCase().includes(value)
+      ? ""
+      : "none";
 
-card.innerText.toLowerCase().includes(value)
+    });
 
-? ""
-
-: "none";
-
-});
-
-});
+  });
 
 }
 
@@ -191,40 +167,36 @@ card.innerText.toLowerCase().includes(value)
 // Dark Mode
 // ===========================
 
-const darkBtn = document.getElementById("darkModeBtn");
+const darkBtn =
+document.getElementById("darkModeBtn");
 
 if (darkBtn) {
 
-if (localStorage.getItem("theme") === "dark") {
+  if (localStorage.getItem("theme") === "dark") {
 
-document.body.classList.add("dark-mode");
+    document.body.classList.add("dark-mode");
 
-}
+  }
 
-darkBtn.onclick = () => {
+  darkBtn.onclick = () => {
 
-document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("dark-mode");
 
-localStorage.setItem(
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("dark-mode")
+      ? "dark"
+      : "light"
+    );
 
-"theme",
-
-document.body.classList.contains("dark-mode")
-
-? "dark"
-
-: "light"
-
-);
-
-};
+  };
 
 }
 
 // ===========================
-// Load Firebase Data
+// Load Firebase
 // ===========================
 
 loadVIPNumbers();
 
-console.log("✅ Website Connected To Firebase");
+console.log("✅ Website Connected Successfully");
