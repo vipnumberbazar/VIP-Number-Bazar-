@@ -200,3 +200,4 @@ window.addVIP = addVIP;
 loadVIP();
 
 console.log("✅ Firebase Admin Panel Loaded");
+alert("admin.js Loaded Successfully");
