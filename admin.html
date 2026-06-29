@@ -246,3 +246,42 @@ All Rights Reserved.
 
 </body>
 </html>
+<div class="admin-container">
+
+    <header class="admin-header">
+        <h1>VIP Number Bazar</h1>
+        <p>Admin Dashboard</p>
+    </header>
+
+    <div class="card">
+
+        <h2>Add VIP Number</h2>
+
+        <input type="text" id="vipNumber" placeholder="VIP Number">
+
+        <input type="number" id="vipPrice" placeholder="Price">
+
+        <select id="vipCategory">
+            <option value="gold">Gold</option>
+            <option value="silver">Silver</option>
+            <option value="platinum">Platinum</option>
+            <option value="premium">Premium</option>
+        </select>
+
+        <button onclick="addVIP()">
+            Add Number
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>VIP Numbers</h2>
+
+        <div id="vipList"></div>
+
+    </div>
+
+</div>
+
+<script src="admin.js"></script>
