@@ -450,3 +450,96 @@ function saveData() {
 }
 
 showVIP();
+// ================================
+// VIP Number Bazar Admin Panel
+// Part 3 - Search + Edit + Dashboard
+// ================================
+
+// Dashboard Summary
+function updateDashboard() {
+
+    const totalNumbers = vipNumbers.length;
+
+    let totalValue = 0;
+
+    vipNumbers.forEach(item => {
+        totalValue += Number(item.price);
+    });
+
+    const totalBox = document.getElementById("totalNumbers");
+    const valueBox = document.getElementById("totalValue");
+
+    if (totalBox) totalBox.innerHTML = totalNumbers;
+    if (valueBox) valueBox.innerHTML = "₹" + totalValue;
+}
+
+// Edit VIP Number
+function editVIP(index) {
+
+    document.getElementById("vipNumber").value =
+        vipNumbers[index].number;
+
+    document.getElementById("vipPrice").value =
+        vipNumbers[index].price;
+
+    document.getElementById("vipCategory").value =
+        vipNumbers[index].category;
+
+    vipNumbers.splice(index, 1);
+
+    saveData();
+    showVIP();
+}
+
+// Search
+function searchVIP() {
+
+    const value =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    document.querySelectorAll(".vip-item").forEach(item => {
+
+        if (item.innerText.toLowerCase().includes(value)) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+
+    });
+
+}
+
+// Old showVIP ને Replace કરો
+function showVIP() {
+
+    const list = document.getElementById("vipList");
+
+    list.innerHTML = "";
+
+    vipNumbers.forEach((item, index) => {
+
+        list.innerHTML += `
+        <div class="vip-item">
+
+            <h3>${item.number}</h3>
+
+            <p>₹${item.price}</p>
+
+            <p>${item.category}</p>
+
+            <button onclick="editVIP(${index})">
+                ✏️ Edit
+            </button>
+
+            <button onclick="deleteVIP(${index})">
+                🗑 Delete
+            </button>
+
+        </div>
+        `;
+
+    });
+
+    updateDashboard();
+
+},
