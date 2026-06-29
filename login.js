@@ -1,39 +1,25 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-getAuth,
-signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+const USERNAME = "maldev";
+const PASSWORD = "6354312829";
 
-const firebaseConfig = {
-  apiKey: "તમારો apiKey",
-  authDomain: "તમારો-project.firebaseapp.com",
-  projectId: "તમારો-project-id",
-  storageBucket: "તમારો-project.appspot.com",
-  messagingSenderId: "તમારો senderId",
-  appId: "તમારો appId"
-};
+document.getElementById("loginBtn").onclick = function () {
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  const username =
+    document.getElementById("username").value.trim();
 
-document.getElementById("loginBtn").onclick = () => {
+  const password =
+    document.getElementById("password").value.trim();
 
-const email = document.getElementById("email").value.trim();
-const password = document.getElementById("password").value.trim();
+  if (username === USERNAME && password === PASSWORD) {
 
-signInWithEmailAndPassword(auth, email, password)
+    sessionStorage.setItem("adminLogin", "true");
 
-.then(() => {
+    window.location.href = "admin.html";
 
-window.location.href = "admin.html";
+  } else {
 
-})
+    document.getElementById("msg").innerHTML =
+      "❌ Username અથવા Password ખોટો છે";
 
-.catch(() => {
-
-document.getElementById("msg").innerHTML =
-"❌ Email અથવા Password ખોટો છે";
-
-});
+  }
 
 };
