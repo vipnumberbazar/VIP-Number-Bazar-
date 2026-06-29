@@ -1,53 +1,23 @@
-// =======================================
-// VIP Number Bazar Admin Panel
-// admin.js - Part 1
-// =======================================
+import { db } from "./firebase.js";
 
-// Local Storage
+import {
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+updateDoc,
+doc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-let vipNumbers =
-JSON.parse(localStorage.getItem("vipNumbers")) || [];
+const vipCollection = collection(db, "numbers");
 
-// =========================
-// Save Data
-// =========================
+let editId = null;
 
-function saveData(){
+// ===========================
+// Add / Update VIP Number
+// ===========================
 
-localStorage.setItem(
-"vipNumbers",
-JSON.stringify(vipNumbers)
-);
-
-}
-
-// =========================
-// Dashboard
-// =========================
-
-function updateDashboard(){
-
-document.getElementById("totalNumbers").innerText =
-vipNumbers.length;
-
-let total = 0;
-
-vipNumbers.forEach(item=>{
-
-total += Number(item.price);
-
-});
-
-document.getElementById("totalValue").innerText =
-"₹" + total.toLocaleString();
-
-}
-
-// =========================
-// Add VIP Number
-// =========================
-
-function addVIP(){
+async function addVIP() {
 
 const number =
 document.getElementById("vipNumber").value.trim();
@@ -60,62 +30,90 @@ document.getElementById("vipCategory").value;
 
 if(number==="" || price===""){
 
-alert("Please enter VIP Number and Price.");
+alert("Please fill all fields");
 
 return;
 
 }
 
-vipNumbers.push({
+if(editId){
+
+await updateDoc(doc(db,"numbers",editId),{
 
 number,
-
 price,
-
 category
 
 });
 
-saveData();
+editId=null;
 
-showVIP();
+}else{
 
-updateDashboard();
+await addDoc(vipCollection,{
 
-document.getElementById("vipNumber").value="";
+number,
+price,
+category
 
-document.getElementById("vipPrice").value="";
+});
 
 }
-// =========================
-// Show VIP Numbers
-// =========================
 
-function showVIP(){
+document.getElementById("vipNumber").value="";
+document.getElementById("vipPrice").value="";
 
-const vipList =
-document.getElementById("vipList");
+loadVIP();
+
+}
+// ===========================
+// Load VIP Numbers
+// ===========================
+
+async function loadVIP(){
+
+const vipList = document.getElementById("vipList");
 
 vipList.innerHTML = "";
 
-vipNumbers.forEach((item,index)=>{
+const snapshot = await getDocs(vipCollection);
+
+let total = 0;
+let count = 0;
+
+snapshot.forEach((item)=>{
+
+const data = item.data();
+
+count++;
+
+total += Number(data.price);
 
 vipList.innerHTML += `
 
 <div class="vip-item">
 
-<h3>${item.number}</h3>
+<h3>${data.number}</h3>
 
-<p><strong>Price:</strong> ₹${Number(item.price).toLocaleString()}</p>
+<p><strong>Price:</strong> ₹${Number(data.price).toLocaleString()}</p>
 
-<p><strong>Category:</strong> ${item.category}</p>
+<p><strong>Category:</strong> ${data.category}</p>
 
-<button onclick="editVIP(${index})">
+<button onclick="editVIP(
+'${item.id}',
+'${data.number}',
+'${data.price}',
+'${data.category}'
+)">
+
 ✏️ Edit
+
 </button>
 
-<button onclick="deleteVIP(${index})">
-🗑️ Delete
+<button onclick="deleteVIP('${item.id}')">
+
+🗑 Delete
+
 </button>
 
 </div>
@@ -124,78 +122,62 @@ vipList.innerHTML += `
 
 });
 
+document.getElementById("totalNumbers").innerText = count;
+document.getElementById("totalValue").innerText =
+"₹" + total.toLocaleString();
+
 }
 
-// =========================
+// ===========================
 // Delete VIP
-// =========================
+// ===========================
 
-function deleteVIP(index){
+window.deleteVIP = async function(id){
 
 if(confirm("Delete this VIP Number?")){
 
-vipNumbers.splice(index,1);
+await deleteDoc(doc(db,"numbers",id));
 
-saveData();
-
-showVIP();
-
-updateDashboard();
+loadVIP();
 
 }
 
 }
 
-// =========================
+// ===========================
 // Edit VIP
-// =========================
+// ===========================
 
-function editVIP(index){
+window.editVIP = function(id,number,price,category){
 
-const item = vipNumbers[index];
+editId = id;
 
-document.getElementById("vipNumber").value =
-item.number;
-
-document.getElementById("vipPrice").value =
-item.price;
-
-document.getElementById("vipCategory").value =
-item.category;
-
-vipNumbers.splice(index,1);
-
-saveData();
-
-showVIP();
-
-updateDashboard();
+document.getElementById("vipNumber").value = number;
+document.getElementById("vipPrice").value = price;
+document.getElementById("vipCategory").value = category;
 
 }
+// ===========================
+// Search
+// ===========================
 
-// =========================
-// Search VIP
-// =========================
+const searchInput = document.getElementById("searchInput");
 
-const searchInput =
-document.getElementById("searchInput");
+if (searchInput) {
 
-if(searchInput){
+searchInput.addEventListener("keyup", function () {
 
-searchInput.addEventListener("keyup",function(){
+const value = this.value.toLowerCase();
 
-const value =
-this.value.toLowerCase();
+document.querySelectorAll(".vip-item").forEach(item => {
 
-document.querySelectorAll(".vip-item").forEach(card=>{
+if (item.innerText.toLowerCase().includes(value)) {
 
-if(card.innerText.toLowerCase().includes(value)){
+item.style.display = "";
 
-card.style.display="block";
+} else {
 
-}else{
-
-card.style.display="none";
+item.style.display = "none";
 
 }
 
@@ -205,12 +187,16 @@ card.style.display="none";
 
 }
 
-// =========================
+// ===========================
+// Global Function
+// ===========================
+
+window.addVIP = addVIP;
+
+// ===========================
 // Load Data
-// =========================
+// ===========================
 
-showVIP();
+loadVIP();
 
-updateDashboard();
-
-console.log("✅ Admin Panel Loaded Successfully");
+console.log("✅ Firebase Admin Panel Loaded");
