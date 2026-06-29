@@ -1,175 +1,848 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="VIP Number Bazar - Buy Premium VIP Mobile Numbers">
+
+<meta name="keywords"
+content="VIP Number, Fancy Number, Mobile Number, VIP SIM">
+
+<meta name="author"
+content="VIP Number Bazar">
+
 <title>VIP Number Bazar</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+<link rel="icon" type="image/png" href="logo.png">
 
-body{
-background:#f5f5f5;
-}
+<link rel="stylesheet" href="style.css">
 
-header{
-background:#ff6600;
-color:white;
-padding:20px;
-text-align:center;
-font-size:32px;
-font-weight:bold;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-.search{
-padding:20px;
-text-align:center;
-}
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-.search input{
-width:95%;
-max-width:500px;
-padding:15px;
-font-size:18px;
-border:1px solid #ddd;
-border-radius:8px;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,.15);
-text-align:center;
-}
-
-.number{
-font-size:28px;
-font-weight:bold;
-color:#ff6600;
-margin-bottom:10px;
-}
-
-.price{
-font-size:22px;
-font-weight:bold;
-margin-bottom:15px;
-}
-
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:12px 20px;
-font-size:18px;
-border-radius:8px;
-cursor:pointer;
-}
-</style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<header>
-VIP Number Bazar
+<!-- ========================= -->
+<!-- HEADER START -->
+<!-- ========================= -->
+
+<header class="header">
+
+<div class="logo">
+
+<i class="fa-solid fa-sim-card"></i>
+
+<h2>VIP Number Bazar</h2>
+
+</div>
+
+<nav>
+
+<ul class="menu">
+
+<li>
+<a href="#home">Home</a>
+</li>
+
+<li>
+<a href="#numbers">VIP Numbers</a>
+</li>
+
+<li>
+<a href="#offers">Offers</a>
+</li>
+
+<li>
+<a href="#about">About</a>
+</li>
+
+<li>
+<a href="#contact">Contact</a>
+</li>
+
+</ul>
+
+</nav>
+
+<div class="header-buttons">
+
+<button id="darkModeBtn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+<a href="admin.html"
+class="admin-btn">
+
+Admin
+
+</a>
+
+</div>
+
 </header>
 
-<div class="search">
-<input type="text" id="search" placeholder="Search VIP Number...">
-</div>
+<!-- ========================= -->
+<!-- HEADER END -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- HERO SECTION START -->
+<!-- ========================= -->
 
-<div class="container" id="numbers">
-</div>
-<script type="module">
+<section class="hero" id="home">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-getFirestore,
-collection,
-getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    <div class="hero-content">
 
-const firebaseConfig = {
-apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-projectId: "vipnumberbazar-73e51",
-storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-messagingSenderId: "756745745147",
-appId: "1:756745745147:web:e8dcd216eda572c440f65e"
-};
+        <span class="hero-tag">
+            India's No.1 VIP Number Marketplace
+        </span>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        <h1>
+            Get Your Dream
+            <span>VIP Mobile Number</span>
+        </h1>
 
-const container = document.getElementById("numbers");
-const search = document.getElementById("search");
+        <p>
 
-let allNumbers = [];
+            Choose from thousands of Premium, Gold,
+            Platinum and Fancy VIP Mobile Numbers
+            at the best prices.
 
-async function loadNumbers(){
+        </p>
 
-const snapshot = await getDocs(collection(db,"numbers"));
+        <div class="hero-buttons">
 
-snapshot.forEach((doc)=>{
-allNumbers.push(doc.data());
-});
+            <a href="#numbers" class="btn-primary">
 
-showNumbers(allNumbers);
+                Browse Numbers
 
-}
+            </a>
 
-function showNumbers(list){
+            <a href="https://wa.me/918070424242"
+               class="btn-secondary">
 
-container.innerHTML="";
+                <i class="fa-brands fa-whatsapp"></i>
 
-list.forEach((data)=>{
+                WhatsApp
 
-container.innerHTML += `
-<div class="card">
+            </a>
 
-<div class="number">${data.number}</div>
+        </div>
 
-<div class="price">₹${data.Price}</div>
+    </div>
 
-<button onclick="window.open('https://wa.me/6354312829?text=I want VIP Number ${data.number}')">
+    <div class="hero-image">
+
+        <div class="hero-card">
+
+            <h2>99999 77777</h2>
+
+            <p>Premium VIP Number</p>
+
+            <h3>₹99,999</h3>
+
+            <button>
+
+                Buy Now
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- HERO SECTION END -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- SEARCH & CATEGORY START -->
+<!-- ========================= -->
+
+<section class="search-section" id="numbers">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Find Your VIP Number
+        </h2>
+
+        <p class="section-subtitle">
+            Search your lucky mobile number instantly
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search VIP Number...">
+
+            <button id="searchBtn">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Search
+
+            </button>
+
+        </div>
+
+        <div class="category-buttons">
+
+            <button class="filter-btn active"
+                    data-filter="all">
+
+                All Numbers
+
+            </button>
+
+            <button class="filter-btn"
+                    data-filter="gold">
+
+                Gold
+
+            </button>
+
+            <button class="filter-btn"
+                    data-filter="premium">
+
+                Premium
+
+            </button>
+
+            <button class="filter-btn"
+                    data-filter="platinum">
+
+                Platinum
+
+            </button>
+
+            <button class="filter-btn"
+                    data-filter="silver">
+
+                Silver
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SEARCH & CATEGORY END -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- VIP NUMBER CARDS START -->
+<!-- ========================= -->
+
+<section class="vip-section">
+
+<div class="container">
+
+<div class="vip-grid">
+
+<!-- Card 1 -->
+
+<div class="vip-card reveal" data-category="premium">
+
+<div class="vip-badge">Premium</div>
+
+<h2>99999 99999</h2>
+
+<h3>₹1,25,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn"
+data-number="9999999999">
+
+📋 Copy
+
+</button>
+
+<a class="whatsapp-btn"
+data-number="9999999999"
+data-price="125000">
+
 WhatsApp
+
+</a>
+
+<button class="buy-btn">
+
+Buy Now
+
 </button>
 
 </div>
-`;
 
-});
+</div>
 
-}
-search.addEventListener("input", () => {
+<!-- Card 2 -->
 
-const value = search.value.toLowerCase();
+<div class="vip-card reveal" data-category="gold">
 
-const filtered = allNumbers.filter(item =>
-item.number.toLowerCase().includes(value)
-);
+<div class="vip-badge">Gold</div>
 
-showNumbers(filtered);
+<h2>98765 43210</h2>
 
-});
+<h3>₹75,000</h3>
 
-loadNumbers();
+<div class="vip-buttons">
 
-</script>
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn"
+data-number="9876543210">
+
+📋 Copy
+
+</button>
+
+<a class="whatsapp-btn"
+data-number="9876543210"
+data-price="75000">
+
+WhatsApp
+
+</a>
+
+<button class="buy-btn">
+
+Buy Now
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Card 3 -->
+
+<div class="vip-card reveal" data-category="platinum">
+
+<div class="vip-badge">Platinum</div>
+
+<h2>88888 11111</h2>
+
+<h3>₹2,10,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn"
+data-number="8888811111">
+
+📋 Copy
+
+</button>
+
+<a class="whatsapp-btn"
+data-number="8888811111"
+data-price="210000">
+
+WhatsApp
+
+</a>
+
+<button class="buy-btn">
+
+Buy Now
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Card 4 -->
+
+<div class="vip-card reveal" data-category="silver">
+
+<div class="vip-badge">Silver</div>
+
+<h2>90909 90909</h2>
+
+<h3>₹35,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn"
+data-number="9090990909">
+
+📋 Copy
+
+</button>
+
+<a class="whatsapp-btn"
+data-number="9090990909"
+data-price="35000">
+
+WhatsApp
+
+</a>
+
+<button class="buy-btn">
+
+Buy Now
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- VIP NUMBER CARDS END -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- SPECIAL OFFERS START -->
+<!-- ========================= -->
+
+<section class="offers" id="offers">
+
+<div class="container">
+
+<h2 class="section-title">
+🔥 Today's Special Offers
+</h2>
+
+<div class="offer-grid">
+
+<div class="offer-card">
+<h3>Gold VIP Numbers</h3>
+<p>Up To 30% OFF</p>
+</div>
+
+<div class="offer-card">
+<h3>Premium Numbers</h3>
+<p>Free SIM Activation</p>
+</div>
+
+<div class="offer-card">
+<h3>Platinum VIP</h3>
+<p>Instant Delivery</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FEATURED VIP NUMBERS -->
+<!-- ========================= -->
+
+<section class="vip-section">
+
+<div class="container">
+
+<div class="vip-grid">
+
+<!-- Card 5 -->
+
+<div class="vip-card reveal" data-category="premium">
+
+<div class="vip-badge">Premium</div>
+
+<h2>77777 77777</h2>
+
+<h3>₹95,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn" data-number="7777777777">
+📋 Copy
+</button>
+
+<a class="whatsapp-btn"
+data-number="7777777777"
+data-price="95000">
+WhatsApp
+</a>
+
+<button class="buy-btn">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+<!-- Card 6 -->
+
+<div class="vip-card reveal" data-category="gold">
+
+<div class="vip-badge">Gold</div>
+
+<h2>98989 98989</h2>
+
+<h3>₹60,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn" data-number="9898998989">
+📋 Copy
+</button>
+
+<a class="whatsapp-btn"
+data-number="9898998989"
+data-price="60000">
+WhatsApp
+</a>
+
+<button class="buy-btn">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+<!-- Card 7 -->
+
+<div class="vip-card reveal" data-category="platinum">
+
+<div class="vip-badge">Platinum</div>
+
+<h2>90000 00009</h2>
+
+<h3>₹2,50,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn" data-number="9000000009">
+📋 Copy
+</button>
+
+<a class="whatsapp-btn"
+data-number="9000000009"
+data-price="250000">
+WhatsApp
+</a>
+
+<button class="buy-btn">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+<!-- Card 8 -->
+
+<div class="vip-card reveal" data-category="silver">
+
+<div class="vip-badge">Silver</div>
+
+<h2>91234 56789</h2>
+
+<h3>₹28,000</h3>
+
+<div class="vip-buttons">
+
+<button class="fav-btn">🤍</button>
+
+<button class="copy-btn" data-number="9123456789">
+📋 Copy
+</button>
+
+<a class="whatsapp-btn"
+data-number="9123456789"
+data-price="28000">
+WhatsApp
+</a>
+
+<button class="buy-btn">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- SPECIAL OFFERS END -->
+<!-- ========================= -->
+<!-- ========================= -->
+<!-- VIP NUMBER CARDS (9-20) -->
+<!-- ========================= -->
+
+<section class="vip-section">
+
+<div class="container">
+
+<div class="vip-grid">
+
+<div class="vip-card reveal" data-category="premium">
+<div class="vip-badge">Premium</div>
+<h2>88888 88888</h2>
+<h3>₹1,80,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="8888888888">📋 Copy</button>
+<a class="whatsapp-btn" data-number="8888888888" data-price="180000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="gold">
+<div class="vip-badge">Gold</div>
+<h2>90909 11111</h2>
+<h3>₹58,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9090911111">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9090911111" data-price="58000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="silver">
+<div class="vip-badge">Silver</div>
+<h2>70000 12345</h2>
+<h3>₹18,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="7000012345">📋 Copy</button>
+<a class="whatsapp-btn" data-number="7000012345" data-price="18000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="platinum">
+<div class="vip-badge">Platinum</div>
+<h2>91111 11111</h2>
+<h3>₹3,10,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9111111111">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9111111111" data-price="310000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="premium">
+<div class="vip-badge">Premium</div>
+<h2>99900 99900</h2>
+<h3>₹92,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9990099900">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9990099900" data-price="92000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="gold">
+<div class="vip-badge">Gold</div>
+<h2>95555 55555</h2>
+<h3>₹82,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9555555555">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9555555555" data-price="82000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="silver">
+<div class="vip-badge">Silver</div>
+<h2>93333 44444</h2>
+<h3>₹24,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9333344444">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9333344444" data-price="24000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+<div class="vip-card reveal" data-category="premium">
+<div class="vip-badge">Premium</div>
+<h2>96666 00000</h2>
+<h3>₹1,15,000</h3>
+<div class="vip-buttons">
+<button class="fav-btn">🤍</button>
+<button class="copy-btn" data-number="9666600000">📋 Copy</button>
+<a class="whatsapp-btn" data-number="9666600000" data-price="115000">WhatsApp</a>
+<button class="buy-btn">Buy Now</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- ABOUT SECTION -->
+<!-- ========================= -->
+
+<section class="about" id="about">
+
+<div class="container">
+
+<h2 class="section-title">
+About VIP Number Bazar
+</h2>
+
+<p class="about-text">
+
+VIP Number Bazar is India's trusted marketplace for
+Premium, Gold, Platinum and Fancy Mobile Numbers.
+
+We provide genuine VIP numbers with secure booking,
+instant support and affordable prices.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- CONTACT SECTION -->
+<!-- ========================= -->
+
+<section class="contact" id="contact">
+
+<div class="container">
+
+<h2 class="section-title">
+Contact Us
+</h2>
+
+<div class="contact-box">
+
+<p>
+📞 Phone :
+<a href="tel:+918070424242">
++91 8070424242
+</a>
+</p>
+
+<p>
+📧 Email :
+<a href="mailto:vipnumberbazar.73@gmail.com">
+Vipnumberbazar.73@gmail.com
+</a>
+</p>
+
+<p>
+💬 WhatsApp :
+<a href="https://wa.me/918070424242">
+Chat Now
+</a>
+</p>
+
+<p>
+📍 Address :
+Rajkot, Gujarat, India
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer class="footer">
+
+<div class="container">
+
+<h3>VIP Number Bazar</h3>
+
+<p>
+Premium Fancy Mobile Numbers
+at Best Prices.
+</p>
+
+<div class="footer-links">
+
+<a href="#home">Home</a>
+
+<a href="#numbers">Numbers</a>
+
+<a href="#offers">Offers</a>
+
+<a href="#about">About</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+<p class="copyright">
+
+© 2026 VIP Number Bazar.
+All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- Back To Top -->
+
+<button id="topBtn">
+
+⬆️
+
+</button>
+
+<script src="script.js"></script>
 
 </body>
-</html>
 
+</html>
