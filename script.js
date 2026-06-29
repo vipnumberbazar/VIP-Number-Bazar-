@@ -22,6 +22,7 @@ vipGrid.innerHTML="";
 
 const snapshot =
 await getDocs(vipCollection);
+console.log(snapshot.size);
 
 snapshot.forEach((item)=>{
 
