@@ -1,3 +1,4 @@
+import { db } from "./firebase.js";
 // =======================================
 // VIP Number Bazar V3
 // script.js - Part 1
