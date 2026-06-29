@@ -370,4 +370,83 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 // Console Message
 console.log("✅ VIP Number Bazar V2 Loaded Successfully");
+// ================================
+// VIP Number Bazar Admin Panel
+// Part 2
+// ================================
 
+let vipNumbers = JSON.parse(localStorage.getItem("vipNumbers")) || [];
+
+function addVIP() {
+
+    const number = document.getElementById("vipNumber").value.trim();
+    const price = document.getElementById("vipPrice").value.trim();
+    const category = document.getElementById("vipCategory").value;
+
+    if (number === "" || price === "") {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    vipNumbers.push({
+        number,
+        price,
+        category
+    });
+
+    saveData();
+    showVIP();
+
+    document.getElementById("vipNumber").value = "";
+    document.getElementById("vipPrice").value = "";
+}
+
+function showVIP() {
+
+    const list = document.getElementById("vipList");
+
+    list.innerHTML = "";
+
+    vipNumbers.forEach((item, index) => {
+
+        list.innerHTML += `
+        <div class="vip-item">
+            <h3>${item.number}</h3>
+
+            <p>₹${item.price}</p>
+
+            <p>${item.category}</p>
+
+            <button onclick="deleteVIP(${index})">
+                Delete
+            </button>
+        </div>
+        `;
+
+    });
+
+}
+
+function deleteVIP(index) {
+
+    if (confirm("Delete this VIP Number?")) {
+
+        vipNumbers.splice(index, 1);
+
+        saveData();
+        showVIP();
+
+    }
+
+}
+
+function saveData() {
+
+    localStorage.setItem(
+        "vipNumbers",
+        JSON.stringify(vipNumbers)
+    );
+
+}
+
+showVIP();
