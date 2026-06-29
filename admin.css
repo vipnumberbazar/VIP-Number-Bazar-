@@ -1,0 +1,549 @@
+/* =====================================
+   VIP Number Bazar Admin Panel
+   admin.css - Part 1
+===================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:#f4f7fb;
+
+color:#222;
+
+}
+
+.container{
+
+width:90%;
+
+max-width:1300px;
+
+margin:40px auto;
+
+}
+
+/* =========================
+HEADER
+========================= */
+
+.admin-header{
+
+background:#111;
+
+color:#fff;
+
+padding:20px 40px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.admin-header h1{
+
+font-size:30px;
+
+font-weight:700;
+
+}
+
+.home-btn{
+
+background:#ff9800;
+
+color:#fff;
+
+padding:12px 22px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.home-btn:hover{
+
+background:#fff;
+
+color:#111;
+
+}
+
+/* =========================
+DASHBOARD
+========================= */
+
+.dashboard{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+margin:40px 0;
+
+}
+
+.card{
+
+background:#fff;
+
+padding:30px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+.card h3{
+
+font-size:18px;
+
+color:#666;
+
+margin-bottom:10px;
+
+}
+
+.card h2{
+
+font-size:34px;
+
+color:#ff9800;
+
+font-weight:700;
+
+}
+/* =========================
+ADD VIP FORM
+========================= */
+
+.add-number{
+
+background:#fff;
+
+padding:35px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+margin-bottom:40px;
+
+}
+
+.add-number h2{
+
+font-size:28px;
+
+margin-bottom:25px;
+
+color:#111;
+
+}
+
+.add-number input,
+.add-number select{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:18px;
+
+font-size:17px;
+
+border:2px solid #ddd;
+
+border-radius:10px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+.add-number input:focus,
+.add-number select:focus{
+
+border-color:#ff9800;
+
+}
+
+.add-number button{
+
+width:100%;
+
+padding:16px;
+
+background:#ff9800;
+
+color:#fff;
+
+font-size:18px;
+
+font-weight:700;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.add-number button:hover{
+
+background:#111;
+
+}
+
+/* =========================
+SEARCH BOX
+========================= */
+
+.search-box{
+
+margin:25px 0;
+
+}
+
+.search-box input{
+
+width:100%;
+
+padding:15px;
+
+font-size:17px;
+
+border:2px solid #ddd;
+
+border-radius:10px;
+
+outline:none;
+
+}
+
+.search-box input:focus{
+
+border-color:#ff9800;
+
+}
+
+/* =========================
+VIP LIST
+========================= */
+
+.vip-list-section{
+
+background:#fff;
+
+padding:35px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.vip-list-section h2{
+
+font-size:28px;
+
+margin-bottom:20px;
+
+}
+
+#vipList{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:20px;
+
+}
+
+.vip-item{
+
+background:#f8f9fc;
+
+padding:20px;
+
+border-radius:15px;
+
+border-left:5px solid #ff9800;
+
+}
+
+.vip-item h3{
+
+font-size:24px;
+
+margin-bottom:10px;
+
+color:#111;
+
+}
+
+.vip-item p{
+
+font-size:17px;
+
+margin-bottom:8px;
+
+color:#555;
+
+}
+
+.vip-item button{
+
+padding:10px 18px;
+
+margin:8px 6px 0 0;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.vip-item button:first-of-type{
+
+background:#2196F3;
+
+color:#fff;
+
+}
+
+.vip-item button:last-of-type{
+
+background:#f44336;
+
+color:#fff;
+
+}
+
+.vip-item button:hover{
+
+opacity:.9;
+
+}
+/* =========================
+ADMIN FOOTER
+========================= */
+
+.admin-footer{
+
+margin-top:50px;
+
+padding:25px;
+
+background:#111;
+
+color:#fff;
+
+text-align:center;
+
+font-size:16px;
+
+}
+
+/* =========================
+ANIMATION
+========================= */
+
+.card,
+.add-number,
+.vip-list-section,
+.vip-item{
+
+transition:.35s ease;
+
+}
+
+.card:hover,
+.add-number:hover,
+.vip-item:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+/* =========================
+DARK MODE
+========================= */
+
+body.dark-mode{
+
+background:#111;
+
+color:#fff;
+
+}
+
+body.dark-mode .card,
+body.dark-mode .add-number,
+body.dark-mode .vip-list-section,
+body.dark-mode .vip-item{
+
+background:#1f1f1f;
+
+color:#fff;
+
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3{
+
+color:#fff;
+
+}
+
+body.dark-mode p{
+
+color:#ddd;
+
+}
+
+body.dark-mode input,
+body.dark-mode select{
+
+background:#2b2b2b;
+
+color:#fff;
+
+border:1px solid #444;
+
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+.dashboard{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.admin-header{
+
+flex-direction:column;
+
+gap:15px;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+.container{
+
+width:95%;
+
+}
+
+#vipList{
+
+grid-template-columns:1fr;
+
+}
+
+.card h2{
+
+font-size:28px;
+
+}
+
+.add-number h2,
+.vip-list-section h2{
+
+font-size:24px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.admin-header h1{
+
+font-size:24px;
+
+}
+
+.home-btn{
+
+width:100%;
+
+text-align:center;
+
+}
+
+.add-number input,
+.add-number select,
+.add-number button{
+
+font-size:16px;
+
+}
+
+.vip-item h3{
+
+font-size:20px;
+
+}
+
+.vip-item p{
+
+font-size:15px;
+
+}
+
+}
+
+/* =========================
+END OF ADMIN CSS
+========================= */
