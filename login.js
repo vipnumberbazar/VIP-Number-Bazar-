@@ -1,80 +1,98 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
 
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+<link rel="stylesheet" href="login.css">
+</head>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-  projectId: "vipnumberbazar-73e51",
-  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-  messagingSenderId: "756745745147",
-  appId: "1:756745745147:web:e8dcd216eda572c440f65e"
-};
+<body>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+<div class="login-box">
 
-window.recaptchaVerifier = new RecaptchaVerifier(
-  auth,
-  "recaptcha-container",
-  {}
-);
+<h2>VIP Number Bazar</h2>
 
-const allowedNumber = "+916354312829";
+<input
+type="text"
+id="username"
+placeholder="Username">
 
-// =======================
-// Send OTP
-// =======================
+<input
+type="password"
+id="password"
+placeholder="Password">
 
-document.getElementById("sendOtp").onclick = async () => {
+<button id="loginBtn">
+Login
+</button>
 
-  const phoneNumber = allowedNumber;
+<p id="msg"></p>
 
-  try {
+</div>
 
-    const confirmationResult =
-      await signInWithPhoneNumber(
-        auth,
-        phoneNumber,
-        window.recaptchaVerifier
-      );
+<script src="login.js"></script>
 
-    window.confirmationResult = confirmationResult;
+</body>
+</html>
 
-    alert("OTP મોકલાઈ ગયો.");
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
 
-  } catch (error) {
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#f5f7fb;
+}
 
-    alert(error.message);
+.login-box{
+width:350px;
+background:#fff;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+text-align:center;
+}
 
-  }
+.login-box h2{
+margin-bottom:20px;
+color:#ff9800;
+}
 
-};
+.login-box input{
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
 
-// =======================
-// Verify OTP
-// =======================
+.login-box button{
+width:100%;
+padding:14px;
+background:#ff9800;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+}
 
-document.getElementById("verifyOtp").onclick = async () => {
+.login-box button:hover{
+background:#111;
+}
 
-  const code = document.getElementById("otp").value;
-
-  try {
-
-    await window.confirmationResult.confirm(code);
-
-    alert("Login Successful");
-
-    window.location.href = "admin.html";
-
-  } catch (error) {
-
-    alert("ખોટો OTP");
-
-  }
-
-};
+#msg{
+margin-top:15px;
+color:red;
+font-weight:bold;
+}
