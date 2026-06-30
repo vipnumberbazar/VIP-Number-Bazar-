@@ -561,6 +561,7 @@ await loadDashboard();
 await loadVIPTable();
 
 await loadAnalytics();
+ await loadHighestVIP();
 
 notify("🔄 Dashboard Refreshed");
 
