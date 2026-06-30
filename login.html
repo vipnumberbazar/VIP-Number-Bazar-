@@ -147,6 +147,51 @@ placeholder="Search anything...">
 </div>
 
 </header>
+  <!-- Dashboard Info -->
+
+<div class="dashboard-info">
+
+<div class="info-box">
+
+<h2 id="greeting">Welcome Maldev</h2>
+
+<p id="liveClock">Loading...</p>
+
+<p id="lastUpdate">Last Update : --</p>
+
+</div>
+
+<div class="info-buttons">
+
+<button id="refreshBtn">🔄 Refresh</button>
+
+<button onclick="exportCSV()">📄 Export CSV</button>
+
+<button onclick="exportBackup()">💾 Backup</button>
+
+</div>
+
+</div>
+
+<div class="search-area">
+
+<input
+type="text"
+id="searchVIP"
+placeholder="Search VIP Number..."
+onkeyup="searchVIP()">
+
+<span id="notificationCount">0</span>
+
+</div>
+
+<div class="best-card">
+
+<h3>🏆 Highest Price VIP Number</h3>
+
+<h2 id="bestVIP">Loading...</h2>
+
+</div>
 
 <!-- Dashboard Cards -->
 
