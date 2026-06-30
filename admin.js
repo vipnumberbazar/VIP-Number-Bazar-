@@ -13,40 +13,33 @@ const vipCollection = collection(db,"numbers");
 
 let editId = null;
 
-// =========================
+// =======================
 // Dashboard
-// =========================
+// =======================
 
 async function loadDashboard(){
 
 const snapshot = await getDocs(vipCollection);
 
-let totalVIP = 0;
+let totalNumbers = 0;
 let totalValue = 0;
 
 snapshot.forEach((item)=>{
 
 const data = item.data();
 
-totalVIP++;
+totalNumbers++;
 
 totalValue += Number(data.price || 0);
 
 });
 
-const vip=document.getElementById("totalNumbers");
-const value=document.getElementById("totalValue");
+document.getElementById("totalNumbers").textContent = totalNumbers;
 
-if(vip) vip.innerHTML=totalVIP;
-if(value) value.innerHTML="₹"+totalValue.toLocaleString();
+document.getElementById("totalValue").textContent =
+"₹" + totalValue.toLocaleString();
 
 }
-
-loadDashboard();
-
-// =========================
-// Load VIP Table
-// =========================
 
 async function loadVIPTable(){
 
@@ -55,14 +48,13 @@ document.getElementById("vipTableBody");
 
 if(!tbody) return;
 
-tbody.innerHTML="";
+tbody.innerHTML = "";
 
-const snapshot =
-await getDocs(vipCollection);
+const snapshot = await getDocs(vipCollection);
 
 snapshot.forEach((item)=>{
 
-const data=item.data();
+const data = item.data();
 
 tbody.innerHTML += `
 
@@ -94,16 +86,22 @@ tbody.innerHTML += `
 
 }
 
-loadVIPTable();
+async function refreshDashboard(){
+
+await loadDashboard();
+
+await loadVIPTable();
+
+}
+
+refreshDashboard();
 
 console.log("✅ Admin Final Part 1 Loaded");
 
-// =========================
-// Final Part 2
-// Add / Edit / Delete / Search
-// =========================
-
+// =======================
 // Add VIP
+// =======================
+
 window.addVIP = async function(){
 
 const number =
@@ -115,9 +113,9 @@ document.getElementById("vipPrice").value.trim();
 const category =
 document.getElementById("vipCategory").value;
 
-if(number==="" || price===""){
+if(!number || !price){
 
-alert("Please fill all fields");
+alert("બધી માહિતી ભરો");
 
 return;
 
@@ -129,15 +127,13 @@ if(editId){
 
 await updateDoc(doc(db,"numbers",editId),{
 
-number:number,
-
+number,
 price:Number(price),
-
-category:category
+category
 
 });
 
-alert("✅ VIP Updated");
+alert("✅ VIP Number Updated");
 
 editId=null;
 
@@ -145,17 +141,14 @@ editId=null;
 
 await addDoc(vipCollection,{
 
-number:number,
-
+number,
 price:Number(price),
-
-category:category,
-
+category,
 createdAt:new Date()
 
 });
 
-alert("✅ VIP Added");
+alert("✅ VIP Number Added");
 
 }
 
@@ -163,8 +156,7 @@ document.getElementById("vipNumber").value="";
 document.getElementById("vipPrice").value="";
 document.getElementById("vipCategory").selectedIndex=0;
 
-loadDashboard();
-loadVIPTable();
+refreshDashboard();
 
 }catch(err){
 
@@ -174,9 +166,9 @@ alert(err.message);
 
 };
 
-// =========================
-// Delete
-// =========================
+// =======================
+// Delete VIP
+// =======================
 
 window.deleteVIP = async function(id){
 
@@ -184,20 +176,17 @@ if(!confirm("Delete this VIP Number?")) return;
 
 await deleteDoc(doc(db,"numbers",id));
 
-loadDashboard();
-
-loadVIPTable();
+refreshDashboard();
 
 };
 
-// =========================
-// Edit
-// =========================
+// =======================
+// Edit VIP
+// =======================
 
 window.editVIP = async function(id){
 
-const snapshot =
-await getDocs(vipCollection);
+const snapshot = await getDocs(vipCollection);
 
 snapshot.forEach((item)=>{
 
@@ -208,17 +197,12 @@ const data=item.data();
 editId=id;
 
 document.getElementById("vipNumber").value=data.number;
-
 document.getElementById("vipPrice").value=data.price;
-
 document.getElementById("vipCategory").value=data.category;
 
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
 
 }
@@ -227,69 +211,45 @@ behavior:"smooth"
 
 };
 
-// =========================
+// =======================
 // Search
-// =========================
+// =======================
 
-window.searchVIP=function(){
+window.searchVIP = function(){
 
-const value=
-
+const value =
 document.getElementById("searchVIP")
-
 .value.toLowerCase();
 
 document
-
 .querySelectorAll("#vipTableBody tr")
-
 .forEach((row)=>{
 
-row.style.display=
-
-row.innerText
-
-.toLowerCase()
-
-.includes(value)
-
+row.style.display =
+row.innerText.toLowerCase().includes(value)
 ? ""
-
 : "none";
 
 });
 
 };
 
-// =========================
-// Auto Refresh
-// =========================
-
-setInterval(()=>{
-
-loadDashboard();
-
-loadVIPTable();
-
-},30000);
-
 console.log("✅ Admin Final Part 2 Loaded");
 
-// =========================
-// Final Part 3
-// Analytics + Notifications + Export
-// =========================
+// =======================
+// Analytics
+// =======================
 
-// Dashboard Analytics
 async function loadAnalytics(){
 
 const snapshot = await getDocs(vipCollection);
 
 let totalRevenue = 0;
-let totalGold = 0;
-let totalPremium = 0;
-let totalSilver = 0;
-let totalPlatinum = 0;
+
+let gold = 0;
+let premium = 0;
+let silver = 0;
+let platinum = 0;
 
 snapshot.forEach((item)=>{
 
@@ -300,38 +260,54 @@ totalRevenue += Number(data.price || 0);
 switch(data.category){
 
 case "Gold":
-totalGold++;
+gold++;
 break;
 
 case "Premium":
-totalPremium++;
+premium++;
 break;
 
 case "Silver":
-totalSilver++;
+silver++;
 break;
 
 case "Platinum":
-totalPlatinum++;
+platinum++;
 break;
 
 }
 
 });
 
-console.log("Revenue :",totalRevenue);
-console.log("Gold :",totalGold);
-console.log("Premium :",totalPremium);
-console.log("Silver :",totalSilver);
-console.log("Platinum :",totalPlatinum);
+const revenue =
+document.getElementById("todayRevenue");
+
+if(revenue){
+
+revenue.innerHTML =
+"₹"+totalRevenue.toLocaleString();
 
 }
 
-loadAnalytics();
+console.table({
 
-// =========================
+Gold:gold,
+
+Premium:premium,
+
+Silver:silver,
+
+Platinum:platinum,
+
+Revenue:totalRevenue
+
+});
+
+}
+
+// =======================
 // Export CSV
-// =========================
+// =======================
 
 window.exportCSV = async function(){
 
@@ -341,10 +317,9 @@ let csv = "Number,Price,Category\n";
 
 snapshot.forEach((item)=>{
 
-const data = item.data();
+const d = item.data();
 
-csv +=
-`${data.number},${data.price},${data.category}\n`;
+csv += `${d.number},${d.price},${d.category}\n`;
 
 });
 
@@ -352,25 +327,28 @@ const blob = new Blob([csv],{
 type:"text/csv"
 });
 
-const a=document.createElement("a");
+const link =
+document.createElement("a");
 
-a.href=URL.createObjectURL(blob);
+link.href =
+URL.createObjectURL(blob);
 
-a.download="VIP_Numbers.csv";
+link.download =
+"VIP_Numbers.csv";
 
-a.click();
+link.click();
 
 };
 
-// =========================
+// =======================
 // Backup JSON
-// =========================
+// =======================
 
 window.exportBackup = async function(){
 
 const snapshot = await getDocs(vipCollection);
 
-const backup=[];
+const backup = [];
 
 snapshot.forEach((item)=>{
 
@@ -384,7 +362,7 @@ id:item.id,
 
 });
 
-const blob=new Blob(
+const blob = new Blob(
 
 [JSON.stringify(backup,null,2)],
 
@@ -392,70 +370,75 @@ const blob=new Blob(
 
 );
 
-const a=document.createElement("a");
+const link =
+document.createElement("a");
 
-a.href=URL.createObjectURL(blob);
+link.href =
+URL.createObjectURL(blob);
 
-a.download="VIP_Backup.json";
+link.download =
+"VIP_Backup.json";
 
-a.click();
+link.click();
 
 };
 
-// =========================
+// =======================
 // Notifications
-// =========================
+// =======================
 
-function notify(text){
+function notify(msg){
 
-const area =
+const box =
 document.getElementById("recentActivity");
 
-if(!area) return;
+if(!box) return;
 
-area.innerHTML =
-"<p>"+text+"</p>" + area.innerHTML;
+box.innerHTML =
+`<p>${msg}</p>` + box.innerHTML;
 
 }
 
-notify("✅ Dashboard Started");
+notify("✅ Dashboard Loaded");
 
-// =========================
-// Auto Analytics Refresh
-// =========================
+// =======================
+// Auto Refresh
+// =======================
 
-setInterval(()=>{
+setInterval(async()=>{
 
-loadAnalytics();
+await refreshDashboard();
 
-},60000);
+await loadAnalytics();
+
+},30000);
 
 console.log("✅ Admin Final Part 3 Loaded");
 
-// =========================
+// =======================
 // Final Part 4
-// Charts + Visitors + Reports
-// =========================
+// Charts + Visitors + Logout
+// =======================
 
-// Demo Visitors
-let visitors = 0;
+// Demo Visitor Counter
+let visitorCount = 125;
 
 function updateVisitors(){
 
-visitors += Math.floor(Math.random()*5)+1;
+visitorCount += Math.floor(Math.random()*3);
 
-const total =
+const totalVisitors =
 document.getElementById("totalVisitors");
 
-const online =
+const onlineVisitors =
 document.getElementById("onlineVisitors");
 
-if(total)
-total.innerHTML = visitors;
+if(totalVisitors)
+totalVisitors.innerHTML = visitorCount;
 
-if(online)
-online.innerHTML =
-Math.floor(Math.random()*20)+1;
+if(onlineVisitors)
+onlineVisitors.innerHTML =
+Math.floor(Math.random()*20)+5;
 
 }
 
@@ -463,18 +446,18 @@ updateVisitors();
 
 setInterval(updateVisitors,5000);
 
-// =========================
-// Chart.js
-// =========================
+// =======================
+// Chart
+// =======================
 
-function loadChart(){
+window.addEventListener("load",()=>{
 
-const canvas =
+const chart =
 document.getElementById("visitorChart");
 
-if(!canvas) return;
+if(!chart) return;
 
-new Chart(canvas,{
+new Chart(chart,{
 
 type:"line",
 
@@ -486,13 +469,13 @@ datasets:[{
 
 label:"Visitors",
 
-data:[12,25,18,40,55,35,60],
+data:[15,32,28,45,60,52,78],
 
 borderWidth:3,
 
 fill:false,
 
-tension:0.4
+tension:.4
 
 }]
 
@@ -508,112 +491,70 @@ maintainAspectRatio:false
 
 });
 
-}
-
-window.addEventListener("load",loadChart);
-
-// =========================
-// Monthly Report
-// =========================
-
-function monthlyReport(){
-
-console.table({
-
-Visitors:visitors,
-
-Revenue:
-document.getElementById("totalValue")?.innerText,
-
-VIP:
-document.getElementById("totalNumbers")?.innerText
-
 });
 
-}
-
-setInterval(monthlyReport,120000);
-
-// =========================
-// Welcome Notification
-// =========================
-
-setTimeout(()=>{
-
-notify("🎉 Welcome Maldev");
-
-},1000);
-
-// =========================
-// Dashboard Health
-// =========================
-
-console.log("Firebase Connected");
-
-console.log("Chart Ready");
-
-console.log("Visitors Ready");
-
-console.log("Admin Final Part 4 Loaded");
-
-// =========================
-// Final Part 5
-// Logout + Settings + Final
-// =========================
-
+// =======================
 // Logout
+// =======================
 
-window.logout = function(){
+window.logout=function(){
 
 if(confirm("Logout Admin?")){
 
 sessionStorage.removeItem("adminLogin");
 
-window.location.href="login.html";
+location.href="login.html";
 
 }
 
 };
 
-// Logout Button
+// Sidebar Logout
 
 document.querySelectorAll(".sidebar li").forEach((item)=>{
 
 if(item.innerText.includes("Logout")){
 
-item.onclick=logout;
+item.onclick = logout;
 
 }
 
 });
 
+// =======================
+// System Ready
+// =======================
+
+console.log("🚀 VIP Number Bazar Admin Ready");
+
+// =======================
+// Final Part 5
+// Production Ready
+// =======================
+
 // Website Settings
+window.websiteSettings = function(){
 
-window.websiteSettings=function(){
-
-alert("Website Settings Module Coming Soon");
+alert("Website Settings Coming Soon");
 
 };
 
 // Export Excel
-
-window.exportExcel=function(){
+window.exportExcel = function(){
 
 alert("Excel Export Coming Soon");
 
 };
 
 // Export PDF
-
-window.exportPDF=function(){
+window.exportPDF = function(){
 
 alert("PDF Export Coming Soon");
 
 };
 
-// Refresh
-
-window.refreshDashboard=async function(){
+// Refresh Dashboard
+window.refreshDashboard = async function(){
 
 await loadDashboard();
 
@@ -625,20 +566,70 @@ notify("🔄 Dashboard Refreshed");
 
 };
 
-// Auto Refresh
+// Refresh Button
+const refreshBtn = document.getElementById("refreshBtn");
 
-setInterval(refreshDashboard,60000);
+if(refreshBtn){
+
+refreshBtn.onclick = refreshDashboard;
+
+}
+
+// Greeting
+function greeting(){
+
+const hour = new Date().getHours();
+
+let text = "Welcome";
+
+if(hour < 12){
+
+text = "🌞 Good Morning";
+
+}else if(hour < 18){
+
+text = "☀️ Good Afternoon";
+
+}else{
+
+text = "🌙 Good Evening";
+
+}
+
+const greet = document.getElementById("greeting");
+
+if(greet){
+
+greet.innerHTML = text + ", Maldev";
+
+}
+
+}
+
+greeting();
+
+// Live Clock
+function liveClock(){
+
+const clock = document.getElementById("liveClock");
+
+if(!clock) return;
+
+clock.innerHTML = new Date().toLocaleString();
+}
+
+setInterval(liveClock,1000);
+
+liveClock();
 
 // Version
+console.log("VIP Number Bazar Admin V2.0");
 
-const VERSION="VIP Number Bazar V2.0";
+// Initial Load
+(async()=>{
 
-console.log(VERSION);
+await refreshDashboard();
 
-// Ready
+notify("🚀 Admin Panel Ready");
 
-console.log("✅ Admin System Ready");
-
-// Welcome
-
-notify("🚀 VIP Number Bazar Admin Started");
+})();
