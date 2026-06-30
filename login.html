@@ -1,78 +1,374 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+<!DOCTYPE html>
+<html lang="en">
 
-import {
-getAuth,
-RecaptchaVerifier,
-signInWithPhoneNumber
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+<head>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-  projectId: "vipnumberbazar-73e51",
-  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-  messagingSenderId: "756745745147",
-  appId: "1:756745745147:web:e8dcd216eda572c440f65e"
-};
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+<title>VIP Number Bazar - Admin</title>
 
-window.recaptchaVerifier = new RecaptchaVerifier(
-auth,
-"recaptcha-container",
-{
-size: "normal"
-}
-);
+<link rel="stylesheet" href="admin.css">
 
-window.recaptchaVerifier.render();
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-const phoneNumber = "+916354312829";
-let confirmationResult;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-document.getElementById("sendOtpBtn").onclick = async () => {
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-try{
+</head>
 
-confirmationResult =
-await signInWithPhoneNumber(
-auth,
-phoneNumber,
-window.recaptchaVerifier
-);
+<body>
 
-document.getElementById("otp").style.display="block";
-document.getElementById("verifyOtpBtn").style.display="block";
-document.getElementById("msg").innerHTML="✅ OTP મોકલાયો.";
+<div class="admin">
 
-}catch(err){
+<!-- Sidebar -->
 
-document.getElementById("msg").innerHTML=err.message;
+<aside class="sidebar">
 
-}
+<div class="logo">
 
-};
+<h2>
+👑 VIP NUMBER
+<br>
+<span>BAZAR</span>
+</h2>
 
-document.getElementById("verifyOtpBtn").onclick = async () => {
+</div>
 
-const otp = document.getElementById("otp").value.trim();
+<div class="profile">
 
-try {
+<img src="https://i.pravatar.cc/120" alt="Admin">
 
-await confirmationResult.confirm(otp);
+<h3>Maldev Thakor</h3>
 
-// Login સફળ
-sessionStorage.setItem("adminLogin", "true");
+<p>Administrator</p>
 
-// Admin Dashboard ખોલો
-window.location.href = "admin.html";
+<span class="online">
+● Online
+</span>
 
-} catch (err) {
+</div>
 
-document.getElementById("msg").innerHTML =
-"❌ OTP ખોટો છે.";
+<ul>
 
-}
+<li class="active">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</li>
 
-};
+<li>
+<i class="fa-solid fa-sim-card"></i>
+VIP Numbers
+</li>
+
+<li>
+<i class="fa-solid fa-plus"></i>
+Add Number
+</li>
+
+<li>
+<i class="fa-solid fa-layer-group"></i>
+Categories
+</li>
+
+<li>
+<i class="fa-solid fa-users"></i>
+Visitors
+</li>
+
+<li>
+<i class="fa-solid fa-envelope"></i>
+Enquiries
+</li>
+
+<li>
+<i class="fa-solid fa-cart-shopping"></i>
+Orders
+</li>
+
+<li>
+<i class="fa-solid fa-chart-line"></i>
+Analytics
+</li>
+
+<li>
+<i class="fa-solid fa-bell"></i>
+Notifications
+</li>
+
+<li>
+<i class="fa-solid fa-gear"></i>
+Settings
+</li>
+
+<li>
+<i class="fa-solid fa-globe"></i>
+Website Settings
+</li>
+
+<li>
+<i class="fa-solid fa-user"></i>
+Users
+</li>
+
+<li>
+<i class="fa-solid fa-database"></i>
+Backup
+</li>
+
+<li>
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+</li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<header class="topbar">
+
+<input
+type="text"
+placeholder="Search anything...">
+
+<div class="admin-right">
+
+<i class="fa-solid fa-bell"></i>
+
+<img src="https://i.pravatar.cc/60">
+
+</div>
+
+</header>
+
+<!-- Dashboard Cards -->
+
+<section class="dashboard-cards">
+
+<div class="card blue">
+<i class="fa-solid fa-users"></i>
+
+<div>
+<h2 id="totalVisitors">0</h2>
+<p>Total Visitors</p>
+</div>
+
+</div>
+
+<div class="card green">
+<i class="fa-solid fa-sim-card"></i>
+
+<div>
+<h2 id="totalNumbers">0</h2>
+<p>Total VIP Numbers</p>
+</div>
+
+</div>
+
+<div class="card purple">
+<i class="fa-solid fa-indian-rupee-sign"></i>
+
+<div>
+<h2 id="totalValue">₹0</h2>
+<p>Total Value</p>
+</div>
+
+</div>
+
+<div class="card orange">
+<i class="fa-solid fa-envelope"></i>
+
+<div>
+<h2 id="totalEnquiry">0</h2>
+<p>Total Enquiries</p>
+</div>
+
+</div>
+
+<div class="card cyan">
+<i class="fa-solid fa-eye"></i>
+
+<div>
+<h2 id="onlineVisitors">0</h2>
+<p>Online Visitors</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- Charts -->
+
+<section class="dashboard-row">
+
+<div class="box">
+
+<h3>Visitors Overview</h3>
+
+<canvas id="visitorChart"></canvas>
+
+</div>
+
+<div class="box">
+
+<h3>Recent Activity</h3>
+
+<div id="recentActivity">
+
+<p>✅ New visitor</p>
+
+<p>📱 VIP Number Added</p>
+
+<p>💬 WhatsApp Click</p>
+
+<p>🛒 Buy Now Click</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Recent Visitors -->
+<!-- ========================= -->
+
+<section class="dashboard-row">
+
+<div class="box">
+
+<h3>Recent Visitors</h3>
+
+<table class="admin-table">
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Phone</th>
+<th>Action</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="visitorTable">
+
+<tr>
+
+<td colspan="4">
+
+No Visitors Yet
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Quick Actions -->
+<!-- ========================= -->
+
+<section class="dashboard-row">
+
+<div class="box">
+
+<h3>Quick Actions</h3>
+
+<div class="quick-actions">
+
+<button id="addVipBtn">
+➕ Add VIP Number
+</button>
+
+<button id="manageVipBtn">
+📱 Manage VIP Numbers
+</button>
+
+<button id="ordersBtn">
+🛒 Orders
+</button>
+
+<button id="analyticsBtn">
+📊 Analytics
+</button>
+
+<button id="backupBtn">
+💾 Backup
+</button>
+
+<button id="settingBtn">
+⚙️ Settings
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Add VIP Form -->
+<!-- ========================= -->
+
+<section class="dashboard-row">
+
+<div class="box">
+
+<h3>Add New VIP Number</h3>
+
+<input
+type="text"
+id="vipNumber"
+placeholder="VIP Number">
+
+<input
+type="number"
+id="vipPrice"
+placeholder="Price">
+
+<select id="vipCategory">
+
+<option>Gold</option>
+
+<option>Premium</option>
+
+<option>Silver</option>
+
+<option>Platinum</option>
+
+</select>
+
+<button onclick="addVIP()">
+
+Save VIP Number
+
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
+
