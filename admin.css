@@ -1,7 +1,7 @@
-/* =====================================
-   VIP Number Bazar Admin Panel
-   admin.css - Part 1
-===================================== */
+/* =========================
+VIP NUMBER BAZAR ADMIN
+PART 1
+========================= */
 
 *{
 margin:0;
@@ -11,437 +11,416 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-
-background:#f4f7fb;
-
-color:#222;
-
+background:#f5f7fb;
+overflow-x:hidden;
 }
 
-.container{
-
-width:90%;
-
-max-width:1300px;
-
-margin:40px auto;
-
+.admin{
+display:flex;
+min-height:100vh;
 }
 
 /* =========================
-HEADER
+SIDEBAR
 ========================= */
 
-.admin-header{
-
-background:#111;
-
+.sidebar{
+width:270px;
+background:#111827;
 color:#fff;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+overflow-y:auto;
+}
 
-padding:20px 40px;
+.logo{
+padding:30px 20px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
 
+.logo h2{
+font-size:28px;
+font-weight:800;
+line-height:1.4;
+}
+
+.logo span{
+color:#ff9800;
+}
+
+.profile{
+text-align:center;
+padding:25px 15px;
+}
+
+.profile img{
+width:90px;
+height:90px;
+border-radius:50%;
+border:4px solid #ff9800;
+margin-bottom:15px;
+}
+
+.profile h3{
+font-size:20px;
+}
+
+.profile p{
+font-size:14px;
+opacity:.7;
+margin:5px 0;
+}
+
+.online{
+display:inline-block;
+background:#00c853;
+padding:5px 12px;
+border-radius:20px;
+font-size:13px;
+margin-top:8px;
+}
+
+.sidebar ul{
+padding:20px 0;
+}
+
+.sidebar ul li{
+padding:16px 25px;
+cursor:pointer;
+transition:.3s;
+font-size:16px;
 display:flex;
-
-justify-content:space-between;
-
 align-items:center;
-
+gap:12px;
 }
 
-.admin-header h1{
+.sidebar ul li:hover,
+.sidebar ul li.active{
+background:#ff9800;
+}
 
-font-size:30px;
+/* =========================
+MAIN
+========================= */
 
+.main{
+margin-left:270px;
+width:calc(100% - 270px);
+padding:25px;
+}
+
+/* =========================
+TOPBAR
+========================= */
+
+.topbar{
+background:#fff;
+padding:18px 25px;
+border-radius:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+
+.topbar input{
+width:380px;
+padding:14px 18px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+.topbar input:focus{
+outline:none;
+border-color:#ff9800;
+}
+
+.admin-right{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+.admin-right i{
+font-size:24px;
+color:#555;
+cursor:pointer;
+}
+
+.admin-right img{
+width:48px;
+height:48px;
+border-radius:50%;
+border:3px solid #ff9800;
+}
+
+/* =========================
+DASHBOARD CARDS
+========================= */
+
+.dashboard-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-bottom:30px;
+}
+
+.card{
+padding:25px;
+border-radius:18px;
+display:flex;
+align-items:center;
+gap:18px;
+color:#fff;
+box-shadow:0 15px 30px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card i{
+font-size:42px;
+}
+
+.card h2{
+font-size:32px;
 font-weight:700;
-
+margin-bottom:5px;
 }
 
-.home-btn{
+.card p{
+font-size:15px;
+opacity:.9;
+}
+
+.blue{
+background:linear-gradient(135deg,#2196F3,#1565C0);
+}
+
+.green{
+background:linear-gradient(135deg,#00C853,#2E7D32);
+}
+
+.purple{
+background:linear-gradient(135deg,#9C27B0,#6A1B9A);
+}
+
+.orange{
+background:linear-gradient(135deg,#FB8C00,#EF6C00);
+}
+
+.cyan{
+background:linear-gradient(135deg,#00BCD4,#00838F);
+}
+
+/* =========================
+BOXES
+========================= */
+
+.dashboard-row{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+margin-bottom:30px;
+}
+
+.box{
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.box h3{
+font-size:22px;
+margin-bottom:20px;
+color:#222;
+}
+
+#recentActivity p{
+padding:12px 0;
+border-bottom:1px solid #eee;
+font-size:15px;
+}
+
+/* =========================
+TABLE
+========================= */
+
+.admin-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.admin-table th{
+background:#ff9800;
+color:#fff;
+padding:14px;
+text-align:left;
+}
+
+.admin-table td{
+padding:14px;
+border-bottom:1px solid #eee;
+}
+
+.admin-table tr:hover{
+background:#f8f8f8;
+}
+
+/* =========================
+QUICK ACTION BUTTONS
+========================= */
+
+.quick-actions{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.quick-actions button{
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
 
 background:#ff9800;
 
 color:#fff;
 
-padding:12px 22px;
-
-border-radius:8px;
-
-text-decoration:none;
+font-size:16px;
 
 font-weight:600;
 
+cursor:pointer;
+
 transition:.3s;
 
-}
-
-.home-btn:hover{
-
-background:#fff;
-
-color:#111;
+box-shadow:0 8px 20px rgba(0,0,0,.10);
 
 }
 
-/* =========================
-DASHBOARD
-========================= */
+.quick-actions button:hover{
 
-.dashboard{
+background:#111;
 
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
-margin:40px 0;
+transform:translateY(-5px);
 
 }
 
-.card{
-
-background:#fff;
-
-padding:30px;
-
-border-radius:18px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-text-align:center;
-
-}
-
-.card h3{
-
-font-size:18px;
-
-color:#666;
-
-margin-bottom:10px;
-
-}
-
-.card h2{
-
-font-size:34px;
-
-color:#ff9800;
-
-font-weight:700;
-
-}
 /* =========================
 ADD VIP FORM
 ========================= */
 
-.add-number{
-
-background:#fff;
-
-padding:35px;
-
-border-radius:18px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-margin-bottom:40px;
-
-}
-
-.add-number h2{
-
-font-size:28px;
-
-margin-bottom:25px;
-
-color:#111;
-
-}
-
-.add-number input,
-.add-number select{
+.box input,
+.box select{
 
 width:100%;
 
 padding:15px;
 
-margin-bottom:18px;
+margin:12px 0;
 
-font-size:17px;
-
-border:2px solid #ddd;
+border:1px solid #ddd;
 
 border-radius:10px;
 
-outline:none;
+font-size:16px;
 
 transition:.3s;
 
 }
 
-.add-number input:focus,
-.add-number select:focus{
+.box input:focus,
+.box select:focus{
 
 border-color:#ff9800;
 
+outline:none;
+
 }
 
-.add-number button{
+.box button{
 
 width:100%;
 
 padding:16px;
 
+margin-top:15px;
+
 background:#ff9800;
 
 color:#fff;
 
-font-size:18px;
+border:none;
+
+border-radius:10px;
+
+font-size:17px;
 
 font-weight:700;
 
-border:none;
-
-border-radius:10px;
-
 cursor:pointer;
 
 transition:.3s;
 
 }
 
-.add-number button:hover{
+.box button:hover{
 
 background:#111;
 
 }
 
 /* =========================
-SEARCH BOX
+STATUS BADGES
 ========================= */
 
-.search-box{
+.badge{
 
-margin:25px 0;
+display:inline-block;
 
-}
+padding:6px 12px;
 
-.search-box input{
+border-radius:20px;
 
-width:100%;
-
-padding:15px;
-
-font-size:17px;
-
-border:2px solid #ddd;
-
-border-radius:10px;
-
-outline:none;
-
-}
-
-.search-box input:focus{
-
-border-color:#ff9800;
-
-}
-
-/* =========================
-VIP LIST
-========================= */
-
-.vip-list-section{
-
-background:#fff;
-
-padding:35px;
-
-border-radius:18px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.vip-list-section h2{
-
-font-size:28px;
-
-margin-bottom:20px;
-
-}
-
-#vipList{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-gap:20px;
-
-}
-
-.vip-item{
-
-background:#f8f9fc;
-
-padding:20px;
-
-border-radius:15px;
-
-border-left:5px solid #ff9800;
-
-}
-
-.vip-item h3{
-
-font-size:24px;
-
-margin-bottom:10px;
-
-color:#111;
-
-}
-
-.vip-item p{
-
-font-size:17px;
-
-margin-bottom:8px;
-
-color:#555;
-
-}
-
-.vip-item button{
-
-padding:10px 18px;
-
-margin:8px 6px 0 0;
-
-border:none;
-
-border-radius:8px;
-
-cursor:pointer;
+font-size:13px;
 
 font-weight:600;
 
-transition:.3s;
-
 }
 
-.vip-item button:first-of-type{
+.badge-success{
 
-background:#2196F3;
+background:#00c853;
 
 color:#fff;
 
 }
 
-.vip-item button:last-of-type{
+.badge-warning{
 
-background:#f44336;
-
-color:#fff;
-
-}
-
-.vip-item button:hover{
-
-opacity:.9;
-
-}
-/* =========================
-ADMIN FOOTER
-========================= */
-
-.admin-footer{
-
-margin-top:50px;
-
-padding:25px;
-
-background:#111;
-
-color:#fff;
-
-text-align:center;
-
-font-size:16px;
-
-}
-
-/* =========================
-ANIMATION
-========================= */
-
-.card,
-.add-number,
-.vip-list-section,
-.vip-item{
-
-transition:.35s ease;
-
-}
-
-.card:hover,
-.add-number:hover,
-.vip-item:hover{
-
-transform:translateY(-5px);
-
-box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-/* =========================
-DARK MODE
-========================= */
-
-body.dark-mode{
-
-background:#111;
+background:#ff9800;
 
 color:#fff;
 
 }
 
-body.dark-mode .card,
-body.dark-mode .add-number,
-body.dark-mode .vip-list-section,
-body.dark-mode .vip-item{
+.badge-danger{
 
-background:#1f1f1f;
+background:#e53935;
 
 color:#fff;
-
-}
-
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3{
-
-color:#fff;
-
-}
-
-body.dark-mode p{
-
-color:#ddd;
-
-}
-
-body.dark-mode input,
-body.dark-mode select{
-
-background:#2b2b2b;
-
-color:#fff;
-
-border:1px solid #444;
 
 }
 
@@ -451,9 +430,31 @@ RESPONSIVE
 
 @media(max-width:992px){
 
-.dashboard{
+.sidebar{
 
-grid-template-columns:repeat(2,1fr);
+width:90px;
+
+}
+
+.sidebar .logo h2,
+.sidebar .profile,
+.sidebar ul li span{
+
+display:none;
+
+}
+
+.main{
+
+margin-left:90px;
+
+width:calc(100% - 90px);
+
+}
+
+.dashboard-row{
+
+grid-template-columns:1fr;
 
 }
 
@@ -461,89 +462,50 @@ grid-template-columns:repeat(2,1fr);
 
 @media(max-width:768px){
 
-.admin-header{
+.main{
+
+margin-left:0;
+
+width:100%;
+
+padding:15px;
+
+}
+
+.sidebar{
+
+position:relative;
+
+width:100%;
+
+height:auto;
+
+}
+
+.dashboard-cards{
+
+grid-template-columns:1fr;
+
+}
+
+.quick-actions{
+
+grid-template-columns:1fr;
+
+}
+
+.topbar{
 
 flex-direction:column;
 
 gap:15px;
 
-text-align:center;
-
-padding:20px;
-
 }
 
-.dashboard{
-
-grid-template-columns:1fr;
-
-}
-
-.container{
-
-width:95%;
-
-}
-
-#vipList{
-
-grid-template-columns:1fr;
-
-}
-
-.card h2{
-
-font-size:28px;
-
-}
-
-.add-number h2,
-.vip-list-section h2{
-
-font-size:24px;
-
-}
-
-}
-
-@media(max-width:480px){
-
-.admin-header h1{
-
-font-size:24px;
-
-}
-
-.home-btn{
+.topbar input{
 
 width:100%;
 
-text-align:center;
-
-}
-
-.add-number input,
-.add-number select,
-.add-number button{
-
-font-size:16px;
-
-}
-
-.vip-item h3{
-
-font-size:20px;
-
-}
-
-.vip-item p{
-
-font-size:15px;
-
 }
 
 }
-
-/* =========================
-END OF ADMIN CSS
-========================= */
