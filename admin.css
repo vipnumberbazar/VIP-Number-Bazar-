@@ -575,3 +575,187 @@ border-radius:12px;
 box-shadow:0 5px 15px rgba(0,0,0,.08);
 margin-bottom:20px;
 }
+/* =========================
+FINAL ADMIN DESIGN
+========================= */
+
+.chart-box,
+.activity-box,
+.quick-box,
+.form-box,
+.table-box{
+
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:25px;
+
+}
+
+.dashboard-row{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:25px;
+
+}
+
+.chart-box{
+
+height:420px;
+
+}
+
+.chart-box canvas{
+
+width:100%!important;
+height:320px!important;
+
+}
+
+.activity-box ul{
+
+list-style:none;
+
+}
+
+.activity-box li{
+
+padding:12px 0;
+border-bottom:1px solid #eee;
+
+}
+
+.quick-box{
+
+display:flex;
+flex-direction:column;
+gap:15px;
+
+}
+
+.quick-box button{
+
+padding:15px;
+background:#ff9800;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+
+}
+
+.quick-box button:hover{
+
+background:#111;
+
+}
+
+.form-box input,
+.form-box select{
+
+width:100%;
+padding:15px;
+margin:12px 0;
+border:1px solid #ddd;
+border-radius:10px;
+
+}
+
+.form-box button{
+
+width:100%;
+padding:15px;
+background:#00c853;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+
+}
+
+.form-box button:hover{
+
+background:#111;
+
+}
+
+.vip-table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+.vip-table th{
+
+background:#ff9800;
+color:#fff;
+padding:14px;
+
+}
+
+.vip-table td{
+
+padding:14px;
+border-bottom:1px solid #eee;
+
+}
+
+.vip-table tr:hover{
+
+background:#fafafa;
+
+}
+
+.admin-footer{
+
+margin-top:40px;
+padding:20px;
+text-align:center;
+color:#777;
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+
+width:100%;
+position:relative;
+
+}
+
+.main{
+
+margin-left:0;
+width:100%;
+
+}
+
+.topbar{
+
+flex-direction:column;
+gap:15px;
+
+}
+
+.dashboard-cards{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-row{
+
+grid-template-columns:1fr;
+
+}
+
+}
