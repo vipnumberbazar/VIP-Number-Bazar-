@@ -575,7 +575,43 @@ if(refreshBtn){
 refreshBtn.onclick = refreshDashboard;
 
 }
+async function loadHighestVIP() {
 
+const snapshot = await getDocs(vipCollection);
+
+let best = null;
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+if(!best || Number(data.price) > Number(best.price)){
+best = data;
+}
+
+});
+
+const box = document.getElementById("bestVIP");
+
+if(box){
+
+if(best){
+
+box.innerHTML =
+best.number + " (₹" +
+Number(best.price).toLocaleString() + ")";
+
+}else{
+
+box.innerHTML = "No VIP Number";
+
+}
+
+}
+
+}
+
+loadHighestVIP();
 // Greeting
 function greeting(){
 
