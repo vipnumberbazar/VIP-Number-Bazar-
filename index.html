@@ -3,374 +3,200 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-content="VIP Number Bazar - Buy Premium VIP Mobile Numbers">
+    <title>VIP Number Bazar</title>
 
-<meta name="keywords"
-content="VIP Number, Fancy Number, Mobile Number, VIP SIM">
+    <link rel="stylesheet" href="style.css">
 
-<meta name="author"
-content="VIP Number Bazar">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<title>VIP Number Bazar</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="Style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<!-- ========================= -->
-<!-- HEADER START -->
-<!-- ========================= -->
+<!-- Header Start -->
 
-<header class="header">
+<header>
 
-<div class="logo">
+    <div class="logo">
 
-<i class="fa-solid fa-sim-card"></i>
+        <h2>VIP Number Bazar</h2>
 
-<h2>VIP Number Bazar</h2>
+    </div>
 
-</div>
+    <nav>
 
-<nav>
+        <ul>
 
-<ul class="menu">
+            <li><a href="#">Home</a></li>
 
-<li>
-<a href="#home">Home</a>
-</li>
+            <li><a href="#numbers">VIP Numbers</a></li>
 
-<li>
-<a href="#numbers">VIP Numbers</a>
-</li>
+            <li><a href="#contact">Contact</a></li>
 
-<li>
-<a href="#offers">Offers</a>
-</li>
+        </ul>
 
-<li>
-<a href="#about">About</a>
-</li>
+    </nav>
 
-<li>
-<a href="#contact">Contact</a>
-</li>
+    <a href="login.html" class="admin-btn">
 
-</ul>
+        <i class="fas fa-user-shield"></i>
 
-</nav>
+        Admin
 
-<div class="header-buttons">
-
-<button id="darkModeBtn">
-
-<i class="fa-solid fa-moon"></i>
-
-</button>
-
-</div>
+    </a>
 
 </header>
 
-<!-- ========================= -->
-<!-- HEADER END -->
-<!-- ========================= -->
-<!-- ========================= -->
-<!-- HERO SECTION START -->
-<!-- ========================= -->
+<!-- Hero Section -->
 
-<section class="hero" id="home">
+<section class="hero">
 
     <div class="hero-content">
 
-        <span class="hero-tag">
-            India's No.1 VIP Number Marketplace
-        </span>
-
-        <h1>
-            Get Your Dream
-            <span>VIP Mobile Number</span>
-        </h1>
+        <h1>India's Premium VIP Mobile Number Store</h1>
 
         <p>
-
-            Choose from thousands of Premium, Gold,
-            Platinum and Fancy VIP Mobile Numbers
-            at the best prices.
-
+            Choose your lucky VIP mobile number at the best price.
         </p>
 
-        <div class="hero-buttons">
+        <a href="#numbers" class="shop-btn">
 
-            <a href="#numbers" class="btn-primary">
+            Browse VIP Numbers
 
-                Browse Numbers
-
-            </a>
-
-            <a href="https://wa.me/918070424242"
-               class="btn-secondary">
-
-                <i class="fa-brands fa-whatsapp"></i>
-
-                WhatsApp
-
-            </a>
-
-        </div>
+        </a>
 
     </div>
 
-<div class="hero-image">
-<div class="hero-card">
-<h2 id="bestVIP">Loading...</h2>
-<p>Highest Price VIP Number</p>
- <h4 id="bestPrice">₹0</h4>
-<h3>🔥 Premium Collection</h3>
-<button>Buy Now</button>
- </div>
-</div>
-
 </section>
 
-<!-- ========================= -->
-<!-- HERO SECTION END -->
-<!-- ========================= -->
-<!-- ========================= -->
-<!-- SEARCH & CATEGORY START -->
-<!-- ========================= -->
+<!-- Search Section -->
 
 <section class="search-section" id="numbers">
 
-    <div class="container">
+    <h2>Search VIP Number</h2>
 
-        <h2 class="section-title">
-            Find Your VIP Number
-        </h2>
-
-        <p class="section-subtitle">
-            Search your lucky mobile number instantly
-        </p>
-
-        <div class="search-box">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search VIP Number...">
-
-            <button id="searchBtn">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                Search
-
-            </button>
-
-        </div>
-
-        <div class="category-buttons">
-
-            <button class="filter-btn active"
-                    data-filter="all">
-
-                All Numbers
-
-            </button>
-
-            <button class="filter-btn"
-                    data-filter="gold">
-
-                Gold
-
-            </button>
-
-            <button class="filter-btn"
-                    data-filter="premium">
-
-                Premium
-
-            </button>
-
-            <button class="filter-btn"
-                    data-filter="platinum">
-
-                Platinum
-
-            </button>
-
-            <button class="filter-btn"
-                    data-filter="silver">
-
-                Silver
-
-            </button>
-
-        </div>
-
-    </div>
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Number...">
 
 </section>
 
-<!-- ========================= -->
-<!-- SEARCH & CATEGORY END -->
-<!-- ========================= -->
-<!-- ========================= -->
-<!-- VIP NUMBER CARDS START -->
-<!-- ========================= -->
+<!-- ===========================
+     VIP Numbers Section
+=========================== -->
 
 <section class="vip-section">
 
-<div class="container">
+    <div class="section-title">
 
-<div class="vip-grid">
+        <h2>Available VIP Numbers</h2>
+
+        <p>Choose your favourite premium mobile number.</p>
 
     </div>
-</div>
-</section>
 
-<!-- ========================= -->
-<!-- ABOUT SECTION -->
-<!-- ========================= -->
+    <div class="vip-grid" id="vipContainer">
 
-<section class="about" id="about">
+        <!-- Firebase Data Here -->
 
-<div class="container">
-
-<h2 class="section-title">
-About VIP Number Bazar
-</h2>
-
-<p class="about-text">
-
-VIP Number Bazar is India's trusted marketplace for
-Premium, Gold, Platinum and Fancy Mobile Numbers.
-
-We provide genuine VIP numbers with secure booking,
-instant support and affordable prices.
-
-</p>
-
-</div>
+    </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- CONTACT SECTION -->
-<!-- ========================= -->
 
-<section class="contact" id="contact">
+<!-- ===========================
+     Why Choose Us
+=========================== -->
 
-<div class="container">
+<section class="features">
 
-<h2 class="section-title">
-Contact Us
-</h2>
+    <div class="feature-box">
 
-<div class="contact-box">
+        <i class="fas fa-shield-alt"></i>
 
-<p>
-📞 Phone :
-<a href="tel:+918070424242">
-+91 8070424242
-</a>
-</p>
+        <h3>100% Trusted</h3>
 
-<p>
-📧 Email :
-<a href="mailto:vipnumberbazar.73@gmail.com">
-Vipnumberbazar.73@gmail.com
-</a>
-</p>
+        <p>Safe and secure VIP number booking.</p>
 
-<p>
-💬 WhatsApp :
-<a href="https://wa.me/918070424242">
-Chat Now
-</a>
-</p>
+    </div>
 
-<p>
-📍 Address :
-Rajkot, Gujarat, India
-</p>
+    <div class="feature-box">
 
-</div>
+        <i class="fas fa-bolt"></i>
 
-</div>
+        <h3>Instant Response</h3>
+
+        <p>Quick confirmation via WhatsApp.</p>
+
+    </div>
+
+    <div class="feature-box">
+
+        <i class="fas fa-crown"></i>
+
+        <h3>Premium Collection</h3>
+
+        <p>Gold, Platinum and Diamond VIP numbers.</p>
+
+    </div>
 
 </section>
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
 
-<footer class="footer">
+<!-- ===========================
+     Contact Section
+=========================== -->
 
-<div class="container">
+<section id="contact" class="contact">
 
-<h3>VIP Number Bazar</h3>
+    <h2>Contact Us</h2>
 
-<p>
-Premium Fancy Mobile Numbers
-at Best Prices.
-</p>
+    <p>Need help choosing a VIP number? Contact us anytime.</p>
 
-<div class="footer-links">
+    <a
+        href="https://wa.me/919999999999"
+        target="_blank"
+        class="whatsapp-btn">
 
-<a href="#home">Home</a>
+        <i class="fab fa-whatsapp"></i>
 
-<a href="#numbers">Numbers</a>
+        Chat on WhatsApp
 
-<a href="#offers">Offers</a>
+    </a>
 
-<a href="#about">About</a>
+</section>
 
-<a href="#contact">Contact</a>
 
-</div>
+<!-- ===========================
+     Footer
+=========================== -->
 
-<p class="copyright">
+<footer>
 
-© 2026 VIP Number Bazar.
-All Rights Reserved.
+    <p>
 
-</p>
+        © 2026 VIP Number Bazar.
+        All Rights Reserved.
 
-</div>
+    </p>
 
 </footer>
 
-<!-- Back To Top -->
-
-<button id="topBtn">
-
-⬆️
-
-</button>
 
 <script type="module" src="firebase.js"></script>
+
 <script type="module" src="script.js"></script>
 
 </body>
