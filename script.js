@@ -219,5 +219,5 @@ async function saveVisitor() {
   }
 }
 
-saveVisitor();
+// saveVisitor();
 console.log("✅ Website Connected Successfully");
