@@ -65,7 +65,7 @@ let bestNumber = "";
     });
   if (bestNumber) {
     document.getElementById("bestVIP").innerText = bestNumber;
-}
+    document.getElementById("bestPrice").innerText = "₹" + bestPrice.toLocaleString();
   } catch (err) {
 
     console.error(err);
