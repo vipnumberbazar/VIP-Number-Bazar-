@@ -1,4 +1,4 @@
-// Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";// Firebase SDK
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
