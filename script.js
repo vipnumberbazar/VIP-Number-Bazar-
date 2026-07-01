@@ -199,5 +199,25 @@ if (darkBtn) {
 // ===========================
 
 loadVIPNumbers();
+async function saveVisitor() {
 
+  try {
+
+    await addDoc(collection(db, "visitors"), {
+      name: "Guest",
+      phone: "-",
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString(),
+      device: navigator.userAgent
+    });
+
+  } catch (e) {
+
+    console.log(e);
+
+  }
+
+}
+
+saveVisitor();
 console.log("✅ Website Connected Successfully");
