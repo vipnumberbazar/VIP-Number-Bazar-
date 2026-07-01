@@ -213,10 +213,10 @@ async function saveVisitor() {
 
   } catch (e) {
 
-    console.log(e);
+    alert(e.message);
+    console.error(e);
 
   }
-
 }
 
 saveVisitor();
