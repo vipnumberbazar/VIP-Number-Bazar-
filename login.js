@@ -1,24 +1,26 @@
-const USERNAME = "maldev";
-const PASSWORD = "6354312829";
+import { auth } from "./firebase.js";
 
-document.getElementById("loginBtn").onclick = function () {
+import {
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-  const username =
-    document.getElementById("username").value.trim();
+document.getElementById("loginBtn").onclick = async function () {
 
-  const password =
-    document.getElementById("password").value.trim();
+  const email = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-  if (username === USERNAME && password === PASSWORD) {
+  try {
+
+    await signInWithEmailAndPassword(auth, email, password);
 
     sessionStorage.setItem("adminLogin", "true");
 
     window.location.href = "admin.html";
 
-  } else {
+  } catch (error) {
 
     document.getElementById("msg").innerHTML =
-      "❌ Username અથવા Password ખોટો છે";
+      "❌ Email અથવા Password ખોટો છે";
 
   }
 
