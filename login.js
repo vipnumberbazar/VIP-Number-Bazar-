@@ -4,10 +4,20 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-document.getElementById("loginBtn").onclick = async function () {
+const loginBtn = document.getElementById("loginBtn");
+const msg = document.getElementById("msg");
+
+loginBtn.addEventListener("click", async () => {
 
   const email = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const password = document.getElementById("password").value;
+
+  msg.innerHTML = "";
+
+  if (!email || !password) {
+    msg.innerHTML = "⚠️ Email અને Password ભરો";
+    return;
+  }
 
   try {
 
@@ -19,9 +29,8 @@ document.getElementById("loginBtn").onclick = async function () {
 
   } catch (error) {
 
-    document.getElementById("msg").innerHTML =
-      "❌ Email અથવા Password ખોટો છે";
+    msg.innerHTML = error.message;
 
   }
 
-};
+});
