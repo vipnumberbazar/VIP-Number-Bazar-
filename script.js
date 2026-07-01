@@ -63,7 +63,9 @@ let bestNumber = "";
       vipGrid.insertAdjacentHTML("beforeend", card);
 
     });
-
+  if (bestNumber) {
+    document.getElementById("bestVIP").innerText = bestNumber;
+}
   } catch (err) {
 
     console.error(err);
