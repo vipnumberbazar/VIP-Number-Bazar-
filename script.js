@@ -19,11 +19,15 @@ async function loadVIPNumbers() {
   try {
 
     const snapshot = await getDocs(vipCollection);
-
+let bestPrice = 0;
+let bestNumber = "";
     snapshot.forEach((item) => {
 
       const data = item.data();
-
+      if (Number(data.price) > bestPrice) {
+    bestPrice = Number(data.price);
+    bestNumber = data.number;
+      }
       const card = `
       <div class="vip-card reveal active" data-category="${String(data.category).toLowerCase()}">
 
