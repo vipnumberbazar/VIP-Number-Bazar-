@@ -1,231 +1,146 @@
+// =====================================
+// VIP Number Bazar V3
+// script.js Part 1
+// =====================================
+
 import { db } from "./firebase.js";
 
 import {
-  collection,
-  getDocs,
-  addDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-const vipCollection = collection(db, "numbers");
+const vipContainer = document.getElementById("vipContainer");
+const searchInput = document.getElementById("searchInput");
 
-async function loadVIPNumbers() {
+let vipNumbers = [];
 
-  const vipGrid = document.querySelector(".vip-grid");
 
-  if (!vipGrid) return;
+// =====================================
+// Load VIP Numbers
+// =====================================
 
-  vipGrid.innerHTML = "";
+async function loadVipNumbers() {
 
-  try {
+    vipContainer.innerHTML = "<h3>Loading...</h3>";
 
-    const snapshot = await getDocs(vipCollection);
-let bestPrice = 0;
-let bestNumber = "";
-    snapshot.forEach((item) => {
+    try {
 
-      const data = item.data();
-      if (Number(data.price) > bestPrice) {
-    bestPrice = Number(data.price);
-    bestNumber = data.number;
-      }
-      const card = `
-      <div class="vip-card reveal active" data-category="${String(data.category).toLowerCase()}">
+        const snapshot = await getDocs(collection(db, "vipNumbers"));
 
-        <div class="vip-badge">${data.category}</div>
+        vipNumbers = [];
 
-        <h2>${data.number}</h2>
+        snapshot.forEach((doc) => {
 
-        <h3>₹${Number(data.price).toLocaleString()}</h3>
+            const data = doc.data();
 
-        <div class="vip-buttons">
+            // માત્ર Available નંબર બતાવવાના
+            if (data.status === "Available") {
 
-          <button class="fav-btn">🤍</button>
+                vipNumbers.push({
+                    id: doc.id,
+                    ...data
+                });
 
-          <button class="copy-btn" data-number="${data.number}">
-            📋 Copy
-          </button>
+            }
 
-          <a href="#" class="whatsapp-btn"
-             data-number="${data.number}"
-             data-price="${data.price}">
-             WhatsApp
-          </a>
+        });
 
-          <button class="buy-btn">
-            Buy Now
-          </button>
+        displayNumbers(vipNumbers);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        vipContainer.innerHTML = "<h3>Failed to load data.</h3>";
+
+    }
+
+}
+
+// =====================================
+// Display Numbers
+// =====================================
+
+function displayNumbers(list) {
+
+    vipContainer.innerHTML = "";
+
+    if (list.length === 0) {
+
+        vipContainer.innerHTML = "<h3>No VIP Numbers Found.</h3>";
+
+        return;
+
+    }
+
+    list.forEach((item) => {
+
+        vipContainer.innerHTML += `
+
+        <div class="vip-card">
+
+            <div class="vip-number">
+                ${item.number}
+            </div>
+
+            <div class="vip-category">
+                ${item.category}
+            </div>
+
+            <div class="vip-price">
+                ₹ ${Number(item.price).toLocaleString("en-IN")}
+            </div>
+
+            <div class="card-buttons">
+
+                <a
+                    class="book-btn"
+                    href="#">
+                    Book Now
+                </a>
+
+                <a
+                    class="whatsapp-card-btn"
+                    target="_blank"
+                    href="https://wa.me/918070424242?text=Hello,%20I%20want%20to%20buy%20VIP%20Number%20${encodeURIComponent(item.number)}">
+
+                    WhatsApp
+
+                </a>
+
+            </div>
 
         </div>
 
-      </div>
-      `;
-
-      vipGrid.insertAdjacentHTML("beforeend", card);
-
-    });
-  if (bestNumber) {
-    document.getElementById("bestVIP").innerText = bestNumber;
-    document.getElementById("bestPrice").innerText = "₹" + bestPrice.toLocaleString();
-  }
-    
-  } catch (err) {
-
-    console.error(err);
-
-  }
-
-}
-
-// ===========================
-// Copy Button
-// ===========================
-
-document.addEventListener("click", (e) => {
-
-  if (e.target.classList.contains("copy-btn")) {
-
-    navigator.clipboard.writeText(e.target.dataset.number);
-
-    e.target.innerHTML = "✅ Copied";
-
-    setTimeout(() => {
-      e.target.innerHTML = "📋 Copy";
-    }, 2000);
-
-  }
-
-});
-
-// ===========================
-// WhatsApp Button
-// ===========================
-
-document.addEventListener("click", (e) => {
-
-  if (e.target.classList.contains("whatsapp-btn")) {
-
-    e.preventDefault();
-
-    const number = e.target.dataset.number;
-    const price = e.target.dataset.price;
-
-    const msg =
-`Hello VIP Number Bazar,
-
-I want this VIP Number.
-
-📱 Number : ${number}
-💰 Price : ₹${price}`;
-
-    window.open(
-      "https://wa.me/918070424242?text=" +
-      encodeURIComponent(msg),
-      "_blank"
-    );
-
-  }
-
-});
-
-// ===========================
-// Favourite Button
-// ===========================
-
-document.addEventListener("click", (e) => {
-
-  if (e.target.classList.contains("fav-btn")) {
-
-    e.target.innerHTML =
-      e.target.innerHTML === "🤍"
-      ? "❤️"
-      : "🤍";
-
-  }
-
-});
-
-// ===========================
-// Search
-// ===========================
-
-const searchInput =
-document.getElementById("searchInput");
-
-if (searchInput) {
-
-  searchInput.addEventListener("keyup", function () {
-
-    const value =
-    this.value.toLowerCase();
-
-    document.querySelectorAll(".vip-card")
-    .forEach((card) => {
-
-      card.style.display =
-      card.innerText.toLowerCase().includes(value)
-      ? ""
-      : "none";
+        `;
 
     });
 
-  });
-
 }
 
-// ===========================
-// Dark Mode
-// ===========================
+loadVipNumbers();
 
-const darkBtn =
-document.getElementById("darkModeBtn");
+// =====================================
+// Live Search
+// =====================================
 
-if (darkBtn) {
+searchInput.addEventListener("keyup", () => {
 
-  if (localStorage.getItem("theme") === "dark") {
+    const value = searchInput.value.toLowerCase();
 
-    document.body.classList.add("dark-mode");
+    const filtered = vipNumbers.filter((item) => {
 
-  }
+        return (
+            item.number.toLowerCase().includes(value) ||
+            item.category.toLowerCase().includes(value)
+        );
 
-  darkBtn.onclick = () => {
-
-    document.body.classList.toggle("dark-mode");
-
-    localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark-mode")
-      ? "dark"
-      : "light"
-    );
-
-  };
-
-}
-
-// ===========================
-// Load Firebase
-// ===========================
-
-loadVIPNumbers();
-async function saveVisitor() {
-
-  try {
-
-    await addDoc(collection(db, "visitors"), {
-      name: "Guest",
-      phone: "-",
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-      device: navigator.userAgent
     });
 
-  } catch (e) {
+    displayNumbers(filtered);
 
-    alert(e.message);
-    console.error(e);
+});
 
-  }
-}
-
-// saveVisitor();
-console.log("✅ Website Connected Successfully");
