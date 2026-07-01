@@ -1,672 +1,345 @@
-import { db } from "./firebase.js";
+// ===============================
+// VIP Number Bazar - admin.js
+// Part 1
+// ===============================
+
+import { auth, db } from "./firebase.js";
 
 import {
-collection,
-getDocs,
-addDoc,
-updateDoc,
-deleteDoc,
-doc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
-const vipCollection = collection(db,"numbers");
+import {
+  collection,
+  addDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-let editId = null;
 
-// =======================
-// Dashboard
-// =======================
+// ===============================
+// DOM Elements
+// ===============================
 
-async function loadDashboard(){
+const logoutBtn = document.getElementById("logoutBtn");
 
-const snapshot = await getDocs(vipCollection);
+const addNumberForm = document.getElementById("addNumberForm");
 
-let totalNumbers = 0;
-let totalValue = 0;
+const numbersTable = document.getElementById("numbersTable");
 
-snapshot.forEach((item)=>{
+const totalNumbers = document.getElementById("totalNumbers");
 
-const data = item.data();
 
-totalNumbers++;
+// ===============================
+// Login Check
+// ===============================
 
-totalValue += Number(data.price || 0);
+onAuthStateChanged(auth, (user) => {
 
-});
+    if (!user) {
 
-document.getElementById("totalNumbers").textContent = totalNumbers;
+        window.location.href = "login.html";
 
-document.getElementById("totalValue").textContent =
-"₹" + totalValue.toLocaleString();
-
-}
-
-async function loadVIPTable(){
-
-const tbody =
-document.getElementById("vipTableBody");
-
-if(!tbody) return;
-
-tbody.innerHTML = "";
-
-const snapshot = await getDocs(vipCollection);
-
-snapshot.forEach((item)=>{
-
-const data = item.data();
-
-tbody.innerHTML += `
-
-<tr>
-
-<td>${data.number}</td>
-
-<td>₹${Number(data.price).toLocaleString()}</td>
-
-<td>${data.category}</td>
-
-<td>
-
-<button onclick="editVIP('${item.id}')">
-✏️
-</button>
-
-<button onclick="deleteVIP('${item.id}')">
-🗑
-</button>
-
-</td>
-
-</tr>
-
-`;
+    }
 
 });
 
-}
 
-async function refreshDashboard(){
-
-await loadDashboard();
-
-await loadVIPTable();
-
-}
-
-refreshDashboard();
-
-console.log("✅ Admin Final Part 1 Loaded");
-
-// =======================
-// Add VIP
-// =======================
-
-window.addVIP = async function(){
-
-const number =
-document.getElementById("vipNumber").value.trim();
-
-const price =
-document.getElementById("vipPrice").value.trim();
-
-const category =
-document.getElementById("vipCategory").value;
-
-if(!number || !price){
-
-alert("બધી માહિતી ભરો");
-
-return;
-
-}
-
-try{
-
-if(editId){
-
-await updateDoc(doc(db,"numbers",editId),{
-
-number,
-price:Number(price),
-category
-
-});
-
-alert("✅ VIP Number Updated");
-
-editId=null;
-
-}else{
-
-await addDoc(vipCollection,{
-
-number,
-price:Number(price),
-category,
-createdAt:new Date()
-
-});
-
-alert("✅ VIP Number Added");
-
-}
-
-document.getElementById("vipNumber").value="";
-document.getElementById("vipPrice").value="";
-document.getElementById("vipCategory").selectedIndex=0;
-
-refreshDashboard();
-
-}catch(err){
-
-alert(err.message);
-
-}
-
-};
-
-// =======================
-// Delete VIP
-// =======================
-
-window.deleteVIP = async function(id){
-
-if(!confirm("Delete this VIP Number?")) return;
-
-await deleteDoc(doc(db,"numbers",id));
-
-refreshDashboard();
-
-};
-
-// =======================
-// Edit VIP
-// =======================
-
-window.editVIP = async function(id){
-
-const snapshot = await getDocs(vipCollection);
-
-snapshot.forEach((item)=>{
-
-if(item.id===id){
-
-const data=item.data();
-
-editId=id;
-
-document.getElementById("vipNumber").value=data.number;
-document.getElementById("vipPrice").value=data.price;
-document.getElementById("vipCategory").value=data.category;
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-});
-
-};
-
-// =======================
-// Search
-// =======================
-
-window.searchVIP = function(){
-
-const value =
-document.getElementById("searchVIP")
-.value.toLowerCase();
-
-document
-.querySelectorAll("#vipTableBody tr")
-.forEach((row)=>{
-
-row.style.display =
-row.innerText.toLowerCase().includes(value)
-? ""
-: "none";
-
-});
-
-};
-
-console.log("✅ Admin Final Part 2 Loaded");
-
-// =======================
-// Analytics
-// =======================
-
-async function loadAnalytics(){
-
-const snapshot = await getDocs(vipCollection);
-
-let totalRevenue = 0;
-
-let gold = 0;
-let premium = 0;
-let silver = 0;
-let platinum = 0;
-
-snapshot.forEach((item)=>{
-
-const data = item.data();
-
-totalRevenue += Number(data.price || 0);
-
-switch(data.category){
-
-case "Gold":
-gold++;
-break;
-
-case "Premium":
-premium++;
-break;
-
-case "Silver":
-silver++;
-break;
-
-case "Platinum":
-platinum++;
-break;
-
-}
-
-});
-
-const revenue =
-document.getElementById("todayRevenue");
-
-if(revenue){
-
-revenue.innerHTML =
-"₹"+totalRevenue.toLocaleString();
-
-}
-
-console.table({
-
-Gold:gold,
-
-Premium:premium,
-
-Silver:silver,
-
-Platinum:platinum,
-
-Revenue:totalRevenue
-
-});
-
-}
-
-// =======================
-// Export CSV
-// =======================
-
-window.exportCSV = async function(){
-
-const snapshot = await getDocs(vipCollection);
-
-let csv = "Number,Price,Category\n";
-
-snapshot.forEach((item)=>{
-
-const d = item.data();
-
-csv += `${d.number},${d.price},${d.category}\n`;
-
-});
-
-const blob = new Blob([csv],{
-type:"text/csv"
-});
-
-const link =
-document.createElement("a");
-
-link.href =
-URL.createObjectURL(blob);
-
-link.download =
-"VIP_Numbers.csv";
-
-link.click();
-
-};
-
-// =======================
-// Backup JSON
-// =======================
-
-window.exportBackup = async function(){
-
-const snapshot = await getDocs(vipCollection);
-
-const backup = [];
-
-snapshot.forEach((item)=>{
-
-backup.push({
-
-id:item.id,
-
-...item.data()
-
-});
-
-});
-
-const blob = new Blob(
-
-[JSON.stringify(backup,null,2)],
-
-{type:"application/json"}
-
-);
-
-const link =
-document.createElement("a");
-
-link.href =
-URL.createObjectURL(blob);
-
-link.download =
-"VIP_Backup.json";
-
-link.click();
-
-};
-
-// =======================
-// Notifications
-// =======================
-
-function notify(msg){
-
-const box =
-document.getElementById("recentActivity");
-
-if(!box) return;
-
-box.innerHTML =
-`<p>${msg}</p>` + box.innerHTML;
-
-}
-
-notify("✅ Dashboard Loaded");
-
-// =======================
-// Auto Refresh
-// =======================
-
-setInterval(async()=>{
-
-await refreshDashboard();
-
-await loadAnalytics();
-
-},30000);
-
-console.log("✅ Admin Final Part 3 Loaded");
-
-// =======================
-// Final Part 4
-// Charts + Visitors + Logout
-// =======================
-
-// Demo Visitor Counter
-let visitorCount = 125;
-
-function updateVisitors(){
-
-visitorCount += Math.floor(Math.random()*3);
-
-const totalVisitors =
-document.getElementById("totalVisitors");
-
-const onlineVisitors =
-document.getElementById("onlineVisitors");
-
-if(totalVisitors)
-totalVisitors.innerHTML = visitorCount;
-
-if(onlineVisitors)
-onlineVisitors.innerHTML =
-Math.floor(Math.random()*20)+5;
-
-}
-
-updateVisitors();
-
-setInterval(updateVisitors,5000);
-
-// =======================
-// Chart
-// =======================
-
-window.addEventListener("load",()=>{
-
-const chart =
-document.getElementById("visitorChart");
-
-if(!chart) return;
-
-new Chart(chart,{
-
-type:"line",
-
-data:{
-
-labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-
-datasets:[{
-
-label:"Visitors",
-
-data:[15,32,28,45,60,52,78],
-
-borderWidth:3,
-
-fill:false,
-
-tension:.4
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-maintainAspectRatio:false
-
-}
-
-});
-
-});
-
-// =======================
+// ===============================
 // Logout
-// =======================
+// ===============================
 
-window.logout=function(){
+logoutBtn.addEventListener("click", async () => {
 
-if(confirm("Logout Admin?")){
+    try {
 
-sessionStorage.removeItem("adminLogin");
+        await signOut(auth);
 
-location.href="login.html";
+        alert("Logout Successfully");
 
-}
+        window.location.href = "login.html";
 
-};
+    }
 
-// Sidebar Logout
+    catch (error) {
 
-document.querySelectorAll(".sidebar li").forEach((item)=>{
+        alert(error.message);
 
-if(item.innerText.includes("Logout")){
-
-item.onclick = logout;
-
-}
+    }
 
 });
 
-// =======================
-// System Ready
-// =======================
+// ===============================
+// Add VIP Number to Firebase
+// ===============================
 
-console.log("🚀 VIP Number Bazar Admin Ready");
+addNumberForm.addEventListener("submit", async (e) => {
 
-// =======================
-// Final Part 5
-// Production Ready
-// =======================
+    e.preventDefault();
 
-// Website Settings
-window.websiteSettings = function(){
+    const vipNumber = document.getElementById("vipNumber").value.trim();
 
-alert("Website Settings Coming Soon");
+    const vipPrice = Number(document.getElementById("vipPrice").value);
 
-};
+    const vipCategory = document.getElementById("vipCategory").value;
 
-// Export Excel
-window.exportExcel = function(){
+    if (!vipNumber || !vipPrice) {
 
-alert("Excel Export Coming Soon");
+        alert("Please fill all fields.");
 
-};
+        return;
 
-// Export PDF
-window.exportPDF = function(){
+    }
 
-alert("PDF Export Coming Soon");
+    try {
 
-};
+        await addDoc(collection(db, "vipNumbers"), {
 
-// Refresh Dashboard
-window.refreshDashboard = async function(){
+            number: vipNumber,
 
-await loadDashboard();
+            price: vipPrice,
 
-await loadVIPTable();
+            category: vipCategory,
 
-await loadAnalytics();
- await loadHighestVIP();
+            status: "Available",
 
-notify("🔄 Dashboard Refreshed");
+            createdAt: Date.now()
 
-};
+        });
 
-// Refresh Button
-const refreshBtn = document.getElementById("refreshBtn");
+        alert("VIP Number Added Successfully ✅");
 
-if(refreshBtn){
+        addNumberForm.reset();
 
-refreshBtn.onclick = refreshDashboard;
+        loadVipNumbers();
 
-}
-async function loadHighestVIP() {
+    }
 
-const snapshot = await getDocs(vipCollection);
+    catch (error) {
 
-let best = null;
+        console.error(error);
 
-snapshot.forEach((doc)=>{
+        alert("Error : " + error.message);
 
-const data = doc.data();
-
-if(!best || Number(data.price) > Number(best.price)){
-best = data;
-}
+    }
 
 });
 
-const box = document.getElementById("bestVIP");
 
-if(box){
+// ===============================
+// Load VIP Numbers
+// ===============================
 
-if(best){
+async function loadVipNumbers() {
 
-box.innerHTML =
-best.number + " (₹" +
-Number(best.price).toLocaleString() + ")";
+    numbersTable.innerHTML = "";
 
-}else{
+    const snapshot = await getDocs(collection(db, "vipNumbers"));
 
-box.innerHTML = "No VIP Number";
+    totalNumbers.innerText = snapshot.size;
+
+    let sr = 1;
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        numbersTable.innerHTML += `
+
+            <tr>
+
+                <td>${sr++}</td>
+
+                <td>${data.number}</td>
+
+                <td>${data.category}</td>
+
+                <td>₹ ${data.price}</td>
+
+                <td>
+                    <span class="status available">
+                        ${data.status}
+                    </span>
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn edit-btn"
+                        data-id="${doc.id}">
+
+                        <i class="fas fa-edit"></i>
+
+                    </button>
+
+                    <button
+                        class="action-btn delete-btn"
+                        data-id="${doc.id}">
+
+                        <i class="fas fa-trash"></i>
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
 
 }
 
-}
+loadVipNumbers();
+
+// ===============================
+// Delete VIP Number
+// ===============================
+
+import {
+    deleteDoc,
+    doc,
+    updateDoc
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+document.addEventListener("click", async (e) => {
+
+    // Delete Button
+    if (e.target.closest(".delete-btn")) {
+
+        const id = e.target.closest(".delete-btn").dataset.id;
+
+        const confirmDelete = confirm("Are you sure you want to delete this VIP Number?");
+
+        if (!confirmDelete) return;
+
+        try {
+
+            await deleteDoc(doc(db, "vipNumbers", id));
+
+            alert("VIP Number Deleted Successfully ✅");
+
+            loadVipNumbers();
+
+        } catch (error) {
+
+            alert(error.message);
+
+        }
+
+    }
+
+    // Edit Button
+    if (e.target.closest(".edit-btn")) {
+
+        const id = e.target.closest(".edit-btn").dataset.id;
+
+        const newPrice = prompt("Enter New Price");
+
+        if (!newPrice) return;
+
+        try {
+
+            await updateDoc(doc(db, "vipNumbers", id), {
+
+                price: Number(newPrice)
+
+            });
+
+            alert("Price Updated Successfully ✅");
+
+            loadVipNumbers();
+
+        } catch (error) {
+
+            alert(error.message);
+
+        }
+
+    }
+
+});
+
+
+// ===============================
+// Search VIP Number
+// ===============================
+
+const searchNumber = document.getElementById("searchNumber");
+
+searchNumber.addEventListener("keyup", () => {
+
+    const value = searchNumber.value.toLowerCase();
+
+    const rows = numbersTable.querySelectorAll("tr");
+
+    rows.forEach((row) => {
+
+        const text = row.innerText.toLowerCase();
+
+        row.style.display = text.includes(value) ? "" : "none";
+
+    });
+
+});
+
+// ===============================
+// Dashboard Summary
+// ===============================
+
+const totalCustomers = document.getElementById("totalCustomers");
+const totalOrders = document.getElementById("totalOrders");
+const totalRevenue = document.getElementById("totalRevenue");
+
+async function loadDashboard() {
+
+    try {
+
+        // Customers Count
+        const customerSnapshot = await getDocs(collection(db, "customers"));
+        totalCustomers.innerText = customerSnapshot.size;
+
+        // Orders Count
+        const orderSnapshot = await getDocs(collection(db, "orders"));
+        totalOrders.innerText = orderSnapshot.size;
+
+        // Revenue
+        let revenue = 0;
+
+        orderSnapshot.forEach((doc) => {
+
+            const data = doc.data();
+
+            if (data.price) {
+                revenue += Number(data.price);
+            }
+
+        });
+
+        totalRevenue.innerText = "₹ " + revenue.toLocaleString("en-IN");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
-loadHighestVIP();
-// Greeting
-function greeting(){
+// ===============================
+// Auto Refresh Dashboard
+// ===============================
 
-const hour = new Date().getHours();
+async function refreshDashboard() {
 
-let text = "Welcome";
+    await loadVipNumbers();
 
-if(hour < 12){
-
-text = "🌞 Good Morning";
-
-}else if(hour < 18){
-
-text = "☀️ Good Afternoon";
-
-}else{
-
-text = "🌙 Good Evening";
+    await loadDashboard();
 
 }
 
-const greet = document.getElementById("greeting");
+// First Load
+refreshDashboard();
 
-if(greet){
-
-greet.innerHTML = text + ", Maldev";
-
-}
-
-}
-
-greeting();
-
-// Live Clock
-function liveClock(){
-
-const clock = document.getElementById("liveClock");
-
-if(!clock) return;
-
-clock.innerHTML = new Date().toLocaleString();
-}
-
-setInterval(liveClock,1000);
-
-liveClock();
-
-// Version
-console.log("VIP Number Bazar Admin V2.0");
-
-// Initial Load
-(async()=>{
-
-await refreshDashboard();
-
-notify("🚀 Admin Panel Ready");
-
-})();
+// Auto Refresh Every 30 Seconds
+setInterval(refreshDashboard, 30000);
