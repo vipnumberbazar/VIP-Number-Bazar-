@@ -2,487 +2,269 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIP Number Bazar - Admin Panel</title>
 
-<title>VIP Number Bazar - Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
 
-<link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<script>
+<div class="admin-container">
 
-if(sessionStorage.getItem("adminLogin")!="true"){
-location.href="login.html";
-}
+    <!-- Sidebar Start -->
 
-</script>
+    <aside class="sidebar">
 
-<div class="admin-panel">
+        <div class="logo">
 
-<aside class="sidebar">
+            <h2>VIP Number Bazar</h2>
+            <span>Admin Panel</span>
 
-<div class="logo">
+        </div>
 
-<h2>
+        <ul>
 
-<i class="fa-solid fa-crown"></i>
+            <li class="active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </li>
 
-VIP NUMBER
+            <li>
+                <i class="fas fa-mobile-screen-button"></i>
+                <span>VIP Numbers</span>
+            </li>
 
-<br>
+            <li>
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </li>
 
-BAZAR
+            <li>
+                <i class="fas fa-cart-shopping"></i>
+                <span>Orders</span>
+            </li>
 
-</h2>
+            <li>
+                <i class="fas fa-gear"></i>
+                <span>Settings</span>
+            </li>
+
+            <li id="logoutBtn">
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Sidebar End -->
+
+    <main class="main-content">
+
+<!-- Top Header Start -->
+
+        <header class="topbar">
+
+            <div class="left">
+
+                <h1>Dashboard</h1>
+                <p>Welcome Admin 👋</p>
+
+            </div>
+
+            <div class="right">
+
+                <div class="admin-profile">
+
+                    <i class="fas fa-user-circle"></i>
+
+                    <div>
+
+                        <h4>Administrator</h4>
+                        <small>VIP Number Bazar</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Top Header End -->
+
+
+        <!-- Dashboard Cards -->
+
+        <section class="dashboard-cards">
+
+            <div class="card">
+
+                <i class="fas fa-mobile-screen-button"></i>
+
+                <div>
+
+                    <h2 id="totalNumbers">0</h2>
+                    <p>Total VIP Numbers</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-users"></i>
+
+                <div>
+
+                    <h2 id="totalCustomers">0</h2>
+                    <p>Total Customers</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-cart-shopping"></i>
+
+                <div>
+
+                    <h2 id="totalOrders">0</h2>
+                    <p>Total Orders</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-indian-rupee-sign"></i>
+
+                <div>
+
+                    <h2 id="totalRevenue">₹0</h2>
+                    <p>Total Revenue</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Add VIP Number Form -->
+
+        <section class="add-number">
+
+            <h2>Add New VIP Number</h2>
+
+            <form id="addNumberForm">
+
+                <input
+                    type="text"
+                    id="vipNumber"
+                    placeholder="Enter VIP Number"
+                    required>
+
+                <input
+                    type="number"
+                    id="vipPrice"
+                    placeholder="Price"
+                    required>
+
+                <select id="vipCategory">
+
+                    <option value="Silver">Silver</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                    <option value="Diamond">Diamond</option>
+
+                </select>
+
+                <button type="submit">
+
+                    <i class="fas fa-plus"></i>
+
+                    Add Number
+
+                </button>
+
+            </form>
+
+        </section>
+
+<!-- VIP Numbers Table -->
+
+        <section class="numbers-section">
+
+            <div class="table-header">
+
+                <h2>VIP Numbers List</h2>
+
+                <input
+                    type="text"
+                    id="searchNumber"
+                    placeholder="Search VIP Number...">
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No.</th>
+
+                            <th>VIP Number</th>
+
+                            <th>Category</th>
+
+                            <th>Price</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="numbersTable">
+
+                        <!-- Firebase Data Here -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
-<div class="profile">
-
-<img src="https://i.pravatar.cc/120">
-
-<h3>Maldev Thakor</h3>
-
-<p>Administrator</p>
-
-<span class="online">
-🟢 Online
-</span>
-
-</div>
-
-<ul>
-
-<li class="active">
-
-<i class="fa-solid fa-house"></i>
-
-<span>Dashboard</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-sim-card"></i>
-
-<span>VIP Numbers</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-plus"></i>
-
-<span>Add Number</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-layer-group"></i>
-
-<span>Categories</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-users"></i>
-
-<span>Visitors</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-envelope"></i>
-
-<span>Enquiries</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-<span>Orders</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-chart-line"></i>
-
-<span>Analytics</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-bell"></i>
-
-<span>Notifications</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-gear"></i>
-
-<span>Settings</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-globe"></i>
-
-<span>Website Settings</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-user"></i>
-
-<span>Users</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-database"></i>
-
-<span>Backup</span>
-
-</li>
-
-<li>
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-<span>Logout</span>
-
-</li>
-
-</ul>
-
-</aside>
-
-<main class="main">
-
-<header class="topbar">
-
-<input
-type="text"
-placeholder="Search anything...">
-
-<div class="admin-right">
-
-<i class="fa-solid fa-bell"></i>
-
-<img src="https://i.pravatar.cc/60">
-
-</div>
-
-</header>
-
-<!-- Dashboard Cards -->
-
-<section class="dashboard-cards">
-
-<div class="card blue">
-
-<i class="fa-solid fa-users"></i>
-
-<div>
-
-<h2 id="totalVisitors">0</h2>
-
-<p>Total Visitors</p>
-
-</div>
-
-</div>
-
-<div class="card green">
-
-<i class="fa-solid fa-mobile-screen"></i>
-
-<div>
-
-<h2 id="totalNumbers">0</h2>
-
-<p>Total VIP Numbers</p>
-
-</div>
-
-</div>
-
-<div class="card purple">
-
-<i class="fa-solid fa-indian-rupee-sign"></i>
-
-<div>
-
-<h2 id="totalValue">₹0</h2>
-
-<p>Total Value</p>
-
-</div>
-
-</div>
-
-<div class="card orange">
-
-<i class="fa-solid fa-comments"></i>
-
-<div>
-
-<h2 id="totalEnquiries">0</h2>
-
-<p>Total Enquiries</p>
-
-</div>
-
-</div>
-
-<div class="card cyan">
-
-<i class="fa-solid fa-eye"></i>
-
-<div>
-
-<h2 id="onlineVisitors">0</h2>
-
-<p>Online Visitors</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- Dashboard Row -->
-
-<section class="dashboard-row">
-
-<div class="chart-box">
-
-<h3>Visitors Overview (This Week)</h3>
-
-<canvas id="visitorChart"></canvas>
-
-</div>
-
-<div class="activity-box">
-
-<h3>Recent Activity</h3>
-
-<ul>
-
-<li>✅ New VIP Number Added</li>
-
-<li>📩 New Enquiry Received</li>
-
-<li>💬 WhatsApp Clicked</li>
-
-<li>👤 New Visitor Registered</li>
-
-<li>🛒 New Order Placed</li>
-
-</ul>
-
-</div>
-
-<div class="quick-box">
-
-<h3>Quick Actions</h3>
-
-<button id="addVipBtn">
-➕ Add VIP Number
-</button>
-
-<button id="manageVipBtn">
-📱 Manage VIP Numbers
-</button>
-
-<button id="visitorBtn">
-👥 View Visitors
-</button>
-
-<button id="analyticsBtn">
-📊 View Analytics
-</button>
-
-<button id="settingBtn">
-⚙ Website Settings
-</button>
-
-</div>
-
-</section>
-
-<!-- Add VIP Number -->
-
-<section class="dashboard-row">
-
-<div class="form-box">
-
-<h3>Add New VIP Number</h3>
-
-<input
-type="text"
-id="vipNumber"
-placeholder="Enter VIP Number">
-
-<input
-type="number"
-id="vipPrice"
-placeholder="Enter Price">
-
-<select id="vipCategory">
-
-<option value="Gold">Gold</option>
-
-<option value="Premium">Premium</option>
-
-<option value="Platinum">Platinum</option>
-
-<option value="Silver">Silver</option>
-
-</select>
-
-<button onclick="addVIP()">
-💾 Save VIP Number
-</button>
-
-</div>
-
-<div class="table-box">
-
-<h3>Latest VIP Numbers</h3>
-
-<table class="vip-table">
-
-<thead>
-
-<tr>
-
-<th>Number</th>
-
-<th>Price</th>
-
-<th>Category</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="vipTableBody">
-
-<tr>
-
-<td colspan="4">
-
-Loading...
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<!-- Footer -->
-
-<footer class="admin-footer">
-
-<p>
-
-© 2026 VIP Number Bazar Admin Panel
-
-</p>
-
-</footer>
-
-</main>
-
-</div>
-
-<!-- Chart.js -->
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Admin Script -->
-
+<script type="module" src="firebase.js"></script>
 <script type="module" src="admin.js"></script>
 
-<script>
-
-const ctx = document.getElementById("visitorChart");
-
-if(ctx){
-
-new Chart(ctx,{
-
-type:"line",
-
-data:{
-
-labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-
-datasets:[{
-
-label:"Visitors",
-
-data:[25,42,58,65,49,72,95],
-
-borderWidth:3,
-
-fill:false
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-maintainAspectRatio:false
-
-}
-
-});
-
-}
-
-</script>
-
 </body>
+
 </html>
