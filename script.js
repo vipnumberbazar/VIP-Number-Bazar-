@@ -6,10 +6,9 @@
 import { db } from "./firebase.js";
 
 import {
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 const vipContainer = document.getElementById("vipContainer");
 const searchInput = document.getElementById("searchInput");
 
