@@ -1,98 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VIP Number Bazar - Admin Login</title>
-
-<link rel="stylesheet" href="login.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-</head>
-
+<html>
+<head><title>Admin Login</title><link rel="stylesheet" href="style.css"></head>
 <body>
-
-<div class="login-container">
-
-<div class="login-box">
-
-<div class="logo">
-
-<h1>VIP Number Bazar</h1>
-
-<p>Administrator Login</p>
-
-</div>
-
-<form id="loginForm">
-
-<div class="input-group">
-
-<i class="fas fa-envelope"></i>
-
-<input
-type="email"
-id="email"
-placeholder="Enter Email"
-required>
-
-</div>
-
-<div class="input-group">
-
-<i class="fas fa-lock"></i>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password"
-required>
-
-</div>
-
-<button
-type="submit"
-class="login-btn">
-
-<i class="fas fa-right-to-bracket"></i>
-
-Login
-
-</button>
-
-</form>
-
-<p id="errorMsg"></p>
-
-<div class="back-home">
-
-<a href="index.html">
-
-<i class="fas fa-arrow-left"></i>
-
-Back To Website
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<script type="module" src="login.js"></script>
-
+    <form id="login-form" class="admin-panel">
+        <h2>Admin Login</h2>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    <script type="module" src="login.js"></script>
 </body>
-
 </html>
