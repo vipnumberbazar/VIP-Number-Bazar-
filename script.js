@@ -32,7 +32,7 @@ async function loadVipNumbers() {
         snapshot.forEach((doc) => {
 
             const data = doc.data();
-            console.log(data);
+alert(JSON.stringify(data));
             // માત્ર Available નંબર બતાવવાના
             if (data.status === "Available") {
 
