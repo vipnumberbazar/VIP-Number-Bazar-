@@ -12,12 +12,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -30,33 +27,65 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <div class="login-box">
 
-<h2>
-👑 VIP NUMBER BAZAR
-</h2>
+<div class="logo">
 
-<p>
-Admin Login
-</p>
+<h1>VIP Number Bazar</h1>
+
+<p>Administrator Login</p>
+
+</div>
+
+<form id="loginForm">
+
+<div class="input-group">
+
+<i class="fas fa-envelope"></i>
 
 <input
 type="email"
-id="username"
-placeholder="Enter Email">
+id="email"
+placeholder="Enter Email"
+required>
+
+</div>
+
+<div class="input-group">
+
+<i class="fas fa-lock"></i>
 
 <input
 type="password"
 id="password"
-placeholder="Enter Password">
+placeholder="Enter Password"
+required>
 
-<button id="loginBtn">
+</div>
 
-<i class="fa-solid fa-right-to-bracket"></i>
+<button
+type="submit"
+class="login-btn">
+
+<i class="fas fa-right-to-bracket"></i>
 
 Login
 
 </button>
 
-<p id="msg"></p>
+</form>
+
+<p id="errorMsg"></p>
+
+<div class="back-home">
+
+<a href="index.html">
+
+<i class="fas fa-arrow-left"></i>
+
+Back To Website
+
+</a>
+
+</div>
 
 </div>
 
@@ -65,4 +94,5 @@ Login
 <script type="module" src="login.js"></script>
 
 </body>
+
 </html>
