@@ -44,8 +44,11 @@ alert(JSON.stringify(data));
             }
 
         });
-        console.log(vipNumbers);
-        displayNumbers(vipNumbers);
+      console.log(vipNumbers);
+
+alert(vipNumbers.length);
+
+displayNumbers(vipNumbers);
 
     }
 
