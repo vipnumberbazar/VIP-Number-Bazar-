@@ -68,7 +68,7 @@ displayNumbers(vipNumbers);
 // =====================================
 
 function displayNumbers(list) {
-
+alert(JSON.stringify(list));
     vipContainer.innerHTML = "";
 
     if (list.length === 0) {
