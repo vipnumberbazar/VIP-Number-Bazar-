@@ -1,36 +1,52 @@
+// ======================================
+// VIP Number Bazar V4
+// login.js
+// ======================================
+
 import { auth } from "./firebase.js";
 
 import {
-  signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-const loginBtn = document.getElementById("loginBtn");
-const msg = document.getElementById("msg");
+const loginForm = document.getElementById("loginForm");
+const errorMsg = document.getElementById("errorMsg");
 
-loginBtn.addEventListener("click", async () => {
+// જો પહેલેથી Login હોય તો સીધું Admin Panel
+onAuthStateChanged(auth, (user) => {
 
-  const email = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value;
+    if (user) {
 
-  msg.innerHTML = "";
+        window.location.href = "admin.html";
 
-  if (!email || !password) {
-    msg.innerHTML = "⚠️ Email અને Password ભરો";
-    return;
-  }
+    }
 
-  try {
+});
 
-    await signInWithEmailAndPassword(auth, email, password);
+// Login
+loginForm.addEventListener("submit", async (e) => {
 
-    sessionStorage.setItem("adminLogin", "true");
+    e.preventDefault();
 
-    window.location.href = "admin.html";
+    errorMsg.innerText = "";
 
-  } catch (error) {
+    const email = document.getElementById("email").value.trim();
 
-    msg.innerHTML = error.message;
+    const password = document.getElementById("password").value;
 
-  }
+    try {
+
+        await signInWithEmailAndPassword(auth, email, password);
+
+        window.location.href = "admin.html";
+
+    }
+
+    catch (error) {
+
+        errorMsg.innerText = "Invalid Email or Password";
+
+    }
 
 });
