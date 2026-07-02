@@ -1,23 +1,13 @@
 <!DOCTYPE html>
-<html lang="gu">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<html>
+<head><title>Admin Dashboard</title><link rel="stylesheet" href="style.css"></head>
 <body>
-    <h1>VIP નંબર મેનેજ કરો</h1>
-    
-    <!-- નંબર ઉમેરવાનું ફોર્મ -->
     <div class="admin-panel">
-        <input type="text" id="num" placeholder="VIP નંબર">
+        <h2>નંબર ઉમેરો</h2>
+        <input type="text" id="num" placeholder="નંબર">
         <input type="number" id="price" placeholder="કિંમત">
-        <input type="text" id="category" placeholder="કેટેગરી (Gold/Silver)">
-        <button id="add-btn">નંબર ઉમેરો</button>
+        <button id="add-btn">Add</button>
     </div>
-
-    <div id="admin-number-list"></div>
-
     <script type="module" src="admin.js"></script>
 </body>
 </html>
