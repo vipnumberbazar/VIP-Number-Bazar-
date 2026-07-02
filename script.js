@@ -32,7 +32,7 @@ async function loadVipNumbers() {
         snapshot.forEach((doc) => {
 
             const data = doc.data();
-
+            console.log(data);
             // માત્ર Available નંબર બતાવવાના
             if (data.status === "Available") {
 
@@ -44,7 +44,7 @@ async function loadVipNumbers() {
             }
 
         });
-
+        console.log(vipNumbers);
         displayNumbers(vipNumbers);
 
     }
