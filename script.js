@@ -47,8 +47,6 @@ alert(JSON.stringify(data));
       console.log(vipNumbers);
 
 alert(vipNumbers.length);
-vipContainer.innerHTML = "<h1 style='color:red'>TEST</h1>";
-return;
 displayNumbers(vipNumbers);
 
     }
