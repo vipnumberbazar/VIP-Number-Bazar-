@@ -1,33 +1,215 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #2c3e50; /* ઘાટો રંગ */
-    margin: 0;
+/* ==========================================
+   VIP Number Bazar V4
+   login.css
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
-#login-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    width: 300px;
-    text-align: center;
+
+body{
+
+background:#050505;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+color:#fff;
+
 }
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+
+.login-container{
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
 }
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e67e22;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+.login-box{
+
+width:100%;
+
+max-width:430px;
+
+background:#111;
+
+border:1px solid rgba(212,175,55,.25);
+
+border-radius:18px;
+
+padding:35px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.45);
+
+}
+
+.login-box h1{
+
+text-align:center;
+
+color:#d4af37;
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.login-box h2{
+
+text-align:center;
+
+font-size:22px;
+
+margin-bottom:8px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#bbb;
+
+margin-bottom:30px;
+
+font-size:14px;
+
+}
+
+.input-group{
+
+margin-bottom:20px;
+
+}
+
+.input-group label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:14px;
+
+color:#d4af37;
+
+}
+
+.input-group input{
+
+width:100%;
+
+padding:15px;
+
+background:#1a1a1a;
+
+color:#fff;
+
+border:1px solid #333;
+
+border-radius:10px;
+
+outline:none;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+.input-group input:focus{
+
+border-color:#d4af37;
+
+}
+
+.login-btn{
+
+width:100%;
+
+padding:15px;
+
+background:#d4af37;
+
+color:#000;
+
+font-size:16px;
+
+font-weight:700;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 12px 30px rgba(212,175,55,.35);
+
+}
+
+#loginMessage{
+
+margin-top:18px;
+
+text-align:center;
+
+font-size:14px;
+
+font-weight:600;
+
+min-height:20px;
+
+}
+
+@media(max-width:480px){
+
+.login-box{
+
+padding:25px;
+
+}
+
+.login-box h1{
+
+font-size:28px;
+
+}
+
+.login-box h2{
+
+font-size:20px;
+
+}
+
+.subtitle{
+
+font-size:13px;
+
+}
+
 }
