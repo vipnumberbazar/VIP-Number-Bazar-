@@ -62,6 +62,8 @@ onAuthStateChanged(auth, (user) => {
 
     }
 
+    history.replaceState(null, "", "admin.html");
+
     loader.style.display = "none";
 
     loadDashboard();
