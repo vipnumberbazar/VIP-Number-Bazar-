@@ -1,13 +1,356 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>VIP Number Bazar</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIP Number Bazar</title>
+
+<meta name="theme-color" content="#000000">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    <h1>VIP નંબર્સની યાદી</h1>
-    <div id="number-list"></div>
-    <script type="module" src="script.js"></script>
+
+<!-- Loader -->
+
+<div id="loader">
+
+<div class="spinner"></div>
+
+<p>Loading VIP Numbers...</p>
+
+</div>
+
+<!-- Header -->
+
+<header class="header">
+
+<div class="container">
+
+<div class="logo">
+
+<span>VIP</span> Number Bazar
+
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#numbers">VIP Numbers</a>
+
+<a href="#about">About</a>
+
+<a href="#contact">Contact</a>
+
+<a href="login.html" class="admin-btn">
+
+Admin Login
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<h1>
+
+India's Premium
+
+<span>VIP Mobile Numbers</span>
+
+</h1>
+
+<p>
+
+Choose Your Lucky VIP Mobile Number With Instant WhatsApp Booking.
+
+</p>
+
+<a href="#numbers" class="gold-btn">
+
+Browse VIP Numbers
+
+</a>
+
+</div>
+
+</section>
+
+<!-- Dashboard -->
+
+<section class="dashboard">
+
+<div class="container dashboard-grid">
+
+<div class="dashboard-card">
+
+<h2 id="totalNumbers">0</h2>
+
+<p>Total VIP Numbers</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h2 id="totalOrders">0</h2>
+
+<p>Total Orders</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h2 id="totalRevenue">₹0</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h2 id="totalCustomers">0</h2>
+
+<p>Total Customers</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Search -->
+
+<section class="search-section">
+
+<div class="container">
+
+<input
+
+type="text"
+
+id="searchInput"
+
+placeholder="Search VIP Number..."
+
+autocomplete="off"
+
+>
+
+</div>
+
+</section>
+
+<!-- VIP Numbers -->
+
+<section id="numbers" class="numbers-section">
+
+<div class="container">
+
+<div id="numbersGrid" class="numbers-grid">
+
+<!-- Firebase Data Here -->
+
+</div>
+
+</div>
+
+</section>
+<!-- ===========================
+Booking Modal
+=========================== -->
+
+<div id="bookingModal" class="modal">
+
+    <div class="modal-content">
+
+        <span id="closeModal" class="close">&times;</span>
+
+        <h2>Book VIP Number</h2>
+
+        <form id="bookingForm">
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="Mobile Number"
+                required
+            >
+
+            <input
+                type="text"
+                id="selectedNumber"
+                placeholder="Selected VIP Number"
+                readonly
+            >
+
+            <input
+                type="text"
+                id="selectedPrice"
+                placeholder="Price"
+                readonly
+            >
+
+            <button
+                type="submit"
+                class="gold-btn">
+
+                Book on WhatsApp
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+About Section
+=========================== -->
+
+<section id="about" class="about-section">
+
+    <div class="container">
+
+        <h2>Why Choose VIP Number Bazar?</h2>
+
+        <div class="about-grid">
+
+            <div class="about-card">
+
+                <h3>Premium VIP Numbers</h3>
+
+                <p>
+                    Huge collection of premium and lucky mobile numbers.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <h3>Instant Booking</h3>
+
+                <p>
+                    Book your favourite VIP number directly on WhatsApp.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <h3>Trusted Service</h3>
+
+                <p>
+                    Safe, secure and fast VIP number booking.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+Contact
+=========================== -->
+
+<section id="contact" class="contact-section">
+
+    <div class="container">
+
+        <h2>Contact Us</h2>
+
+        <p>Need a Special VIP Number? Contact us anytime.</p>
+
+        <a
+            href="https://wa.me/919999999999"
+            target="_blank"
+            class="gold-btn">
+
+            Chat on WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+Toast
+=========================== -->
+
+<div id="toast" class="toast">
+
+    Booking Successful
+
+</div>
+
+<!-- ===========================
+Empty State
+=========================== -->
+
+<div
+    id="emptyState"
+    class="empty-state"
+    style="display:none;">
+
+    <h2>No VIP Numbers Found</h2>
+
+    <p>Please try another search.</p>
+
+</div>
+
+<!-- ===========================
+Footer
+=========================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+
+            © 2026 VIP Number Bazar.
+            All Rights Reserved.
+
+        </p>
+
+    </div>
+
+</footer>
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
+
 </body>
 </html>
