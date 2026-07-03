@@ -1,5 +1,794 @@
-body { font-family: sans-serif; background: #f4f4f4; text-align: center; }
-.card, .admin-panel { background: white; padding: 20px; margin: 10px; border-radius: 10px; display: inline-block; }
-.wa-btn { background: #25d366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; }
-input { display: block; width: 90%; margin: 10px auto; padding: 10px; }
-button { width: 95%; padding: 10px; background: blue; color: white; border: none; }
+/* ======================================================
+   VIP Number Bazar V4 Professional
+   style.css
+   Part 1
+====================================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#090909;
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#d4af37;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+/* Links */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* Images */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* Container */
+
+.container{
+
+    width:92%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+/* ===============================
+   Navbar
+================================ */
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 6%;
+
+    background:#111;
+
+    border-bottom:1px solid rgba(212,175,55,.25);
+
+}
+
+.logo{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#fff;
+
+}
+
+.logo span{
+
+    color:#d4af37;
+
+}
+
+nav{
+
+    display:flex;
+
+    gap:28px;
+
+}
+
+nav a{
+
+    color:#fff;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:#d4af37;
+
+}
+
+/* ===============================
+Hero
+================================ */
+
+.hero{
+
+    min-height:85vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    background:linear-gradient(180deg,#0d0d0d,#1b1b1b);
+
+}
+
+.hero-content{
+
+    max-width:760px;
+
+}
+
+.hero h1{
+
+    font-size:52px;
+
+    margin-bottom:18px;
+
+    color:#d4af37;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    color:#ddd;
+
+    line-height:1.8;
+
+}
+
+/* ===============================
+Gold Button
+================================ */
+
+.gold-btn{
+
+    display:inline-block;
+
+    margin-top:30px;
+
+    padding:15px 36px;
+
+    background:#d4af37;
+
+    color:#000;
+
+    font-weight:700;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.gold-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(212,175,55,.35);
+
+}
+
+/* ===============================
+Search Section
+================================ */
+
+.search-section{
+
+    padding:35px 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+#searchBox{
+
+    width:100%;
+
+    max-width:650px;
+
+    padding:16px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#181818;
+
+    color:#fff;
+
+    outline:none;
+
+    font-size:16px;
+
+    border:1px solid rgba(212,175,55,.25);
+
+}
+
+#searchBox:focus{
+
+    border-color:#d4af37;
+
+}
+
+/* ===============================
+Dashboard
+================================ */
+
+.dashboard{
+
+    width:92%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    padding:20px 0 40px;
+
+}
+
+.card{
+
+    background:#151515;
+
+    border:1px solid rgba(212,175,55,.20);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+}
+
+.card h2{
+
+    color:#d4af37;
+
+    font-size:36px;
+
+    margin-bottom:10px;
+
+}
+
+.card p{
+
+    color:#ddd;
+
+    font-size:16px;
+
+}
+/* ======================================================
+   VIP Number Bazar V4 Professional
+   style.css
+   Part 2
+====================================================== */
+
+/* ===============================
+VIP Numbers Section
+================================ */
+
+.numbers-section{
+
+    width:92%;
+
+    max-width:1400px;
+
+    margin:0 auto 70px;
+
+}
+
+#numbersContainer{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:22px;
+
+}
+
+/* VIP Card */
+
+.vip-card{
+
+    background:#151515;
+
+    border:1px solid rgba(212,175,55,.22);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.30s;
+
+}
+
+.vip-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#d4af37;
+
+    box-shadow:0 18px 40px rgba(212,175,55,.18);
+
+}
+
+.vip-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.vip-number{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    color:#fff;
+
+}
+
+.vip-price{
+
+    font-size:30px;
+
+    color:#d4af37;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+/* Status */
+
+.vip-status{
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.available{
+
+    background:#0d5c2a;
+
+    color:#aef8c7;
+
+}
+
+.sold{
+
+    background:#7b1717;
+
+    color:#ffd4d4;
+
+}
+
+/* Book Button */
+
+.book-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#d4af37;
+
+    color:#000;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.book-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 25px rgba(212,175,55,.25);
+
+}
+
+/* ===============================
+Modal
+================================ */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.72);
+
+    z-index:2000;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+.modal-content{
+
+    width:100%;
+
+    max-width:480px;
+
+    background:#171717;
+
+    border:1px solid rgba(212,175,55,.25);
+
+    border-radius:18px;
+
+    padding:28px;
+
+    position:relative;
+
+}
+
+.close-modal{
+
+    position:absolute;
+
+    top:16px;
+
+    right:18px;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    color:#d4af37;
+
+}
+
+.modal input{
+
+    width:100%;
+
+    margin:12px 0;
+
+    padding:14px 16px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(212,175,55,.20);
+
+    background:#111;
+
+    color:#fff;
+
+    outline:none;
+
+}
+
+/* ===============================
+Toast
+================================ */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#d4af37;
+
+    color:#000;
+
+    padding:14px 20px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    display:none;
+
+    z-index:3000;
+
+}
+
+/* ===============================
+Loader
+================================ */
+
+.loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#090909;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    z-index:5000;
+
+}
+
+.loader-circle{
+
+    width:64px;
+
+    height:64px;
+
+    border:6px solid #333;
+
+    border-top:6px solid #d4af37;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ===============================
+About / Contact / Footer
+================================ */
+
+.about,
+.contact{
+
+    width:92%;
+
+    max-width:1000px;
+
+    margin:70px auto;
+
+    text-align:center;
+
+}
+
+.about h2,
+.contact h2{
+
+    color:#d4af37;
+
+    margin-bottom:16px;
+
+}
+
+.about p,
+.contact p{
+
+    color:#d0d0d0;
+
+    line-height:1.8;
+
+}
+
+footer{
+
+    margin-top:70px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(212,175,55,.15);
+
+    color:#aaa;
+
+}
+
+/* ===============================
+Empty State
+================================ */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#bbb;
+
+}
+
+/* ===============================
+Back To Top
+================================ */
+
+#backToTop{
+
+    position:fixed;
+
+    right:18px;
+
+    bottom:18px;
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#000;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    display:none;
+
+}
+
+/* ===============================
+Responsive
+================================ */
+
+@media(max-width:768px){
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:16px;
+
+    }
+
+    nav{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:16px;
+
+    }
+
+    .hero h1{
+
+        font-size:36px;
+
+    }
+
+    .hero p{
+
+        font-size:16px;
+
+    }
+
+    .vip-number{
+
+        font-size:22px;
+
+    }
+
+    .vip-price{
+
+        font-size:24px;
+
+    }
+
+}
