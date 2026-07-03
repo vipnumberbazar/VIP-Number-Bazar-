@@ -53,17 +53,16 @@ const toast = document.getElementById("toast");
 // Login Check
 // ============================
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(auth, (user) => {
 
-    if(!user){
+    if (!user) {
 
-        window.location.href="login.html";
-
+        window.location.replace("login.html");
         return;
 
     }
 
-    loader.style.display="none";
+    loader.style.display = "none";
 
     loadDashboard();
 
