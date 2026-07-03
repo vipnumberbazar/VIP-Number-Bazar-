@@ -1,15 +1,87 @@
-import { db } from "./firebase.js";
+// ===========================================
+// VIP Number Bazar V4 Professional
+// login.js
+// ===========================================
 
-import { db } from './firebase.js';
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import {
+    auth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged
+} from "./firebase.js";
 
-async function loadNumbers() {
-    const list = document.getElementById('number-list');
-    const querySnapshot = await getDocs(collection(db, "vipNumbers"));
-    list.innerHTML = "";
-    querySnapshot.forEach((doc) => {
-        const d = doc.data();
-        list.innerHTML += `<div class="card"><h3>${d.number}</h3><p>કિંમત: ₹${d.price}</p><a href="https://wa.me/918070424242?text=મારે ${d.number} નંબર જોઈએ છે" class="wa-btn">WhatsApp</a></div>`;
-    });
-}
-loadNumbers();
+// Elements
+const loginForm = document.getElementById("loginForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const loginMessage = document.getElementById("loginMessage");
+
+// Already Logged In
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+        window.location.href = "admin.html";
+    }
+
+});
+
+// Login
+loginForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    loginMessage.style.color = "#ff6b6b";
+    loginMessage.textContent = "Signing in...";
+
+    try {
+
+        await signInWithEmailAndPassword(
+
+            auth,
+            email.value.trim(),
+            password.value
+
+        );
+
+        loginMessage.style.color = "#4CAF50";
+        loginMessage.textContent = "Login Successful";
+
+        setTimeout(() => {
+
+            window.location.href = "admin.html";
+
+        }, 800);
+
+    }
+
+    catch (error) {
+
+        switch (error.code) {
+
+            case "auth/invalid-credential":
+                loginMessage.textContent = "Invalid Email or Password";
+                break;
+
+            case "auth/user-not-found":
+                loginMessage.textContent = "User Not Found";
+                break;
+
+            case "auth/wrong-password":
+                loginMessage.textContent = "Wrong Password";
+                break;
+
+            case "auth/invalid-email":
+                loginMessage.textContent = "Invalid Email";
+                break;
+
+            case "auth/too-many-requests":
+                loginMessage.textContent = "Too Many Attempts";
+                break;
+
+            default:
+                loginMessage.textContent = error.message;
+
+        }
+
+    }
+
+});
