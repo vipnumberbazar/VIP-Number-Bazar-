@@ -1,18 +1,110 @@
+// ===============================
+// VIP Number Bazar V4 Professional
+// firebase.js
+// Firebase SDK v12
+// ===============================
+
+// Firebase App
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+// Firestore
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+// Authentication
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+// ========================================
+// YOUR FIREBASE CONFIG
+// Replace with your own Firebase project
+// ========================================
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
-  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
-  projectId: "vipnumberbazar-73e51",
-  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
-  messagingSenderId: "756745745147",
-  appId: "1:756745745147:web:e8dcd216eda572c440f65e",
-  measurementId: "G-ZTB2EEZVQ1"
+
+  apiKey: "YOUR_API_KEY",
+
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+
+  projectId: "YOUR_PROJECT_ID",
+
+  storageBucket: "YOUR_PROJECT.appspot.com",
+
+  messagingSenderId: "YOUR_SENDER_ID",
+
+  appId: "YOUR_APP_ID"
+
 };
 
+
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+
+
+// Firestore
+
+const db = getFirestore(app);
+
+
+// Authentication
+
+const auth = getAuth(app);
+
+
+// Collections
+
+const vipNumbersRef = collection(db, "vipNumbers");
+
+const ordersRef = collection(db, "orders");
+
+const customersRef = collection(db, "customers");
+
+
+// Export Everything
+
+export {
+
+  db,
+  auth,
+
+  vipNumbersRef,
+  ordersRef,
+  customersRef,
+
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  orderBy,
+  serverTimestamp,
+  onSnapshot,
+
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+
+};
