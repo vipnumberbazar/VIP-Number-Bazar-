@@ -1,13 +1,10 @@
-// ===============================
+// =======================================
 // VIP Number Bazar V4 Professional
 // firebase.js
-// Firebase SDK v12
-// ===============================
+// =======================================
 
-// Firebase App
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-// Firestore
 import {
   getFirestore,
   collection,
@@ -17,14 +14,12 @@ import {
   updateDoc,
   deleteDoc,
   doc,
+  onSnapshot,
   query,
-  where,
   orderBy,
-  serverTimestamp,
-  onSnapshot
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-// Authentication
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -32,54 +27,35 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-
-// ========================================
-// YOUR FIREBASE CONFIG
-// Replace with your own Firebase project
-// ========================================
-
 const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
 
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
 
-  projectId: "YOUR_PROJECT_ID",
+  projectId: "vipnumberbazar-73e51",
 
-  storageBucket: "YOUR_PROJECT.appspot.com",
+  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
 
-  messagingSenderId: "YOUR_SENDER_ID",
+  messagingSenderId: "756745745147",
 
-  appId: "YOUR_APP_ID"
+  appId: "1:756745745147:web:e8dcd216eda572c440f65e",
+
+  measurementId: "G-ZTB2EEZVQ1"
 
 };
 
-
-// Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
-
-
-// Firestore
 
 const db = getFirestore(app);
 
-
-// Authentication
-
 const auth = getAuth(app);
-
-
-// Collections
 
 const vipNumbersRef = collection(db, "vipNumbers");
 
 const ordersRef = collection(db, "orders");
 
 const customersRef = collection(db, "customers");
-
-
-// Export Everything
 
 export {
 
@@ -97,11 +73,10 @@ export {
   updateDoc,
   deleteDoc,
   doc,
+  onSnapshot,
   query,
-  where,
   orderBy,
   serverTimestamp,
-  onSnapshot,
 
   signInWithEmailAndPassword,
   signOut,
