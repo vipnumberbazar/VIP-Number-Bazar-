@@ -394,7 +394,35 @@ searchAdmin.addEventListener("keyup", () => {
     });
 
 });
+// ===========================
+// AUTO LOGOUT AFTER 10 MINUTES
+// ===========================
 
+let logoutTimer;
+
+function startLogoutTimer() {
+
+    clearTimeout(logoutTimer);
+
+    logoutTimer = setTimeout(async () => {
+
+        await signOut(auth);
+
+        alert("10 Minutes Inactive.\nPlease Login Again.");
+
+        window.location.href = "login.html";
+
+    }, 10 * 60 * 1000);
+
+}
+
+["click", "mousemove", "keydown", "touchstart", "scroll"].forEach(event => {
+
+    document.addEventListener(event, startLogoutTimer);
+
+});
+
+startLogoutTimer();
 // ============================
 // End of admin.js
 // ============================
