@@ -422,6 +422,19 @@ function startLogoutTimer() {
 });
 
 startLogoutTimer();
+// ===========================
+// BLOCK BACK BUTTON
+// ===========================
+
+history.pushState(null, null, location.href);
+
+window.addEventListener("popstate", async () => {
+
+    await signOut(auth);
+
+    window.location.replace("login.html");
+
+});
 // ============================
 // End of admin.js
 // ============================
