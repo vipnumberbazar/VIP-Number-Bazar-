@@ -440,9 +440,6 @@ window.addEventListener("popstate", async () => {
 // ============================
 // End of admin.js
 // ============================
-const menuToggle = document.getElementById("menuToggle");
-const sidebarMenu = document.querySelector(".sidebar-menu");
-
 console.log("Menu Loaded");
 
 const menuToggle = document.getElementById("menuToggle");
@@ -451,3 +448,4 @@ const sidebarMenu = document.querySelector(".sidebar-menu");
 menuToggle.onclick = function () {
     sidebarMenu.classList.toggle("show");
 };
+
