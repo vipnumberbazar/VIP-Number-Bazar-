@@ -826,7 +826,7 @@ margin-left:0;
     cursor:pointer;
 }
 
-@media(max-width:1200px){
+@media(max-width:768px){
 
     .menu-toggle{
         display:block;
