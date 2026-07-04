@@ -17,7 +17,7 @@ form.addEventListener("submit", async (e) => {
     message.textContent = "Login Successful";
 
     setTimeout(() => {
-      window.location.href = "admin.html";
+      window.location.replace("admin.html");
     }, 1000);
 
   } catch (error) {
