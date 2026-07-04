@@ -1,6 +1,7 @@
 /* ==========================================
-   VIP Number Bazar V4
-   login.css
+VIP Number Bazar V5 Professional
+login.css
+Part 1
 ========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -14,7 +15,21 @@ font-family:'Poppins',sans-serif;
 
 body{
 
-background:#050505;
+background:#090909;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+.login-page{
+
+position:relative;
+
+width:100%;
 
 min-height:100vh;
 
@@ -24,9 +39,29 @@ justify-content:center;
 
 align-items:center;
 
-padding:20px;
+padding:40px;
 
-color:#fff;
+}
+
+.background-blur{
+
+position:fixed;
+
+top:-150px;
+
+left:-150px;
+
+width:450px;
+
+height:450px;
+
+background:#d4af37;
+
+opacity:.15;
+
+filter:blur(150px);
+
+border-radius:50%;
 
 }
 
@@ -34,51 +69,76 @@ color:#fff;
 
 width:100%;
 
-display:flex;
+max-width:1200px;
 
-justify-content:center;
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:40px;
 
 align-items:center;
 
 }
 
-.login-box{
-
-width:100%;
-
-max-width:430px;
-
-background:#111;
-
-border:1px solid rgba(212,175,55,.25);
-
-border-radius:18px;
-
-padding:35px;
-
-box-shadow:0 15px 40px rgba(0,0,0,.45);
-
-}
-
-.login-box h1{
+.logo-area{
 
 text-align:center;
 
-color:#d4af37;
+}
 
-font-size:34px;
+.logo-area img{
+
+width:140px;
+
+margin-bottom:20px;
+
+}
+
+.logo-area h1{
+
+font-size:42px;
+
+font-weight:800;
+
+color:#d4af37;
 
 margin-bottom:10px;
 
 }
 
-.login-box h2{
+.logo-area p{
+
+font-size:18px;
+
+color:#ccc;
+
+}
+.login-card{
+
+background:#151515;
+
+border:1px solid rgba(212,175,55,.25);
+
+border-radius:22px;
+
+padding:40px;
+
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.login-card h2{
+
+font-size:34px;
+
+font-weight:700;
 
 text-align:center;
 
-font-size:22px;
+margin-bottom:10px;
 
-margin-bottom:8px;
+color:#fff;
 
 }
 
@@ -88,15 +148,15 @@ text-align:center;
 
 color:#bbb;
 
-margin-bottom:30px;
+margin-bottom:35px;
 
-font-size:14px;
+font-size:15px;
 
 }
 
 .input-group{
 
-margin-bottom:20px;
+margin-bottom:22px;
 
 }
 
@@ -108,6 +168,8 @@ margin-bottom:8px;
 
 font-size:14px;
 
+font-weight:600;
+
 color:#d4af37;
 
 }
@@ -116,19 +178,19 @@ color:#d4af37;
 
 width:100%;
 
-padding:15px;
+padding:15px 18px;
 
-background:#1a1a1a;
-
-color:#fff;
+background:#0f0f0f;
 
 border:1px solid #333;
 
-border-radius:10px;
+border-radius:12px;
 
 outline:none;
 
 font-size:15px;
+
+color:#fff;
 
 transition:.3s;
 
@@ -138,25 +200,86 @@ transition:.3s;
 
 border-color:#d4af37;
 
+box-shadow:0 0 10px rgba(212,175,55,.35);
+
+}
+.remember-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+gap:15px;
+
+}
+
+.remember{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:14px;
+
+color:#ccc;
+
+cursor:pointer;
+
+}
+
+.remember input{
+
+accent-color:#d4af37;
+
+}
+
+.forgot-btn{
+
+background:none;
+
+border:none;
+
+color:#d4af37;
+
+cursor:pointer;
+
+font-size:14px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.forgot-btn:hover{
+
+color:#fff;
+
 }
 
 .login-btn{
 
 width:100%;
 
-padding:15px;
-
-background:#d4af37;
-
-color:#000;
-
-font-size:16px;
-
-font-weight:700;
+padding:16px;
 
 border:none;
 
-border-radius:10px;
+border-radius:12px;
+
+background:#d4af37;
+
+color:#111;
+
+font-size:17px;
+
+font-weight:700;
 
 cursor:pointer;
 
@@ -168,13 +291,23 @@ transition:.3s;
 
 transform:translateY(-2px);
 
-box-shadow:0 12px 30px rgba(212,175,55,.35);
+box-shadow:0 15px 30px rgba(212,175,55,.35);
 
 }
 
-#loginMessage{
+.login-btn:disabled{
+
+opacity:.7;
+
+cursor:not-allowed;
+
+}
+
+.login-message{
 
 margin-top:18px;
+
+min-height:22px;
 
 text-align:center;
 
@@ -182,27 +315,333 @@ font-size:14px;
 
 font-weight:600;
 
-min-height:20px;
+color:#ff6666;
+
+}
+.login-features{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
 
 }
 
-@media(max-width:480px){
+.feature-item{
 
-.login-box{
+display:flex;
 
-padding:25px;
+align-items:center;
+
+gap:12px;
+
+background:#101010;
+
+border:1px solid rgba(212,175,55,.15);
+
+padding:14px;
+
+border-radius:12px;
+
+transition:.3s;
 
 }
 
-.login-box h1{
+.feature-item:hover{
+
+border-color:#d4af37;
+
+transform:translateY(-3px);
+
+}
+
+.feature-item span{
+
+font-size:22px;
+
+}
+
+.feature-item p{
+
+font-size:13px;
+
+font-weight:500;
+
+color:#ddd;
+
+line-height:1.4;
+
+}
+
+.security-info{
+
+margin-top:30px;
+
+}
+
+.security-card{
+
+background:#101010;
+
+border:1px solid rgba(212,175,55,.18);
+
+border-radius:15px;
+
+padding:22px;
+
+}
+
+.security-card h3{
+
+color:#d4af37;
+
+font-size:20px;
+
+margin-bottom:18px;
+
+}
+
+.security-card ul{
+
+list-style:none;
+
+}
+
+.security-card ul li{
+
+padding:8px 0;
+
+font-size:14px;
+
+color:#ddd;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.security-card ul li:last-child{
+
+border-bottom:none;
+
+}
+.version-info{
+
+margin-top:30px;
+
+text-align:center;
+
+}
+
+.version-info p{
+
+font-size:15px;
+
+color:#bbb;
+
+}
+
+.version-info span{
+
+color:#d4af37;
+
+font-weight:700;
+
+}
+
+.footer-links{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.footer-links a{
+
+text-decoration:none;
+
+color:#d4af37;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+color:#fff;
+
+}
+
+.footer-links span{
+
+color:#555;
+
+}
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#d4af37;
+
+border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#f4c842;
+
+}
+@media(max-width:992px){
+
+.login-container{
+
+grid-template-columns:1fr;
+
+gap:35px;
+
+}
+
+.logo-area{
+
+order:1;
+
+}
+
+.login-card{
+
+order:2;
+
+}
+
+.login-features{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:0;
+
+}
+
+.login-page{
+
+padding:20px;
+
+}
+
+.login-card{
+
+padding:30px 20px;
+
+}
+
+.logo-area img{
+
+width:100px;
+
+}
+
+.logo-area h1{
+
+font-size:30px;
+
+}
+
+.login-card h2{
 
 font-size:28px;
 
 }
 
-.login-box h2{
+.remember-row{
 
-font-size:20px;
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.login-features{
+
+grid-template-columns:1fr;
+
+}
+
+.security-card{
+
+padding:18px;
+
+}
+
+}
+@media(max-width:480px){
+
+.login-page{
+
+padding:15px;
+
+}
+
+.login-card{
+
+padding:20px 15px;
+
+border-radius:16px;
+
+}
+
+.logo-area img{
+
+width:80px;
+
+}
+
+.logo-area h1{
+
+font-size:24px;
+
+}
+
+.logo-area p{
+
+font-size:14px;
+
+}
+
+.login-card h2{
+
+font-size:24px;
 
 }
 
@@ -211,5 +650,69 @@ font-size:20px;
 font-size:13px;
 
 }
+
+.input-group input{
+
+padding:14px;
+
+font-size:14px;
+
+}
+
+.login-btn{
+
+padding:14px;
+
+font-size:15px;
+
+}
+
+.feature-item{
+
+padding:10px;
+
+}
+
+.feature-item span{
+
+font-size:18px;
+
+}
+
+.feature-item p{
+
+font-size:12px;
+
+}
+
+.security-card h3{
+
+font-size:18px;
+
+}
+
+.security-card ul li{
+
+font-size:13px;
+
+}
+
+.footer-links{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+}
+
+img{
+
+max-width:100%;
+
+height:auto;
+
+display:block;
 
 }
