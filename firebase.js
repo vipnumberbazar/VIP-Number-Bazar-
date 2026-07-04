@@ -55,23 +55,14 @@ import {
 // =======================================
 
 const firebaseConfig = {
-
-    apiKey: "YOUR_API_KEY",
-
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-
-    projectId: "YOUR_PROJECT_ID",
-
-    storageBucket: "YOUR_PROJECT.appspot.com",
-
-    messagingSenderId: "YOUR_SENDER_ID",
-
-    appId: "YOUR_APP_ID",
-
-    measurementId: "YOUR_MEASUREMENT_ID"
-
+  apiKey: "AIzaSyAWD14Nf9l7HlFrPMsHijREOHoGrxeehok",
+  authDomain: "vipnumberbazar-73e51.firebaseapp.com",
+  projectId: "vipnumberbazar-73e51",
+  storageBucket: "vipnumberbazar-73e51.firebasestorage.app",
+  messagingSenderId: "756745745147",
+  appId: "1:756745745147:web:e8dcd216eda572c440f65e",
+  measurementId: "G-ZTB2EEZVQ1"
 };
-
 // =======================================
 // Initialize Firebase
 // =======================================
