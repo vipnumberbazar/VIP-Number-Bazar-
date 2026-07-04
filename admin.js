@@ -440,3 +440,11 @@ window.addEventListener("popstate", async () => {
 // ============================
 // End of admin.js
 // ============================
+const menuToggle = document.getElementById("menuToggle");
+const sidebarMenu = document.querySelector(".sidebar-menu");
+
+if (menuToggle && sidebarMenu) {
+    menuToggle.addEventListener("click", () => {
+        sidebarMenu.classList.toggle("show");
+    });
+}
