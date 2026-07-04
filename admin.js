@@ -405,8 +405,8 @@ function startLogoutTimer() {
 
     clearTimeout(logoutTimer);
 
-    logoutTimer = setTimeout(() => {
-
+    logoutTimer = setTimeout(async () => {
+await signOut(auth);
         localStorage.clear();
 sessionStorage.clear();
 
