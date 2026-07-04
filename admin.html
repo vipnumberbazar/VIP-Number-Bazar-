@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
 <meta http-equiv="Pragma" content="no-cache">
+
 <meta http-equiv="Expires" content="0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIP Number Bazar - Admin Panel</title>
+<title>VIP Number Bazar | Admin Panel</title>
+
+<link rel="icon" href="favicon.ico">
+
+<link rel="stylesheet" href="admin.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -16,49 +25,133 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="admin.css">
-
 </head>
 
 <body>
-<div class="sidebar">
 
-    <div class="sidebar-logo">
-        👑 VIP NUMBER BAZAR
-    </div>
-<button id="menuToggle" class="menu-toggle">☰ Menu</button>
-    <ul class="sidebar-menu">
-<li class="active" onclick="window.scrollTo(0,0)">🏠 Dashboard</li>
-<li onclick="document.querySelector('.numbers-list-section').scrollIntoView({behavior:'smooth'})">📱 VIP Numbers</li>
-<li onclick="document.querySelector('.add-number-section').scrollIntoView({behavior:'smooth'})">➕ Add Number</li>
-<li onclick="alert('Visitors Feature Coming Soon')">👥 Visitors</li>
-<li onclick="alert('Orders Feature Coming Soon')">📦 Orders</li>
-<li onclick="alert('Analytics Feature Coming Soon')">📊 Analytics</li>
-<li onclick="alert('Notifications Feature Coming Soon')">🔔 Notifications</li>
-<li onclick="alert('Settings Feature Coming Soon')">⚙️ Settings</li>
-</ul>
-   
-</div>
 <div id="loader" class="loader">
 
-<div class="spinner"></div>
+<div class="loader-box">
 
-<p>Loading Dashboard...</p>
+<div class="loader-circle"></div>
 
-</div>
-
-<header class="admin-header">
-
-<div class="container">
-
-<div class="logo">
-
-<span>VIP</span> Number Bazar
+<h2>Loading Dashboard...</h2>
 
 </div>
 
-<div class="header-right">
-<div class="notification-box" id="notificationBox">🔔 <span id="notificationCount">0</span></div>
+</div>
+
+<div class="admin-layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-logo">
+
+<img src="logo.png" alt="Logo">
+
+<h2>VIP NUMBER BAZAR</h2>
+
+<p>V5 Professional</p>
+
+</div>
+
+<nav class="sidebar-menu">
+<ul>
+
+<li class="active" data-page="dashboard">
+
+<i>🏠</i>
+
+<span>Dashboard</span>
+
+</li>
+
+<li data-page="vipNumbers">
+
+<i>📱</i>
+
+<span>VIP Numbers</span>
+
+</li>
+
+<li data-page="orders">
+
+<i>🛒</i>
+
+<span>Orders</span>
+
+</li>
+
+<li data-page="customers">
+
+<i>👥</i>
+
+<span>Customers</span>
+
+</li>
+
+<li data-page="visitors">
+
+<i>📈</i>
+
+<span>Visitors</span>
+
+</li>
+
+<li data-page="notifications">
+
+<i>🔔</i>
+
+<span>Notifications</span>
+
+</li>
+
+<li data-page="analytics">
+
+<i>📊</i>
+
+<span>Analytics</span>
+
+</li>
+
+<li data-page="settings">
+
+<i>⚙️</i>
+
+<span>Settings</span>
+
+</li>
+
+</ul>
+
+</nav>
+
+</aside>
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div class="topbar-left">
+
+<h1 id="pageTitle">
+
+Dashboard
+
+</h1>
+
+</div>
+
+<div class="topbar-right">
+
+<div class="admin-profile">
+
+<img src="logo.png" alt="Admin">
+
+<span>Administrator</span>
+
+</div>
+
 <button id="logoutBtn" class="logout-btn">
 
 Logout
@@ -67,75 +160,689 @@ Logout
 
 </div>
 
-</div>
-
 </header>
-
-<section class="dashboard">
-
-<div class="container">
-
-<h1>Admin Dashboard</h1>
+<section id="dashboardPage" class="page active">
 
 <div class="dashboard-grid">
 
-    <div class="dashboard-card blue">
-        <h2 id="totalVisitors">0</h2>
-        <p>Total Visitors</p>
-    </div>
+<div class="dashboard-card blue">
 
-    <div class="dashboard-card green">
-        <h2 id="totalVipNumbers">0</h2>
-        <p>Total VIP Numbers</p>
-    </div>
+<h2 id="totalVipNumbers">0</h2>
 
-    <div class="dashboard-card purple">
-        <h2 id="totalRevenue">₹0</h2>
-        <p>Total Revenue</p>
-    </div>
+<p>Total VIP Numbers</p>
 
-    <div class="dashboard-card orange">
-        <h2 id="totalOrders">0</h2>
-        <p>Total Orders</p>
-    </div>
+</div>
 
-    <div class="dashboard-card cyan">
-        <h2 id="totalCustomers">0</h2>
-        <p>Total Customers</p>
-    </div>
+<div class="dashboard-card green">
 
-    <div class="dashboard-card red">
-        <h2 id="onlineVisitors">0</h2>
-        <p>Online Visitors</p>
-    </div>
+<h2 id="availableNumbers">0</h2>
+
+<p>Available Numbers</p>
+
+</div>
+
+<div class="dashboard-card red">
+
+<h2 id="soldNumbers">0</h2>
+
+<p>Sold Numbers</p>
+
+</div>
+
+<div class="dashboard-card orange">
+
+<h2 id="totalOrders">0</h2>
+
+<p>Total Orders</p>
+
+</div>
+
+<div class="dashboard-card purple">
+
+<h2 id="totalCustomers">0</h2>
+
+<p>Total Customers</p>
+
+</div>
+
+<div class="dashboard-card cyan">
+
+<h2 id="totalVisitors">0</h2>
+
+<p>Total Visitors</p>
+
+</div>
+
+<div class="dashboard-card gold">
+
+<h2 id="todayVisitors">0</h2>
+
+<p>Today's Visitors</p>
+
+</div>
+
+<div class="dashboard-card dark">
+
+<h2 id="totalRevenue">₹0</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+</div>
+
+<div class="dashboard-charts">
+
+<div class="chart-card">
+
+<h3>Sales Analytics</h3>
+
+<canvas id="salesChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Visitors Analytics</h3>
+
+<canvas id="visitorChart"></canvas>
 
 </div>
 
 </div>
 
 </section>
+<section id="vipNumbersPage" class="page">
 
-<section class="add-number-section">
+<div class="page-header">
 
-<div class="container">
+<h2>VIP Numbers Management</h2>
 
-<h2>Add VIP Number</h2>
+<button id="addVipBtn" class="primary-btn">
+
++ Add VIP Number
+
+</button>
+
+</div>
+
+<div class="toolbar">
+
+<input
+type="text"
+id="searchVip"
+placeholder="Search VIP Number...">
+
+<select id="filterStatus">
+
+<option value="all">All Status</option>
+
+<option value="available">Available</option>
+
+<option value="sold">Sold</option>
+
+</select>
+
+<select id="filterCategory">
+
+<option value="all">All Category</option>
+
+<option value="gold">Gold</option>
+
+<option value="silver">Silver</option>
+
+<option value="platinum">Platinum</option>
+
+<option value="premium">Premium</option>
+
+</select>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="vip-table">
+
+<thead>
+
+<tr>
+
+<th>No.</th>
+
+<th>VIP Number</th>
+
+<th>Price</th>
+
+<th>Category</th>
+
+<th>Operator</th>
+
+<th>Status</th>
+
+<th>Views</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="vipTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+<section id="ordersPage" class="page">
+
+<div class="page-header">
+
+<h2>Orders Management</h2>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="orders-table">
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Mobile</th>
+
+<th>VIP Number</th>
+
+<th>Amount</th>
+
+<th>Payment</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="ordersTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<section id="customersPage" class="page">
+
+<div class="page-header">
+
+<h2>Customers</h2>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="customers-table">
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+
+<th>Mobile</th>
+
+<th>WhatsApp</th>
+
+<th>City</th>
+
+<th>Total Orders</th>
+
+<th>Total Spend</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="customersTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+<section id="visitorsPage" class="page">
+
+<div class="page-header">
+
+<h2>Visitors Analytics</h2>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card blue">
+
+<h2 id="todayVisitCard">0</h2>
+
+<p>Today Visitors</p>
+
+</div>
+
+<div class="dashboard-card green">
+
+<h2 id="weekVisitCard">0</h2>
+
+<p>This Week</p>
+
+</div>
+
+<div class="dashboard-card purple">
+
+<h2 id="monthVisitCard">0</h2>
+
+<p>This Month</p>
+
+</div>
+
+<div class="dashboard-card orange">
+
+<h2 id="allVisitCard">0</h2>
+
+<p>All Visitors</p>
+
+</div>
+
+</div>
+
+<div class="table-responsive">
+
+<table class="visitor-table">
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Device</th>
+
+<th>Browser</th>
+
+<th>Country</th>
+
+<th>City</th>
+
+<th>IP</th>
+
+</tr>
+
+</thead>
+
+<tbody id="visitorTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<section id="notificationsPage" class="page">
+
+<div class="page-header">
+
+<h2>Notifications</h2>
+
+<button id="clearNotificationBtn" class="danger-btn">
+
+Clear All
+
+</button>
+
+</div>
+
+<div id="notificationList" class="notification-list">
+
+</div>
+
+</section>
+<section id="analyticsPage" class="page">
+
+<div class="page-header">
+
+<h2>Analytics Dashboard</h2>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card blue">
+
+<h2 id="todaySales">₹0</h2>
+
+<p>Today's Sales</p>
+
+</div>
+
+<div class="dashboard-card green">
+
+<h2 id="weeklySales">₹0</h2>
+
+<p>Weekly Sales</p>
+
+</div>
+
+<div class="dashboard-card purple">
+
+<h2 id="monthlySales">₹0</h2>
+
+<p>Monthly Sales</p>
+
+</div>
+
+<div class="dashboard-card orange">
+
+<h2 id="yearlySales">₹0</h2>
+
+<p>Yearly Sales</p>
+
+</div>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Revenue Report</h3>
+
+<canvas id="revenueChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Orders Report</h3>
+
+<canvas id="ordersChart"></canvas>
+
+</div>
+
+</section>
+
+<section id="settingsPage" class="page">
+
+<div class="page-header">
+
+<h2>Website Settings</h2>
+
+</div>
+
+<form id="settingsForm">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Website Name</label>
+
+<input
+type="text"
+id="siteName">
+
+</div>
+
+<div class="form-group">
+
+<label>WhatsApp Number</label>
+
+<input
+type="text"
+id="whatsappNumber">
+
+</div>
+
+<div class="form-group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="siteEmail">
+
+</div>
+
+<div class="form-group">
+
+<label>Instagram Link</label>
+
+<input
+type="text"
+id="instagramLink">
+
+</div>
+
+</div>
+<div class="form-group">
+
+<label>Facebook Link</label>
+
+<input
+type="text"
+id="facebookLink">
+
+</div>
+
+<div class="form-group">
+
+<label>YouTube Link</label>
+
+<input
+type="text"
+id="youtubeLink">
+
+</div>
+
+<div class="form-group">
+
+<label>Office Address</label>
+
+<textarea
+id="officeAddress"
+rows="3"></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>Website Theme</label>
+
+<select id="websiteTheme">
+
+<option value="dark">Dark</option>
+
+<option value="light">Light</option>
+
+<option value="auto">Auto</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Maintenance Mode</label>
+
+<select id="maintenanceMode">
+
+<option value="off">OFF</option>
+
+<option value="on">ON</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Upload Logo</label>
+
+<input
+type="file"
+id="logoUpload"
+accept="image/*">
+
+</div>
+
+<div class="form-group">
+
+<label>Upload Banner</label>
+
+<input
+type="file"
+id="bannerUpload"
+accept="image/*">
+
+</div>
+
+</div>
+
+<div class="form-actions">
+
+<button
+type="submit"
+class="primary-btn">
+
+Save Settings
+
+</button>
+
+<button
+type="reset"
+class="secondary-btn">
+
+Reset
+
+</button>
+
+</div>
+
+</form>
+
+</section>
+<!-- Add / Edit VIP Number Modal -->
+
+<div id="vipModal" class="modal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2 id="vipModalTitle">
+
+Add VIP Number
+
+</h2>
+
+<span
+id="closeVipModal"
+class="close-btn">
+
+&times;
+
+</span>
+
+</div>
 
 <form id="vipForm">
 
+<input
+type="hidden"
+id="vipDocId">
+
 <div class="form-grid">
+
+<div class="form-group">
+
+<label>VIP Number</label>
 
 <input
 type="text"
 id="vipNumber"
-placeholder="VIP Number"
+placeholder="Enter VIP Number"
 required>
+
+</div>
+
+<div class="form-group">
+
+<label>Price</label>
 
 <input
 type="number"
 id="vipPrice"
-placeholder="Price"
+placeholder="Enter Price"
 required>
+
+</div>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="vipCategory">
+
+<option value="Gold">Gold</option>
+
+<option value="Silver">Silver</option>
+
+<option value="Premium">Premium</option>
+
+<option value="Platinum">Platinum</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Operator</label>
+
+<select id="vipOperator">
+
+<option value="Jio">Jio</option>
+
+<option value="Airtel">Airtel</option>
+
+<option value="Vi">Vi</option>
+
+<option value="BSNL">BSNL</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Status</label>
 
 <select id="vipStatus">
 
@@ -145,11 +852,40 @@ required>
 
 </select>
 
+</div>
+
+<div class="form-group">
+
+<label>Featured</label>
+
+<select id="vipFeatured">
+
+<option value="false">No</option>
+
+<option value="true">Yes</option>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="form-actions">
+
 <button
 type="submit"
-class="save-btn">
+class="primary-btn">
 
 Save VIP Number
+
+</button>
+
+<button
+type="button"
+id="cancelVipBtn"
+class="secondary-btn">
+
+Cancel
 
 </button>
 
@@ -159,124 +895,202 @@ Save VIP Number
 
 </div>
 
-</section>
-<section class="numbers-list-section">
+</div>
+<!-- Delete Confirmation Modal -->
 
-    <div class="container">
+<div id="deleteModal" class="modal">
 
-        <div class="table-header">
+<div class="modal-content small-modal">
 
-            <h2>VIP Numbers List</h2>
+<div class="modal-header">
 
-            <input
-                type="text"
-                id="searchAdmin"
-                placeholder="Search VIP Number..."
-            >
-
-        </div>
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>VIP Number</th>
-
-                        <th>Price</th>
-
-                        <th>Status</th>
-
-                        <th>Actions</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="vipTableBody">
-
-                    <!-- Firebase Data -->
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- Edit Modal -->
-
-<div id="editModal" class="modal">
-
-    <div class="modal-content">
-
-        <span id="closeEditModal" class="close">&times;</span>
-
-        <h2>Edit VIP Number</h2>
-
-        <form id="editForm">
-
-            <input
-                type="hidden"
-                id="editId"
-            >
-
-            <input
-                type="text"
-                id="editNumber"
-                placeholder="VIP Number"
-                required
-            >
-
-            <input
-                type="number"
-                id="editPrice"
-                placeholder="Price"
-                required
-            >
-
-            <select id="editStatus">
-
-                <option value="Available">
-                    Available
-                </option>
-
-                <option value="Sold">
-                    Sold
-                </option>
-
-            </select>
-
-            <button
-                type="submit"
-                class="save-btn">
-
-                Update VIP Number
-
-            </button>
-
-        </form>
-
-    </div>
+<h2>Delete VIP Number</h2>
 
 </div>
 
-<!-- Toast -->
+<div class="modal-body">
+
+<p>
+
+Are you sure you want to delete this VIP Number?
+
+</p>
+
+<input
+type="hidden"
+id="deleteVipId">
+
+</div>
+
+<div class="form-actions">
+
+<button
+id="confirmDeleteBtn"
+class="danger-btn"
+type="button">
+
+Delete
+
+</button>
+
+<button
+id="cancelDeleteBtn"
+class="secondary-btn"
+type="button">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Loading Overlay -->
+
+<div id="loadingOverlay" class="loading-overlay">
+
+<div class="loading-box">
+
+<div class="spinner"></div>
+
+<h3>Please Wait...</h3>
+
+<p>Processing Request</p>
+
+</div>
+
+</div>
+
+<!-- Toast Notification -->
 
 <div id="toast" class="toast">
 
-    Saved Successfully
+<span id="toastMessage">
+
+Success
+
+</span>
+
+</div>
+<!-- Image Preview Modal -->
+
+<div id="imagePreviewModal" class="modal">
+
+<div class="modal-content image-modal">
+
+<div class="modal-header">
+
+<h2>Image Preview</h2>
+
+<span
+id="closeImagePreview"
+class="close-btn">
+
+&times;
+
+</span>
 
 </div>
 
-<script type="module" src="firebase.js"></script>
-<script type="module" src="admin.js"></script>
+<div class="modal-body">
+
+<img
+id="previewImage"
+src=""
+alt="Preview">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Notification Popup -->
+
+<div id="notificationPopup" class="notification-popup">
+
+<div class="notification-header">
+
+<h3>🔔 Notifications</h3>
+
+<button
+id="closeNotificationPopup"
+class="icon-btn">
+
+✖
+
+</button>
+
+</div>
+
+<div
+id="notificationPopupList"
+class="notification-popup-list">
+
+</div>
+
+</div>
+
+<!-- Floating Action Button -->
+
+<button
+id="scrollTopBtn"
+class="scroll-top-btn">
+
+↑
+
+</button>
+<footer class="admin-footer">
+
+<p>
+
+© 2026 VIP Number Bazar V5 Professional
+
+</p>
+
+<p>
+
+Developed with Firebase & GitHub Pages
+
+</p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+type="module"
+src="admin.js">
+
+</script>
+
+<script>
+
+history.replaceState(
+
+null,
+
+"",
+
+location.href
+
+);
+
+window.onpopstate=function(){
+
+history.go(1);
+
+};
+
+</script>
 
 </body>
+
 </html>
