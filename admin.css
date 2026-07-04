@@ -826,7 +826,7 @@ margin-left:0;
     cursor:pointer;
 }
 
-@media(max-width:768px){
+@media(max-width:1200px){
 
     .menu-toggle{
         display:block;
@@ -839,5 +839,17 @@ margin-left:0;
     .sidebar-menu.show{
         display:block;
     }
+.sidebar{
+    width:100%;
+    position:relative;
+    height:auto;
+}
 
+.sidebar-menu{
+    display:none;
+}
+
+.sidebar-menu.show{
+    display:block;
+}
 }
