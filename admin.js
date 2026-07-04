@@ -407,9 +407,7 @@ function startLogoutTimer() {
 
     logoutTimer = setTimeout(() => {
 
-        alert("10 Minutes Inactive.\nPlease Login Again.");
-
-        window.location.replace("login.html");
+        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:100px'>TIMEOUT WORKING</h1>";
 
    }, 5 * 60 * 1000);
 
