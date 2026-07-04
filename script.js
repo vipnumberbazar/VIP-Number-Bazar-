@@ -303,7 +303,7 @@ Mobile : ${customerPhone.value}`;
 
         window.open(
 
-            "https://wa.me/919999999999?text=" +
+            "https://wa.me/918070424242?text=" +
 
             encodeURIComponent(message),
 
