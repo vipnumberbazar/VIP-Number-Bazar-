@@ -3,81 +3,260 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VIP Number Bazar - Admin Login</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
-    <link rel="stylesheet" href="login.css">
+<meta http-equiv="Pragma" content="no-cache">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta http-equiv="Expires" content="0">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>VIP Number Bazar | Admin Login</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico">
+
+<link rel="stylesheet" href="login.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
+<div class="login-page">
+
+<div class="background-blur"></div>
+
 <div class="login-container">
 
-    <div class="login-box">
+<div class="logo-area">
 
-        <h1>VIP Number Bazar</h1>
+<img src="logo.png" alt="VIP Number Bazar">
 
-        <h2>Admin Login</h2>
+<h1>VIP NUMBER BAZAR</h1>
 
-        <p class="subtitle">
-            Login with your Firebase Email & Password
-        </p>
+<p>Professional Admin Panel</p>
 
-        <form id="loginForm">
+</div>
 
-            <div class="input-group">
+<div class="login-card">
 
-                <label>Email</label>
+<h2>Admin Login</h2>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter Email"
-                    required
-                >
+<p class="subtitle">
 
-            </div>
+Only Authorized Admin Can Login
 
-            <div class="input-group">
+</p>
+<form id="loginForm">
 
-                <label>Password</label>
+<div class="input-group">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter Password"
-                    required
-                >
+<label>Email Address</label>
 
-            </div>
+<input
+type="email"
+id="email"
+placeholder="Enter Admin Email"
+autocomplete="email"
+required>
 
-            <button
-                type="submit"
-                class="login-btn">
+</div>
 
-                Login
+<div class="input-group">
 
-            </button>
+<label>Password</label>
 
-        </form>
+<input
+type="password"
+id="password"
+placeholder="Enter Password"
+autocomplete="current-password"
+required>
 
-        <div id="loginMessage"></div>
+</div>
 
-    </div>
+<div class="remember-row">
+
+<label class="remember">
+
+<input
+type="checkbox"
+id="rememberMe">
+
+<span>Remember Me</span>
+
+</label>
+
+<button
+type="button"
+id="forgotPassword"
+class="forgot-btn">
+
+Forgot Password?
+
+</button>
+
+</div>
+
+<button
+type="submit"
+class="login-btn"
+id="loginBtn">
+
+LOGIN
+
+</button>
+
+<div
+id="loginMessage"
+class="login-message">
+
+</div>
+
+</form>
+<div class="login-features">
+
+<div class="feature-item">
+
+<span>🔒</span>
+
+<p>Firebase Secure Authentication</p>
+
+</div>
+
+<div class="feature-item">
+
+<span>🛡️</span>
+
+<p>Single Admin Access</p>
+
+</div>
+
+<div class="feature-item">
+
+<span>⏱️</span>
+
+<p>10 Minutes Auto Logout</p>
+
+</div>
+
+<div class="feature-item">
+
+<span>📱</span>
+
+<p>100% Mobile Responsive</p>
+
+</div>
+
+<div class="feature-item">
+
+<span>☁️</span>
+
+<p>Realtime Firestore Database</p>
+
+</div>
+
+<div class="feature-item">
+
+<span>📊</span>
+
+<p>Professional Admin Dashboard</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="security-info">
+
+<div class="security-card">
+
+<h3>Security Features</h3>
+
+<ul>
+
+<li>✅ Firebase Authentication</li>
+
+<li>✅ Single Admin Login</li>
+
+<li>✅ Auto Logout After 10 Minutes</li>
+
+<li>✅ Back Button Protection</li>
+
+<li>✅ Session Authentication</li>
+
+<li>✅ Firestore Database Security</li>
+
+<li>✅ Mobile Friendly Login</li>
+
+<li>✅ Fast & Secure Access</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="version-info">
+
+<p>
+
+VIP Number Bazar
+
+<span>V5 Professional</span>
+
+</p>
+
+</div>
+<div class="footer-links">
+
+<a href="index.html">
+
+← Back To Website
+
+</a>
+
+<span>|</span>
+
+<a href="https://wa.me/" target="_blank">
+
+WhatsApp Support
+
+</a>
+
+</div>
+
+</div>
 
 </div>
 
 <script type="module" src="login.js"></script>
+<script>
+
+if (window.history.replaceState) {
+
+    window.history.replaceState(
+
+        null,
+
+        null,
+
+        window.location.href
+
+    );
+
+}
+
+</script>
 
 </body>
 
