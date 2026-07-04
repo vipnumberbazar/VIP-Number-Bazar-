@@ -440,11 +440,6 @@ window.addEventListener("popstate", async () => {
 // End of admin.js
 // ============================
 console.log("Menu Loaded");
-const notificationCount = document.getElementById("notificationCount");
-
-onSnapshot(collection(db, "orders"), (snapshot) => {
-    notificationCount.textContent = snapshot.size;
-});
 const menuToggle = document.getElementById("menuToggle");
 const sidebarMenu = document.querySelector(".sidebar-menu");
 
