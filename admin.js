@@ -405,15 +405,13 @@ function startLogoutTimer() {
 
     clearTimeout(logoutTimer);
 
-    logoutTimer = setTimeout(async () => {
-
-        await signOut(auth);
+    logoutTimer = setTimeout(() => {
 
         alert("10 Minutes Inactive.\nPlease Login Again.");
 
-        window.location.href = "login.html";
+        window.location.replace("login.html");
 
-    }, 10 * 60 * 1000);
+   }, 5 * 60 * 1000);
 
 }
 
@@ -424,11 +422,7 @@ function startLogoutTimer() {
 });
 
 startLogoutTimer();
-console.log("Logout Timer Started");
-
-setTimeout(() => {
-    alert("Test Timer Working");
-}, 10000);
+alert("Timer Started");
 // ===========================
 // BLOCK BACK BUTTON
 // ===========================
