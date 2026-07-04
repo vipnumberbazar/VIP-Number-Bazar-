@@ -1,263 +1,718 @@
-<!DOCTYPE html>
-<html lang="en">
+/* ==========================================
+VIP Number Bazar V5 Professional
+login.css
+Part 1
+========================================== */
 
-<head>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-<meta charset="UTF-8">
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+body{
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+background:#090909;
 
-<meta http-equiv="Pragma" content="no-cache">
+min-height:100vh;
 
-<meta http-equiv="Expires" content="0">
+overflow-x:hidden;
 
-<title>VIP Number Bazar | Admin Login</title>
-
-<link rel="icon" href="favicon.ico">
-
-<link rel="stylesheet" href="login.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-
-<div class="login-page">
-
-<div class="background-blur"></div>
-
-<div class="login-container">
-
-<div class="logo-area">
-
-<img src="logo.png" alt="VIP Number Bazar">
-
-<h1>VIP NUMBER BAZAR</h1>
-
-<p>Professional Admin Panel</p>
-
-</div>
-
-<div class="login-card">
-
-<h2>Admin Login</h2>
-
-<p class="subtitle">
-
-Only Authorized Admin Can Login
-
-</p>
-<form id="loginForm">
-
-<div class="input-group">
-
-<label>Email Address</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter Admin Email"
-autocomplete="email"
-required>
-
-</div>
-
-<div class="input-group">
-
-<label>Password</label>
-
-<input
-type="password"
-id="password"
-placeholder="Enter Password"
-autocomplete="current-password"
-required>
-
-</div>
-
-<div class="remember-row">
-
-<label class="remember">
-
-<input
-type="checkbox"
-id="rememberMe">
-
-<span>Remember Me</span>
-
-</label>
-
-<button
-type="button"
-id="forgotPassword"
-class="forgot-btn">
-
-Forgot Password?
-
-</button>
-
-</div>
-
-<button
-type="submit"
-class="login-btn"
-id="loginBtn">
-
-LOGIN
-
-</button>
-
-<div
-id="loginMessage"
-class="login-message">
-
-</div>
-
-</form>
-<div class="login-features">
-
-<div class="feature-item">
-
-<span>🔒</span>
-
-<p>Firebase Secure Authentication</p>
-
-</div>
-
-<div class="feature-item">
-
-<span>🛡️</span>
-
-<p>Single Admin Access</p>
-
-</div>
-
-<div class="feature-item">
-
-<span>⏱️</span>
-
-<p>10 Minutes Auto Logout</p>
-
-</div>
-
-<div class="feature-item">
-
-<span>📱</span>
-
-<p>100% Mobile Responsive</p>
-
-</div>
-
-<div class="feature-item">
-
-<span>☁️</span>
-
-<p>Realtime Firestore Database</p>
-
-</div>
-
-<div class="feature-item">
-
-<span>📊</span>
-
-<p>Professional Admin Dashboard</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="security-info">
-
-<div class="security-card">
-
-<h3>Security Features</h3>
-
-<ul>
-
-<li>✅ Firebase Authentication</li>
-
-<li>✅ Single Admin Login</li>
-
-<li>✅ Auto Logout After 10 Minutes</li>
-
-<li>✅ Back Button Protection</li>
-
-<li>✅ Session Authentication</li>
-
-<li>✅ Firestore Database Security</li>
-
-<li>✅ Mobile Friendly Login</li>
-
-<li>✅ Fast & Secure Access</li>
-
-</ul>
-
-</div>
-
-</div>
-
-<div class="version-info">
-
-<p>
-
-VIP Number Bazar
-
-<span>V5 Professional</span>
-
-</p>
-
-</div>
-<div class="footer-links">
-
-<a href="index.html">
-
-← Back To Website
-
-</a>
-
-<span>|</span>
-
-<a href="https://wa.me/" target="_blank">
-
-WhatsApp Support
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<script type="module" src="login.js"></script>
-<script>
-
-if (window.history.replaceState) {
-
-    window.history.replaceState(
-
-        null,
-
-        null,
-
-        window.location.href
-
-    );
+color:#fff;
 
 }
 
-</script>
+.login-page{
 
-</body>
+position:relative;
 
-</html>
+width:100%;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:40px;
+
+}
+
+.background-blur{
+
+position:fixed;
+
+top:-150px;
+
+left:-150px;
+
+width:450px;
+
+height:450px;
+
+background:#d4af37;
+
+opacity:.15;
+
+filter:blur(150px);
+
+border-radius:50%;
+
+}
+
+.login-container{
+
+width:100%;
+
+max-width:1200px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:40px;
+
+align-items:center;
+
+}
+
+.logo-area{
+
+text-align:center;
+
+}
+
+.logo-area img{
+
+width:140px;
+
+margin-bottom:20px;
+
+}
+
+.logo-area h1{
+
+font-size:42px;
+
+font-weight:800;
+
+color:#d4af37;
+
+margin-bottom:10px;
+
+}
+
+.logo-area p{
+
+font-size:18px;
+
+color:#ccc;
+
+}
+.login-card{
+
+background:#151515;
+
+border:1px solid rgba(212,175,55,.25);
+
+border-radius:22px;
+
+padding:40px;
+
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+.login-card h2{
+
+font-size:34px;
+
+font-weight:700;
+
+text-align:center;
+
+margin-bottom:10px;
+
+color:#fff;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#bbb;
+
+margin-bottom:35px;
+
+font-size:15px;
+
+}
+
+.input-group{
+
+margin-bottom:22px;
+
+}
+
+.input-group label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#d4af37;
+
+}
+
+.input-group input{
+
+width:100%;
+
+padding:15px 18px;
+
+background:#0f0f0f;
+
+border:1px solid #333;
+
+border-radius:12px;
+
+outline:none;
+
+font-size:15px;
+
+color:#fff;
+
+transition:.3s;
+
+}
+
+.input-group input:focus{
+
+border-color:#d4af37;
+
+box-shadow:0 0 10px rgba(212,175,55,.35);
+
+}
+.remember-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+gap:15px;
+
+}
+
+.remember{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:14px;
+
+color:#ccc;
+
+cursor:pointer;
+
+}
+
+.remember input{
+
+accent-color:#d4af37;
+
+}
+
+.forgot-btn{
+
+background:none;
+
+border:none;
+
+color:#d4af37;
+
+cursor:pointer;
+
+font-size:14px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.forgot-btn:hover{
+
+color:#fff;
+
+}
+
+.login-btn{
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+background:#d4af37;
+
+color:#111;
+
+font-size:17px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-btn:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 15px 30px rgba(212,175,55,.35);
+
+}
+
+.login-btn:disabled{
+
+opacity:.7;
+
+cursor:not-allowed;
+
+}
+
+.login-message{
+
+margin-top:18px;
+
+min-height:22px;
+
+text-align:center;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#ff6666;
+
+}
+.login-features{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+}
+
+.feature-item{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+background:#101010;
+
+border:1px solid rgba(212,175,55,.15);
+
+padding:14px;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.feature-item:hover{
+
+border-color:#d4af37;
+
+transform:translateY(-3px);
+
+}
+
+.feature-item span{
+
+font-size:22px;
+
+}
+
+.feature-item p{
+
+font-size:13px;
+
+font-weight:500;
+
+color:#ddd;
+
+line-height:1.4;
+
+}
+
+.security-info{
+
+margin-top:30px;
+
+}
+
+.security-card{
+
+background:#101010;
+
+border:1px solid rgba(212,175,55,.18);
+
+border-radius:15px;
+
+padding:22px;
+
+}
+
+.security-card h3{
+
+color:#d4af37;
+
+font-size:20px;
+
+margin-bottom:18px;
+
+}
+
+.security-card ul{
+
+list-style:none;
+
+}
+
+.security-card ul li{
+
+padding:8px 0;
+
+font-size:14px;
+
+color:#ddd;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.security-card ul li:last-child{
+
+border-bottom:none;
+
+}
+.version-info{
+
+margin-top:30px;
+
+text-align:center;
+
+}
+
+.version-info p{
+
+font-size:15px;
+
+color:#bbb;
+
+}
+
+.version-info span{
+
+color:#d4af37;
+
+font-weight:700;
+
+}
+
+.footer-links{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.footer-links a{
+
+text-decoration:none;
+
+color:#d4af37;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.footer-links a:hover{
+
+color:#fff;
+
+}
+
+.footer-links span{
+
+color:#555;
+
+}
+
+::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#d4af37;
+
+border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#f4c842;
+
+}
+@media(max-width:992px){
+
+.login-container{
+
+grid-template-columns:1fr;
+
+gap:35px;
+
+}
+
+.logo-area{
+
+order:1;
+
+}
+
+.login-card{
+
+order:2;
+
+}
+
+.login-features{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:0;
+
+}
+
+.login-page{
+
+padding:20px;
+
+}
+
+.login-card{
+
+padding:30px 20px;
+
+}
+
+.logo-area img{
+
+width:100px;
+
+}
+
+.logo-area h1{
+
+font-size:30px;
+
+}
+
+.login-card h2{
+
+font-size:28px;
+
+}
+
+.remember-row{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.login-features{
+
+grid-template-columns:1fr;
+
+}
+
+.security-card{
+
+padding:18px;
+
+}
+
+}
+@media(max-width:480px){
+
+.login-page{
+
+padding:15px;
+
+}
+
+.login-card{
+
+padding:20px 15px;
+
+border-radius:16px;
+
+}
+
+.logo-area img{
+
+width:80px;
+
+}
+
+.logo-area h1{
+
+font-size:24px;
+
+}
+
+.logo-area p{
+
+font-size:14px;
+
+}
+
+.login-card h2{
+
+font-size:24px;
+
+}
+
+.subtitle{
+
+font-size:13px;
+
+}
+
+.input-group input{
+
+padding:14px;
+
+font-size:14px;
+
+}
+
+.login-btn{
+
+padding:14px;
+
+font-size:15px;
+
+}
+
+.feature-item{
+
+padding:10px;
+
+}
+
+.feature-item span{
+
+font-size:18px;
+
+}
+
+.feature-item p{
+
+font-size:12px;
+
+}
+
+.security-card h3{
+
+font-size:18px;
+
+}
+
+.security-card ul li{
+
+font-size:13px;
+
+}
+
+.footer-links{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+}
+
+img{
+
+max-width:100%;
+
+height:auto;
+
+display:block;
+
+}
