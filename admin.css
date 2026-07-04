@@ -853,3 +853,22 @@ margin-left:0;
     display:block;
 }
 }
+.notification-box{
+    position:relative;
+    font-size:24px;
+    cursor:pointer;
+    margin-right:15px;
+    color:#FFD700;
+}
+
+#notificationCount{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+    background:red;
+    color:white;
+    border-radius:50%;
+    padding:2px 6px;
+    font-size:12px;
+    font-weight:bold;
+}
