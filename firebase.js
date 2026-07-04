@@ -725,3 +725,4 @@ export const APP_NAME = "VIP Number Bazar";
 export const APP_VERSION = "V5 Professional";
 
 console.log(APP_NAME + " " + APP_VERSION + " Loaded");
+
