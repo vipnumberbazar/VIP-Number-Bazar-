@@ -7,6 +7,9 @@ import {
     vipNumbersRef,
     getDocs,
     addDoc,
+    collection,
+    serverTimestamp,
+    db,
     ordersRef,
     customersRef
 } from "./firebase.js";
