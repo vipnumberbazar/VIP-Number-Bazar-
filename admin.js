@@ -1,151 +1,145 @@
 // =======================================
-// VIP Number Bazar V4 Professional
-// admin.js - Part 1
+// VIP Number Bazar V5 Professional
+// admin.js
+// Part 1
 // =======================================
 
 import {
+
     db,
     auth,
+
     vipNumbersRef,
     ordersRef,
     customersRef,
+    visitorsRef,
+    notificationsRef,
+
     collection,
-    onSnapshot,
     addDoc,
     getDocs,
     updateDoc,
     deleteDoc,
     doc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp,
 
     signOut,
     onAuthStateChanged
 
 } from "./firebase.js";
 
-// ============================
-// Elements
-// ============================
+// =======================================
+// DOM Elements
+// =======================================
 
 const loader = document.getElementById("loader");
 
 const logoutBtn = document.getElementById("logoutBtn");
 
-const vipForm = document.getElementById("vipForm");
+const pageTitle = document.getElementById("pageTitle");
 
-const vipNumber = document.getElementById("vipNumber");
+const sidebarItems = document.querySelectorAll(".sidebar-menu li");
 
-const vipPrice = document.getElementById("vipPrice");
+const pages = document.querySelectorAll(".page");
 
-const vipStatus = document.getElementById("vipStatus");
-
-const vipTableBody = document.getElementById("vipTableBody");
-
-const totalVipNumbers = document.getElementById("totalVipNumbers");
-
-const totalOrders = document.getElementById("totalOrders");
-
-const totalRevenue = document.getElementById("totalRevenue");
-
-const totalCustomers = document.getElementById("totalCustomers");
+const loadingOverlay = document.getElementById("loadingOverlay");
 
 const toast = document.getElementById("toast");
 
-// ============================
-// Login Check
-// ============================
+const toastMessage = document.getElementById("toastMessage");
+
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+const vipTableBody = document.getElementById("vipTableBody");
+
+const ordersTableBody = document.getElementById("ordersTableBody");
+
+const customersTableBody = document.getElementById("customersTableBody");
+
+const visitorTableBody = document.getElementById("visitorTableBody");
+
+const notificationList = document.getElementById("notificationList");
+// =======================================
+// Authentication Check
+// =======================================
 
 onAuthStateChanged(auth, (user) => {
 
     if (!user) {
 
         window.location.replace("login.html");
+
         return;
 
     }
 
-    history.replaceState(null, "", "admin.html");
-
     loader.style.display = "none";
+
+    initializeDashboard();
+
+});
+
+// =======================================
+// Initialize Dashboard
+// =======================================
+
+async function initializeDashboard() {
 
     loadDashboard();
 
     loadVipNumbers();
 
-});
+    loadOrders();
 
-// ============================
-// Logout
-// ============================
+    loadCustomers();
 
-logoutBtn.addEventListener("click",async()=>{
+    loadVisitors();
 
-    await signOut(auth);
+    loadNotifications();
 
-    window.location.href="login.html";
-
-});
-
-// ============================
-// Toast
-// ============================
-
-function showToast(message){
-
-    toast.innerHTML=message;
-
-    toast.style.display="block";
-
-    setTimeout(()=>{
-
-        toast.style.display="none";
-
-    },2500);
+    startAutoLogout();
 
 }
-// ============================
-// Add VIP Number
-// ============================
 
-vipForm.addEventListener("submit", async (e) => {
+// =======================================
+// Sidebar Navigation
+// =======================================
 
-    e.preventDefault();
+sidebarItems.forEach((item) => {
 
-    try {
+    item.addEventListener("click", () => {
 
-        await addDoc(vipNumbersRef, {
+        sidebarItems.forEach((i) =>
 
-            number: vipNumber.value.trim(),
+            i.classList.remove("active")
 
-            price: Number(vipPrice.value),
+        );
 
-            status: vipStatus.value,
+        pages.forEach((p) =>
 
-            category: "VIP",
+            p.classList.remove("active")
 
-            createdAt: new Date()
+        );
 
-        });
+        item.classList.add("active");
 
-        vipForm.reset();
+        const page = item.dataset.page;
 
-        showToast("VIP Number Added Successfully");
+        document
+            .getElementById(page + "Page")
+            .classList.add("active");
 
-        loadDashboard();
+        pageTitle.textContent = item.innerText.trim();
 
-        loadVipNumbers();
-
-    } catch (err) {
-
-        alert(err.message);
-
-    }
+    });
 
 });
-
-
-// ============================
-// Dashboard
-// ============================
+// =======================================
+// Dashboard Counters
+// =======================================
 
 async function loadDashboard() {
 
@@ -155,56 +149,102 @@ async function loadDashboard() {
 
     const customersSnapshot = await getDocs(customersRef);
 
+    const visitorsSnapshot = await getDocs(visitorsRef);
+
+    document.getElementById("totalVipNumbers").textContent =
+        vipSnapshot.size;
+
+    document.getElementById("totalOrders").textContent =
+        ordersSnapshot.size;
+
+    document.getElementById("totalCustomers").textContent =
+        customersSnapshot.size;
+
+    document.getElementById("totalVisitors").textContent =
+        visitorsSnapshot.size;
+
+    let available = 0;
+
+    let sold = 0;
+
     let revenue = 0;
 
-    vipSnapshot.forEach((item) => {
+    vipSnapshot.forEach((docItem) => {
 
-        const data = item.data();
+        const data = docItem.data();
+
+        if (data.status === "Available") {
+
+            available++;
+
+        }
 
         if (data.status === "Sold") {
 
-            revenue += Number(data.price);
+            sold++;
+
+            revenue += Number(data.price || 0);
 
         }
 
     });
 
-    totalVipNumbers.textContent = vipSnapshot.size;
+    document.getElementById("availableNumbers").textContent =
+        available;
 
-    totalOrders.textContent = ordersSnapshot.size;
+    document.getElementById("soldNumbers").textContent =
+        sold;
 
-    totalCustomers.textContent = customersSnapshot.size;
+    document.getElementById("totalRevenue").textContent =
+        "₹" + revenue.toLocaleString();
 
-    totalRevenue.textContent = "₹" + revenue;
+    document.getElementById("todayVisitors").textContent =
+        visitorsSnapshot.size;
 
 }
-
-
-// ============================
+// =======================================
 // Load VIP Numbers
-// ============================
+// =======================================
 
 async function loadVipNumbers() {
 
     vipTableBody.innerHTML = "";
 
-    const snapshot = await getDocs(vipNumbersRef);
+    const snapshot = await getDocs(
 
-    snapshot.forEach((item) => {
+        query(
 
-        const data = item.data();
+            vipNumbersRef,
 
-        const row = document.createElement("tr");
+            orderBy("createdAt", "desc")
 
-        row.innerHTML = `
+        )
+
+    );
+
+    let index = 1;
+
+    snapshot.forEach((docItem) => {
+
+        const data = docItem.data();
+
+        vipTableBody.innerHTML += `
+
+<tr>
+
+<td>${index++}</td>
 
 <td>${data.number}</td>
 
-<td>₹${data.price}</td>
+<td>₹${Number(data.price).toLocaleString()}</td>
+
+<td>${data.category}</td>
+
+<td>${data.operator}</td>
 
 <td>
 
-<span class="status ${data.status.toLowerCase()}">
+<span class="status ${String(data.status).toLowerCase()}">
 
 ${data.status}
 
@@ -212,238 +252,725 @@ ${data.status}
 
 </td>
 
+<td>${data.views || 0}</td>
+
 <td>
 
-<div class="action-buttons">
-
-<button class="edit-btn">
+<button
+class="action-btn edit"
+onclick="editVip('${docItem.id}')">
 
 Edit
 
 </button>
 
-<button class="delete-btn">
+<button
+class="action-btn delete"
+onclick="deleteVip('${docItem.id}')">
 
 Delete
 
 </button>
 
-</div>
-
 </td>
+
+</tr>
 
 `;
 
-        row.querySelector(".edit-btn").addEventListener("click", () => {
+    });
 
-            openEditModal(item.id, data);
+}
+// =======================================
+// Load Orders
+// =======================================
 
-        });
+async function loadOrders() {
 
-        row.querySelector(".delete-btn").addEventListener("click", () => {
+    ordersTableBody.innerHTML = "";
 
-            removeVip(item.id);
+    const snapshot = await getDocs(
 
-        });
+        query(
 
-        vipTableBody.appendChild(row);
+            ordersRef,
+
+            orderBy("createdAt", "desc")
+
+        )
+
+    );
+
+    snapshot.forEach((docItem) => {
+
+        const data = docItem.data();
+
+        const date = data.createdAt?.toDate
+            ? data.createdAt.toDate().toLocaleDateString()
+            : "-";
+
+        ordersTableBody.innerHTML += `
+
+<tr>
+
+<td>${docItem.id}</td>
+
+<td>${data.customerName || "-"}</td>
+
+<td>${data.mobile || "-"}</td>
+
+<td>${data.vipNumber || "-"}</td>
+
+<td>₹${Number(data.price || 0).toLocaleString()}</td>
+
+<td>${data.paymentStatus || "Pending"}</td>
+
+<td>${data.status || "Pending"}</td>
+
+<td>${date}</td>
+
+<td>
+
+<button
+class="action-btn edit"
+onclick="updateOrderStatus('${docItem.id}')">
+
+Update
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 
     });
 
 }
-// ============================
-// Edit Modal Elements
-// ============================
+// =======================================
+// Load Customers
+// =======================================
 
-const editModal = document.getElementById("editModal");
+async function loadCustomers() {
 
-const closeEditModal = document.getElementById("closeEditModal");
+    customersTableBody.innerHTML = "";
 
-const editForm = document.getElementById("editForm");
+    const snapshot = await getDocs(
 
-const editId = document.getElementById("editId");
+        query(
 
-const editNumber = document.getElementById("editNumber");
+            customersRef,
 
-const editPrice = document.getElementById("editPrice");
+            orderBy("createdAt", "desc")
 
-const editStatus = document.getElementById("editStatus");
+        )
 
-// ============================
-// Open Edit Modal
-// ============================
+    );
 
-function openEditModal(id, data) {
+    snapshot.forEach((docItem) => {
 
-    editId.value = id;
+        const data = docItem.data();
 
-    editNumber.value = data.number;
+        customersTableBody.innerHTML += `
 
-    editPrice.value = data.price;
+<tr>
 
-    editStatus.value = data.status;
+<td>${data.name || "-"}</td>
 
-    editModal.style.display = "flex";
+<td>${data.mobile || "-"}</td>
 
-}
+<td>${data.whatsapp || "-"}</td>
 
-// ============================
-// Close Modal
-// ============================
+<td>${data.city || "-"}</td>
 
-closeEditModal.addEventListener("click", () => {
+<td>${data.totalOrders || 0}</td>
 
-    editModal.style.display = "none";
+<td>₹${Number(data.totalSpent || 0).toLocaleString()}</td>
 
-});
+<td>${data.status || "Active"}</td>
 
-window.addEventListener("click", (e) => {
+<td>
 
-    if (e.target === editModal) {
+<button
+class="action-btn edit"
+onclick="editCustomer('${docItem.id}')">
 
-        editModal.style.display = "none";
+Edit
 
-    }
+</button>
 
-});
+<button
+class="action-btn delete"
+onclick="deleteCustomer('${docItem.id}')">
 
-// ============================
-// Update VIP Number
-// ============================
+Delete
 
-editForm.addEventListener("submit", async (e) => {
+</button>
 
-    e.preventDefault();
+</td>
 
-    try {
+</tr>
 
-        await updateDoc(doc(db, "vipNumbers", editId.value), {
-
-            number: editNumber.value.trim(),
-
-            price: Number(editPrice.value),
-
-            status: editStatus.value
-
-        });
-
-        editModal.style.display = "none";
-
-        showToast("VIP Number Updated");
-
-        loadDashboard();
-
-        loadVipNumbers();
-
-    }
-
-    catch (err) {
-
-        alert(err.message);
-
-    }
-
-});
-
-// ============================
-// Delete VIP Number
-// ============================
-
-async function removeVip(id) {
-
-    if (!confirm("Delete this VIP Number?")) return;
-
-    try {
-
-        await deleteDoc(doc(db, "vipNumbers", id));
-
-        showToast("VIP Number Deleted");
-
-        loadDashboard();
-
-        loadVipNumbers();
-
-    }
-
-    catch (err) {
-
-        alert(err.message);
-
-    }
-
-}
-
-// ============================
-// Live Search
-// ============================
-
-const searchAdmin = document.getElementById("searchAdmin");
-
-searchAdmin.addEventListener("keyup", () => {
-
-    const keyword = searchAdmin.value.toLowerCase();
-
-    const rows = vipTableBody.querySelectorAll("tr");
-
-    rows.forEach((row) => {
-
-        row.style.display = row.innerText.toLowerCase().includes(keyword)
-
-            ? ""
-
-            : "none";
+`;
 
     });
 
-});
-// ===========================
-// AUTO LOGOUT AFTER 10 MINUTES
-// ===========================
+}
+// =======================================
+// Load Visitors
+// =======================================
+
+async function loadVisitors() {
+
+    visitorTableBody.innerHTML = "";
+
+    const snapshot = await getDocs(
+
+        query(
+
+            visitorsRef,
+
+            orderBy("createdAt", "desc")
+
+        )
+
+    );
+
+    document.getElementById("todayVisitCard").textContent =
+        snapshot.size;
+
+    document.getElementById("weekVisitCard").textContent =
+        snapshot.size;
+
+    document.getElementById("monthVisitCard").textContent =
+        snapshot.size;
+
+    document.getElementById("allVisitCard").textContent =
+        snapshot.size;
+
+    snapshot.forEach((docItem) => {
+
+        const data = docItem.data();
+
+        const date = data.createdAt?.toDate
+            ? data.createdAt.toDate().toLocaleString()
+            : "-";
+
+        visitorTableBody.innerHTML += `
+
+<tr>
+
+<td>${date}</td>
+
+<td>${data.device || "-"}</td>
+
+<td>${data.browser || "-"}</td>
+
+<td>${data.country || "-"}</td>
+
+<td>${data.city || "-"}</td>
+
+<td>${data.ip || "-"}</td>
+
+</tr>
+
+`;
+
+    });
+
+}
+// =======================================
+// Load Notifications
+// =======================================
+
+async function loadNotifications() {
+
+    notificationList.innerHTML = "";
+
+    onSnapshot(
+
+        query(
+
+            notificationsRef,
+
+            orderBy("createdAt","desc")
+
+        ),
+
+        (snapshot)=>{
+
+            notificationList.innerHTML="";
+
+            snapshot.forEach((docItem)=>{
+
+                const data = docItem.data();
+
+                const date = data.createdAt?.toDate
+                ? data.createdAt.toDate().toLocaleString()
+                : "-";
+
+                notificationList.innerHTML += `
+
+<div class="notification-item">
+
+<div class="notification-title">
+
+${data.title || "Notification"}
+
+</div>
+
+<div class="notification-message">
+
+${data.message || ""}
+
+</div>
+
+<small>
+
+${date}
+
+</small>
+
+</div>
+
+`;
+
+            });
+
+        }
+
+    );
+
+}
+// =======================================
+// Auto Logout (10 Minutes)
+// =======================================
 
 let logoutTimer;
 
-function startLogoutTimer() {
+function resetLogoutTimer() {
 
     clearTimeout(logoutTimer);
 
     logoutTimer = setTimeout(async () => {
-await signOut(auth);
+
+        try {
+
+            await signOut(auth);
+
+        } catch (e) {
+
+            console.error(e);
+
+        }
+
         localStorage.clear();
-sessionStorage.clear();
 
-alert("10 Minutes Inactive.\nPlease Login Again.");
+        sessionStorage.clear();
 
-window.location.href = "./login.html";
+        alert("Session Expired!\nPlease Login Again.");
+
+        window.location.replace("login.html");
+
     }, 10 * 60 * 1000);
 
-["click", "mousemove", "keydown", "touchstart", "scroll"].forEach(event => {
+}
 
-    document.addEventListener(event, startLogoutTimer);
+[
+"click",
+"mousemove",
+"keydown",
+"touchstart",
+"scroll"
+
+].forEach((eventName)=>{
+
+    document.addEventListener(
+
+        eventName,
+
+        resetLogoutTimer
+
+    );
 
 });
 
-startLogoutTimer();
-// ===========================
-// BLOCK BACK BUTTON
-// ===========================
+resetLogoutTimer();
+// =======================================
+// Logout Button
+// =======================================
 
-history.pushState(null, null, location.href);
+logoutBtn.addEventListener("click", async () => {
 
-window.addEventListener("popstate", async () => {
+    if (!confirm("Are you sure you want to logout?")) {
 
-    await signOut(auth);
+        return;
+
+    }
+
+    loadingOverlay.classList.add("active");
+
+    try {
+
+        await signOut(auth);
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+    localStorage.clear();
+
+    sessionStorage.clear();
 
     window.location.replace("login.html");
 
 });
-// ============================
-// End of admin.js
-// ============================
-console.log("Menu Loaded");
-const menuToggle = document.getElementById("menuToggle");
-const sidebarMenu = document.querySelector(".sidebar-menu");
 
-menuToggle.onclick = function () {
-    sidebarMenu.classList.toggle("show");
+// =======================================
+// Toast Message
+// =======================================
+
+function showToast(message, type = "success") {
+
+    toast.className = "toast";
+
+    if (type !== "success") {
+
+        toast.classList.add(type);
+
+    }
+
+    toastMessage.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+
+}
+// =======================================
+// VIP Number Actions
+// =======================================
+
+window.editVip = async function(id) {
+
+    showToast("Edit feature will open.", "success");
+
+    console.log("Edit VIP:", id);
+
 };
 
+window.deleteVip = async function(id) {
+
+    if (!confirm("Delete this VIP Number?")) return;
+
+    loadingOverlay.classList.add("active");
+
+    try {
+
+        await deleteDoc(
+
+            doc(db, "vipNumbers", id)
+
+        );
+
+        showToast("VIP Number Deleted");
+
+        loadVipNumbers();
+
+        loadDashboard();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast("Delete Failed", "error");
+
+    }
+
+    loadingOverlay.classList.remove("active");
+
+};
+
+window.updateOrderStatus = async function(id) {
+
+    await updateDoc(
+
+        doc(db, "orders", id),
+
+        {
+
+            status: "Completed",
+
+            updatedAt: serverTimestamp()
+
+        }
+
+    );
+
+    showToast("Order Updated");
+
+    loadOrders();
+
+};
+
+window.editCustomer = function(id){
+
+    console.log("Edit Customer:", id);
+
+    showToast("Customer Edit");
+
+};
+
+window.deleteCustomer = async function(id){
+
+    if(!confirm("Delete Customer?")) return;
+
+    await deleteDoc(
+
+        doc(db,"customers",id)
+
+    );
+
+    showToast("Customer Deleted");
+
+    loadCustomers();
+
+};
+// =======================================
+// Settings Form
+// =======================================
+
+const settingsForm = document.getElementById("settingsForm");
+
+if (settingsForm) {
+
+settingsForm.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+loadingOverlay.classList.add("active");
+
+try{
+
+await updateDoc(
+
+doc(db,"settings","website"),
+
+{
+
+siteName:document.getElementById("siteName").value,
+
+whatsapp:document.getElementById("whatsappNumber").value,
+
+email:document.getElementById("siteEmail").value,
+
+instagram:document.getElementById("instagramLink").value,
+
+facebook:document.getElementById("facebookLink").value,
+
+youtube:document.getElementById("youtubeLink").value,
+
+address:document.getElementById("officeAddress").value,
+
+theme:document.getElementById("websiteTheme").value,
+
+maintenance:document.getElementById("maintenanceMode").value,
+
+updatedAt:serverTimestamp()
+
+}
+
+);
+
+showToast("Settings Saved");
+
+}catch(error){
+
+console.error(error);
+
+showToast("Save Failed","error");
+
+}
+
+loadingOverlay.classList.remove("active");
+
+});
+
+}
+
+// =======================================
+// Scroll To Top
+// =======================================
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>300){
+
+scrollTopBtn.classList.add("show");
+
+}else{
+
+scrollTopBtn.classList.remove("show");
+
+}
+
+});
+
+scrollTopBtn.addEventListener("click",()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+});
+// =======================================
+// Search & Filter
+// =======================================
+
+const searchVip = document.getElementById("searchVip");
+
+const filterStatus = document.getElementById("filterStatus");
+
+const filterCategory = document.getElementById("filterCategory");
+
+if(searchVip){
+
+searchVip.addEventListener("input",loadVipNumbers);
+
+}
+
+if(filterStatus){
+
+filterStatus.addEventListener("change",loadVipNumbers);
+
+}
+
+if(filterCategory){
+
+filterCategory.addEventListener("change",loadVipNumbers);
+
+}
+
+// =======================================
+// Real Time Dashboard
+// =======================================
+
+onSnapshot(vipNumbersRef,()=>{
+
+loadDashboard();
+
+loadVipNumbers();
+
+});
+
+onSnapshot(ordersRef,()=>{
+
+loadDashboard();
+
+loadOrders();
+
+});
+
+onSnapshot(customersRef,()=>{
+
+loadDashboard();
+
+loadCustomers();
+
+});
+
+onSnapshot(visitorsRef,()=>{
+
+loadDashboard();
+
+loadVisitors();
+
+});
+
+// =======================================
+// Notification Sound
+// =======================================
+
+function playNotificationSound(){
+
+const audio=new Audio("notification.mp3");
+
+audio.volume=0.6;
+
+audio.play().catch(()=>{});
+
+}
+// =======================================
+// Final Initialization
+// =======================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("VIP Number Bazar V5 Professional");
+
+    console.log("Admin Panel Loaded");
+
+    resetLogoutTimer();
+
+    loadDashboard();
+
+    loadVipNumbers();
+
+    loadOrders();
+
+    loadCustomers();
+
+    loadVisitors();
+
+    loadNotifications();
+
+});
+
+// =======================================
+// Window Functions
+// =======================================
+
+window.showToast = showToast;
+
+window.loadDashboard = loadDashboard;
+
+window.loadVipNumbers = loadVipNumbers;
+
+window.loadOrders = loadOrders;
+
+window.loadCustomers = loadCustomers;
+
+window.loadVisitors = loadVisitors;
+
+window.loadNotifications = loadNotifications;
+
+// =======================================
+// Version
+// =======================================
+
+const APP_NAME = "VIP Number Bazar";
+
+const APP_VERSION = "V5 Professional";
+
+console.log(APP_NAME);
+
+console.log(APP_VERSION);
+
+console.log("Admin Module Ready");
+
+// =======================================
+// End Of File
+// =======================================
+
+export {};
