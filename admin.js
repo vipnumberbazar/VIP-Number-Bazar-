@@ -424,6 +424,11 @@ function startLogoutTimer() {
 });
 
 startLogoutTimer();
+console.log("Logout Timer Started");
+
+setTimeout(() => {
+    alert("Test Timer Working");
+}, 10000);
 // ===========================
 // BLOCK BACK BUTTON
 // ===========================
