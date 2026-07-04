@@ -1,7 +1,8 @@
-/* =====================================================
-   VIP Number Bazar V4 Professional
-   style.css - Final Part 1
-===================================================== */
+/* ==========================================
+VIP Number Bazar V5 Professional
+style.css
+Part 1
+========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -9,29 +10,37 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
-html{
-scroll-behavior:smooth;
+:root{
+
+--primary:#d4af37;
+--secondary:#111827;
+--background:#090909;
+--card:#171717;
+--text:#ffffff;
+--border:#2b2b2b;
+--success:#16a34a;
+--danger:#dc2626;
+--warning:#ea580c;
+
 }
 
 body{
 
-font-family:'Poppins',sans-serif;
+background:var(--background);
 
-background:#080808;
-
-color:#fff;
+color:var(--text);
 
 overflow-x:hidden;
 
 }
 
-/* Container */
-
 .container{
 
-width:92%;
+width:95%;
 
 max-width:1400px;
 
@@ -39,27 +48,7 @@ margin:auto;
 
 }
 
-/* Scrollbar */
-
-::-webkit-scrollbar{
-
-width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#d4af37;
-
-border-radius:20px;
-
-}
-
-/* =======================
-Loader
-======================= */
-
-#loader{
+.loader{
 
 position:fixed;
 
@@ -71,7 +60,7 @@ width:100%;
 
 height:100%;
 
-background:#000;
+background:#090909;
 
 display:flex;
 
@@ -79,25 +68,33 @@ justify-content:center;
 
 align-items:center;
 
-flex-direction:column;
-
-z-index:99999;
+z-index:999999;
 
 }
 
-.spinner{
+.loader-box{
 
-width:60px;
+text-align:center;
 
-height:60px;
+}
 
-border:5px solid #333;
+.loader-circle{
 
-border-top:5px solid #d4af37;
+width:70px;
+
+height:70px;
+
+border:6px solid #333;
+
+border-top:6px solid var(--primary);
 
 border-radius:50%;
 
 animation:spin 1s linear infinite;
+
+margin:auto;
+
+margin-bottom:20px;
 
 }
 
@@ -110,22 +107,17 @@ transform:rotate(360deg);
 }
 
 }
-
-/* =======================
-Header
-======================= */
-
 .header{
 
 position:sticky;
 
 top:0;
 
+z-index:999;
+
 background:#111;
 
-border-bottom:1px solid rgba(212,175,55,.20);
-
-z-index:999;
+border-bottom:1px solid var(--border);
 
 }
 
@@ -143,61 +135,75 @@ padding:18px 0;
 
 .logo{
 
-font-size:30px;
-
-font-weight:800;
-
-}
-
-.logo span{
-
-color:#d4af37;
-
-}
-
-nav{
-
 display:flex;
-
-gap:24px;
 
 align-items:center;
 
+gap:15px;
+
 }
 
-nav a{
+.logo img{
+
+width:60px;
+
+height:60px;
+
+object-fit:contain;
+
+}
+
+.logo h1{
+
+font-size:28px;
+
+font-weight:800;
+
+color:var(--primary);
+
+}
+
+.navbar{
+
+display:flex;
+
+align-items:center;
+
+gap:25px;
+
+}
+
+.navbar a{
+
+text-decoration:none;
 
 color:#fff;
 
-text-decoration:none;
+font-weight:600;
 
 transition:.3s;
 
 }
 
-nav a:hover{
+.navbar a:hover{
 
-color:#d4af37;
+color:var(--primary);
 
 }
 
 .admin-btn{
 
-padding:10px 20px;
+background:var(--primary);
 
-background:#d4af37;
+color:#111!important;
 
-color:#000;
+padding:12px 20px;
 
-border-radius:8px;
+border-radius:10px;
 
 font-weight:700;
 
 }
-
-/* =======================
-Hero
-======================= */
 
 .hero{
 
@@ -205,193 +211,195 @@ padding:100px 0;
 
 text-align:center;
 
-background:linear-gradient(#111,#080808);
+background:linear-gradient(180deg,#111,#090909);
 
 }
 
-.hero h1{
+.hero h2{
 
-font-size:56px;
+font-size:52px;
+
+font-weight:800;
 
 margin-bottom:20px;
 
 }
 
-.hero h1 span{
-
-color:#d4af37;
-
-}
-
 .hero p{
 
-font-size:18px;
+font-size:20px;
 
-color:#ccc;
+color:#bbb;
 
 margin-bottom:35px;
 
 }
 
-.gold-btn{
+.primary-btn{
 
 display:inline-block;
 
-padding:16px 40px;
+padding:15px 30px;
 
-background:#d4af37;
+background:var(--primary);
 
-color:#000;
-
-font-weight:700;
+color:#111;
 
 text-decoration:none;
 
-border-radius:10px;
+font-weight:700;
+
+border-radius:12px;
 
 transition:.3s;
 
 }
 
-.gold-btn:hover{
+.primary-btn:hover{
 
 transform:translateY(-3px);
 
-box-shadow:0 15px 35px rgba(212,175,55,.35);
-
 }
-
-/* =======================
-Dashboard
-======================= */
-
-.dashboard{
-
-padding:60px 0;
-
-}
-
-.dashboard-grid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:20px;
-
-}
-
-.dashboard-card{
-
-background:#111;
-
-padding:30px;
-
-border-radius:16px;
-
-border:1px solid rgba(212,175,55,.18);
+.section-title{
 
 text-align:center;
 
-}
-
-.dashboard-card h2{
-
-font-size:40px;
-
-color:#d4af37;
-
-margin-bottom:10px;
+margin-bottom:50px;
 
 }
 
-.dashboard-card p{
+.section-title h2{
+
+font-size:42px;
+
+font-weight:800;
+
+margin-bottom:15px;
+
+color:var(--primary);
+
+}
+
+.section-title p{
+
+font-size:18px;
 
 color:#bbb;
 
 }
 
-/* =======================
-Search
-======================= */
+.vip-section,
 
-.search-section{
+.premium-section,
 
-padding-bottom:40px;
+.featured-section,
+
+.contact-section,
+
+.reviews-section,
+
+.faq-section,
+
+.counter-section{
+
+padding:80px 0;
 
 }
 
-#searchInput{
+.search-bar{
 
-width:100%;
+display:flex;
 
-padding:18px;
+gap:15px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+margin-bottom:40px;
+
+}
+
+.search-bar input,
+
+.search-bar select{
+
+padding:14px 18px;
 
 background:#111;
 
-border:1px solid rgba(212,175,55,.20);
-
-border-radius:12px;
+border:1px solid var(--border);
 
 color:#fff;
 
-font-size:16px;
+border-radius:10px;
 
 outline:none;
 
-}
+min-width:240px;
 
-#searchInput:focus{
-
-border-color:#d4af37;
-
-}
-/* =====================================================
-   VIP Number Bazar V4 Professional
-   style.css - Final Part 2
-===================================================== */
-
-/* =======================
-VIP Numbers
-======================= */
-
-.numbers-section{
-
-padding:20px 0 80px;
+transition:.3s;
 
 }
 
-.numbers-grid{
+.search-bar input:focus,
+
+.search-bar select:focus{
+
+border-color:var(--primary);
+
+box-shadow:0 0 10px rgba(212,175,55,.25);
+
+}
+
+.vip-grid{
 
 display:grid;
 
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 
-gap:24px;
+gap:25px;
 
 }
-
 .vip-card{
 
-background:#111;
+background:var(--card);
 
-border:1px solid rgba(212,175,55,.18);
+border:1px solid var(--border);
 
 border-radius:18px;
 
-padding:22px;
+overflow:hidden;
 
-transition:.30s;
+transition:.3s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
 
 }
 
 .vip-card:hover{
 
-transform:translateY(-6px);
+transform:translateY(-8px);
 
-border-color:#d4af37;
+border-color:var(--primary);
 
-box-shadow:0 15px 35px rgba(212,175,55,.20);
+}
+
+.vip-image{
+
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+background:#111;
+
+}
+
+.vip-content{
+
+padding:20px;
 
 }
 
@@ -399,359 +407,126 @@ box-shadow:0 15px 35px rgba(212,175,55,.20);
 
 font-size:28px;
 
-font-weight:700;
+font-weight:800;
 
-margin-bottom:15px;
+color:var(--primary);
 
-letter-spacing:1px;
+margin-bottom:10px;
 
 }
 
 .vip-price{
 
-font-size:30px;
+font-size:24px;
 
 font-weight:700;
 
-color:#d4af37;
+margin-bottom:15px;
 
-margin-bottom:18px;
+}
+
+.vip-details{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+font-size:14px;
+
+color:#bbb;
 
 }
 
 .vip-status{
 
-display:inline-block;
-
-padding:7px 15px;
+padding:6px 12px;
 
 border-radius:30px;
 
-font-size:13px;
+font-size:12px;
 
-font-weight:600;
-
-margin-bottom:20px;
+font-weight:700;
 
 }
 
-.available{
+.vip-status.available{
 
-background:#115f31;
+background:#16a34a;
 
 color:#fff;
 
 }
 
-.sold{
+.vip-status.sold{
 
-background:#9c2020;
+background:#dc2626;
 
 color:#fff;
 
 }
 
-.book-btn{
+.buy-btn{
+
+display:block;
 
 width:100%;
 
 padding:14px;
 
-background:#d4af37;
+text-align:center;
 
-color:#000;
+background:var(--primary);
 
-border:none;
-
-border-radius:10px;
+color:#111;
 
 font-weight:700;
 
-font-size:16px;
+border-radius:10px;
 
-cursor:pointer;
+text-decoration:none;
 
 transition:.3s;
 
 }
 
-.book-btn:hover{
+.buy-btn:hover{
 
-transform:translateY(-2px);
+transform:scale(1.03);
+
+}
+.contact-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+
+gap:35px;
+
+align-items:start;
 
 }
 
-/* =======================
-Booking Modal
-======================= */
+.contact-form,
 
-.modal{
+.contact-info{
 
-display:none;
+background:var(--card);
 
-position:fixed;
-
-left:0;
-
-top:0;
-
-width:100%;
-
-height:100%;
-
-background:rgba(0,0,0,.75);
-
-justify-content:center;
-
-align-items:center;
-
-padding:20px;
-
-z-index:5000;
-
-}
-
-.modal-content{
-
-width:100%;
-
-max-width:500px;
-
-background:#111;
-
-border:1px solid rgba(212,175,55,.25);
+border:1px solid var(--border);
 
 border-radius:18px;
 
 padding:30px;
 
-position:relative;
-
 }
 
-.close{
+.contact-form form{
 
-position:absolute;
-
-top:15px;
-
-right:18px;
-
-font-size:32px;
-
-cursor:pointer;
-
-color:#d4af37;
-
-}
-
-.modal-content h2{
-
-text-align:center;
-
-margin-bottom:25px;
-
-color:#d4af37;
-
-}
-
-.modal-content input{
-
-width:100%;
-
-padding:15px;
-
-margin-bottom:15px;
-
-background:#1a1a1a;
-
-border:1px solid #333;
-
-border-radius:10px;
-
-color:#fff;
-
-outline:none;
-
-}
-
-.modal-content input:focus{
-
-border-color:#d4af37;
-
-}
-
-/* =======================
-About
-======================= */
-
-.about-section{
-
-padding:80px 0;
-
-}
-
-.about-section h2{
-
-text-align:center;
-
-color:#d4af37;
-
-margin-bottom:40px;
-
-}
-
-.about-grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:20px;
-
-}
-
-.about-card{
-
-background:#111;
-
-padding:25px;
-
-border-radius:16px;
-
-border:1px solid rgba(212,175,55,.18);
-
-text-align:center;
-
-}
-
-.about-card h3{
-
-margin-bottom:12px;
-
-color:#d4af37;
-
-}
-
-.about-card p{
-
-color:#cfcfcf;
-
-line-height:1.7;
-
-}
-
-/* =======================
-Contact
-======================= */
-
-.contact-section{
-
-padding:80px 0;
-
-text-align:center;
-
-}
-
-.contact-section h2{
-
-color:#d4af37;
-
-margin-bottom:15px;
-
-}
-
-.contact-section p{
-
-color:#ccc;
-
-margin-bottom:30px;
-
-}
-
-/* =======================
-Toast
-======================= */
-
-.toast{
-
-position:fixed;
-
-bottom:25px;
-
-right:25px;
-
-background:#d4af37;
-
-color:#000;
-
-padding:15px 25px;
-
-border-radius:10px;
-
-font-weight:700;
-
-display:none;
-
-z-index:9999;
-
-}
-
-/* =======================
-Empty State
-======================= */
-
-.empty-state{
-
-text-align:center;
-
-padding:70px 20px;
-
-}
-
-.empty-state h2{
-
-color:#d4af37;
-
-margin-bottom:12px;
-
-}
-
-/* =======================
-Footer
-======================= */
-
-.footer{
-
-margin-top:60px;
-
-padding:25px 0;
-
-border-top:1px solid rgba(212,175,55,.18);
-
-text-align:center;
-
-color:#bdbdbd;
-
-}
-
-/* =======================
-Responsive
-======================= */
-
-@media(max-width:992px){
-
-.dashboard-grid{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.header .container{
+display:flex;
 
 flex-direction:column;
 
@@ -759,7 +534,598 @@ gap:18px;
 
 }
 
-nav{
+.contact-form input,
+
+.contact-form textarea{
+
+padding:15px;
+
+background:#111;
+
+border:1px solid var(--border);
+
+border-radius:10px;
+
+color:#fff;
+
+outline:none;
+
+transition:.3s;
+
+resize:none;
+
+}
+
+.contact-form input:focus,
+
+.contact-form textarea:focus{
+
+border-color:var(--primary);
+
+box-shadow:0 0 10px rgba(212,175,55,.25);
+
+}
+
+.contact-info h3{
+
+font-size:28px;
+
+margin-bottom:20px;
+
+color:var(--primary);
+
+}
+
+.contact-info p{
+
+margin-bottom:18px;
+
+font-size:16px;
+
+line-height:1.7;
+
+color:#ddd;
+
+}
+
+.contact-info span{
+
+font-weight:700;
+
+color:#fff;
+
+}
+.counter-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+}
+
+.counter-box{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:35px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.counter-box:hover{
+
+transform:translateY(-5px);
+
+border-color:var(--primary);
+
+}
+
+.counter-box h2{
+
+font-size:42px;
+
+font-weight:800;
+
+color:var(--primary);
+
+margin-bottom:10px;
+
+}
+
+.counter-box p{
+
+font-size:16px;
+
+color:#ccc;
+
+}
+
+.reviews-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.review-card{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:30px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.review-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.review-card h3{
+
+font-size:26px;
+
+margin-bottom:15px;
+
+}
+
+.review-card p{
+
+line-height:1.8;
+
+color:#ccc;
+
+margin-bottom:20px;
+
+}
+
+.review-card h4{
+
+color:var(--primary);
+
+font-size:18px;
+
+}
+.faq-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+margin-top:30px;
+
+}
+
+.faq-item{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:18px;
+
+padding:25px;
+
+transition:.3s;
+
+}
+
+.faq-item:hover{
+
+border-color:var(--primary);
+
+transform:translateY(-3px);
+
+}
+
+.faq-item h3{
+
+font-size:20px;
+
+margin-bottom:12px;
+
+color:var(--primary);
+
+}
+
+.faq-item p{
+
+font-size:15px;
+
+line-height:1.8;
+
+color:#ccc;
+
+}
+
+.footer{
+
+background:#111;
+
+border-top:1px solid var(--border);
+
+padding:60px 0 30px;
+
+margin-top:50px;
+
+}
+
+.footer-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:30px;
+
+}
+
+.footer h3{
+
+color:var(--primary);
+
+margin-bottom:15px;
+
+font-size:22px;
+
+}
+
+.footer p,
+
+.footer li,
+
+.footer a{
+
+color:#bbb;
+
+font-size:15px;
+
+line-height:1.8;
+
+text-decoration:none;
+
+list-style:none;
+
+transition:.3s;
+
+}
+
+.footer a:hover{
+
+color:var(--primary);
+
+}
+
+.social-links{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+.image-modal{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.85);
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
+
+padding:20px;
+
+}
+
+.image-modal.show{
+
+display:flex;
+
+}
+
+.image-modal-content{
+
+position:relative;
+
+max-width:900px;
+
+width:100%;
+
+}
+
+.image-modal-content img{
+
+width:100%;
+
+border-radius:18px;
+
+display:block;
+
+}
+
+.close-image-modal{
+
+position:absolute;
+
+top:-45px;
+
+right:0;
+
+font-size:40px;
+
+color:#fff;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.close-image-modal:hover{
+
+color:var(--primary);
+
+}
+
+.loading-overlay{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+background:rgba(0,0,0,.75);
+
+backdrop-filter:blur(5px);
+
+z-index:99999;
+
+}
+
+.loading-overlay.show{
+
+display:flex;
+
+}
+
+.loading-box{
+
+background:var(--card);
+
+padding:35px;
+
+border-radius:18px;
+
+text-align:center;
+
+border:1px solid var(--border);
+
+}
+.toast{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+padding:16px 24px;
+
+background:#16a34a;
+
+color:#fff;
+
+border-radius:12px;
+
+font-weight:700;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+opacity:0;
+
+visibility:hidden;
+
+transform:translateY(25px);
+
+transition:.3s;
+
+z-index:99999;
+
+}
+
+.toast.show{
+
+opacity:1;
+
+visibility:visible;
+
+transform:translateY(0);
+
+}
+
+.toast.error{
+
+background:#dc2626;
+
+}
+
+.toast.warning{
+
+background:#ea580c;
+
+}
+
+#floatingWhatsapp{
+
+position:fixed;
+
+right:25px;
+
+bottom:100px;
+
+z-index:9999;
+
+}
+
+#floatingWhatsapp a{
+
+width:65px;
+
+height:65px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border-radius:50%;
+
+background:#25D366;
+
+color:#fff;
+
+font-size:34px;
+
+text-decoration:none;
+
+box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+transition:.3s;
+
+}
+
+#floatingWhatsapp a:hover{
+
+transform:scale(1.08);
+
+}
+
+.scroll-top-btn{
+
+position:fixed;
+
+right:25px;
+
+bottom:180px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:var(--primary);
+
+color:#111;
+
+font-size:22px;
+
+font-weight:700;
+
+cursor:pointer;
+
+display:none;
+
+z-index:9999;
+
+}
+
+.scroll-top-btn.show{
+
+display:block;
+
+}
+@media(max-width:1200px){
+
+.hero h2{
+
+font-size:42px;
+
+}
+
+.vip-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+.counter-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.footer-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:992px){
+
+.header .container{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.navbar{
 
 flex-wrap:wrap;
 
@@ -769,13 +1135,82 @@ justify-content:center;
 
 .hero{
 
-padding:70px 0;
+padding:80px 0;
 
 }
 
-.hero h1{
+.hero h2{
 
 font-size:36px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.vip-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.contact-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.reviews-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+@media(max-width:768px){
+
+.header .container{
+
+padding:15px 0;
+
+}
+
+.logo h1{
+
+font-size:22px;
+
+}
+
+.logo img{
+
+width:45px;
+
+}
+
+.navbar{
+
+gap:12px;
+
+}
+
+.navbar a{
+
+font-size:14px;
+
+}
+
+.hero{
+
+padding:60px 0;
+
+}
+
+.hero h2{
+
+font-size:30px;
 
 }
 
@@ -785,41 +1220,82 @@ font-size:16px;
 
 }
 
-.dashboard-grid{
+.section-title h2{
+
+font-size:30px;
+
+}
+
+.search-bar{
+
+flex-direction:column;
+
+}
+
+.search-bar input,
+
+.search-bar select{
+
+width:100%;
+
+min-width:100%;
+
+}
+
+.vip-grid{
 
 grid-template-columns:1fr;
 
 }
 
-.vip-number{
+.counter-grid{
 
-font-size:24px;
-
-}
-
-.vip-price{
-
-font-size:26px;
+grid-template-columns:1fr;
 
 }
 
-.modal-content{
+.reviews-grid{
 
-padding:22px;
+grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.contact-form,
+
+.contact-info{
+
+padding:20px;
 
 }
 
 }
-
 @media(max-width:480px){
 
-.logo{
+.hero h2{
 
 font-size:24px;
 
 }
 
-.gold-btn{
+.hero p{
+
+font-size:15px;
+
+}
+
+.section-title h2{
+
+font-size:24px;
+
+}
+
+.primary-btn{
 
 width:100%;
 
@@ -827,9 +1303,71 @@ text-align:center;
 
 }
 
-.book-btn{
+.vip-card{
 
-font-size:15px;
+border-radius:14px;
+
+}
+
+.vip-content{
+
+padding:15px;
+
+}
+
+.vip-number{
+
+font-size:22px;
+
+}
+
+.vip-price{
+
+font-size:20px;
+
+}
+
+.counter-box{
+
+padding:25px;
+
+}
+
+.counter-box h2{
+
+font-size:32px;
+
+}
+
+.review-card{
+
+padding:20px;
+
+}
+
+.footer{
+
+padding:40px 0 20px;
+
+}
+
+#floatingWhatsapp a{
+
+width:55px;
+
+height:55px;
+
+font-size:28px;
+
+}
+
+.scroll-top-btn{
+
+width:45px;
+
+height:45px;
+
+font-size:18px;
 
 }
 
