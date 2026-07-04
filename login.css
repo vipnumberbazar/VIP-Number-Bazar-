@@ -1,718 +1,263 @@
-/* ==========================================
-VIP Number Bazar V5 Professional
-login.css
-Part 1
-========================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-
-background:#090909;
-
-min-height:100vh;
-
-overflow-x:hidden;
-
-color:#fff;
-
-}
-
-.login-page{
-
-position:relative;
-
-width:100%;
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:40px;
-
-}
-
-.background-blur{
-
-position:fixed;
-
-top:-150px;
-
-left:-150px;
-
-width:450px;
-
-height:450px;
-
-background:#d4af37;
-
-opacity:.15;
-
-filter:blur(150px);
-
-border-radius:50%;
-
-}
-
-.login-container{
-
-width:100%;
-
-max-width:1200px;
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:40px;
-
-align-items:center;
-
-}
-
-.logo-area{
-
-text-align:center;
-
-}
-
-.logo-area img{
-
-width:140px;
-
-margin-bottom:20px;
-
-}
-
-.logo-area h1{
-
-font-size:42px;
-
-font-weight:800;
-
-color:#d4af37;
-
-margin-bottom:10px;
-
-}
-
-.logo-area p{
-
-font-size:18px;
-
-color:#ccc;
-
-}
-.login-card{
-
-background:#151515;
-
-border:1px solid rgba(212,175,55,.25);
-
-border-radius:22px;
-
-padding:40px;
-
-box-shadow:0 20px 60px rgba(0,0,0,.45);
-
-}
-
-.login-card h2{
-
-font-size:34px;
-
-font-weight:700;
-
-text-align:center;
-
-margin-bottom:10px;
-
-color:#fff;
-
-}
-
-.subtitle{
-
-text-align:center;
-
-color:#bbb;
-
-margin-bottom:35px;
-
-font-size:15px;
-
-}
-
-.input-group{
-
-margin-bottom:22px;
-
-}
-
-.input-group label{
-
-display:block;
-
-margin-bottom:8px;
-
-font-size:14px;
-
-font-weight:600;
-
-color:#d4af37;
-
-}
-
-.input-group input{
-
-width:100%;
-
-padding:15px 18px;
-
-background:#0f0f0f;
-
-border:1px solid #333;
-
-border-radius:12px;
-
-outline:none;
-
-font-size:15px;
-
-color:#fff;
-
-transition:.3s;
-
-}
-
-.input-group input:focus{
-
-border-color:#d4af37;
-
-box-shadow:0 0 10px rgba(212,175,55,.35);
-
-}
-.remember-row{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
-
-gap:15px;
-
-}
-
-.remember{
-
-display:flex;
-
-align-items:center;
-
-gap:8px;
-
-font-size:14px;
-
-color:#ccc;
-
-cursor:pointer;
-
-}
-
-.remember input{
-
-accent-color:#d4af37;
-
-}
-
-.forgot-btn{
-
-background:none;
-
-border:none;
-
-color:#d4af37;
-
-cursor:pointer;
-
-font-size:14px;
-
-font-weight:600;
-
-transition:.3s;
-
-}
-
-.forgot-btn:hover{
-
-color:#fff;
-
-}
-
-.login-btn{
-
-width:100%;
-
-padding:16px;
-
-border:none;
-
-border-radius:12px;
-
-background:#d4af37;
-
-color:#111;
-
-font-size:17px;
-
-font-weight:700;
+<!DOCTYPE html>
+<html lang="en">
 
-cursor:pointer;
+<head>
 
-transition:.3s;
+<meta charset="UTF-8">
 
-}
-
-.login-btn:hover{
-
-transform:translateY(-2px);
-
-box-shadow:0 15px 30px rgba(212,175,55,.35);
-
-}
-
-.login-btn:disabled{
-
-opacity:.7;
-
-cursor:not-allowed;
-
-}
-
-.login-message{
-
-margin-top:18px;
-
-min-height:22px;
-
-text-align:center;
-
-font-size:14px;
-
-font-weight:600;
-
-color:#ff6666;
-
-}
-.login-features{
-
-margin-top:35px;
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:15px;
-
-}
-
-.feature-item{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-background:#101010;
-
-border:1px solid rgba(212,175,55,.15);
-
-padding:14px;
-
-border-radius:12px;
-
-transition:.3s;
-
-}
-
-.feature-item:hover{
-
-border-color:#d4af37;
-
-transform:translateY(-3px);
-
-}
-
-.feature-item span{
-
-font-size:22px;
-
-}
-
-.feature-item p{
-
-font-size:13px;
-
-font-weight:500;
-
-color:#ddd;
-
-line-height:1.4;
-
-}
-
-.security-info{
-
-margin-top:30px;
-
-}
-
-.security-card{
-
-background:#101010;
-
-border:1px solid rgba(212,175,55,.18);
-
-border-radius:15px;
-
-padding:22px;
-
-}
-
-.security-card h3{
-
-color:#d4af37;
-
-font-size:20px;
-
-margin-bottom:18px;
-
-}
-
-.security-card ul{
-
-list-style:none;
-
-}
-
-.security-card ul li{
-
-padding:8px 0;
-
-font-size:14px;
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-color:#ddd;
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 
-border-bottom:1px solid rgba(255,255,255,.05);
+<meta http-equiv="Pragma" content="no-cache">
 
-}
-
-.security-card ul li:last-child{
-
-border-bottom:none;
-
-}
-.version-info{
-
-margin-top:30px;
-
-text-align:center;
-
-}
-
-.version-info p{
-
-font-size:15px;
-
-color:#bbb;
-
-}
-
-.version-info span{
-
-color:#d4af37;
-
-font-weight:700;
-
-}
-
-.footer-links{
-
-margin-top:30px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-}
-
-.footer-links a{
-
-text-decoration:none;
-
-color:#d4af37;
-
-font-weight:600;
-
-transition:.3s;
-
-}
-
-.footer-links a:hover{
-
-color:#fff;
-
-}
+<meta http-equiv="Expires" content="0">
 
-.footer-links span{
+<title>VIP Number Bazar | Admin Login</title>
 
-color:#555;
+<link rel="icon" href="favicon.ico">
 
-}
-
-::-webkit-scrollbar{
+<link rel="stylesheet" href="login.css">
 
-width:8px;
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-::-webkit-scrollbar-track{
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-background:#111;
+</head>
 
-}
+<body>
 
-::-webkit-scrollbar-thumb{
+<div class="login-page">
 
-background:#d4af37;
+<div class="background-blur"></div>
 
-border-radius:10px;
+<div class="login-container">
 
-}
+<div class="logo-area">
 
-::-webkit-scrollbar-thumb:hover{
+<img src="logo.png" alt="VIP Number Bazar">
 
-background:#f4c842;
+<h1>VIP NUMBER BAZAR</h1>
 
-}
-@media(max-width:992px){
+<p>Professional Admin Panel</p>
 
-.login-container{
+</div>
 
-grid-template-columns:1fr;
+<div class="login-card">
 
-gap:35px;
+<h2>Admin Login</h2>
 
-}
+<p class="subtitle">
 
-.logo-area{
+Only Authorized Admin Can Login
 
-order:1;
+</p>
+<form id="loginForm">
 
-}
+<div class="input-group">
 
-.login-card{
+<label>Email Address</label>
 
-order:2;
+<input
+type="email"
+id="email"
+placeholder="Enter Admin Email"
+autocomplete="email"
+required>
 
-}
+</div>
 
-.login-features{
+<div class="input-group">
 
-grid-template-columns:1fr 1fr;
+<label>Password</label>
 
-}
+<input
+type="password"
+id="password"
+placeholder="Enter Password"
+autocomplete="current-password"
+required>
 
-}
+</div>
 
-@media(max-width:768px){
+<div class="remember-row">
 
-body{
+<label class="remember">
 
-padding:0;
+<input
+type="checkbox"
+id="rememberMe">
 
-}
+<span>Remember Me</span>
 
-.login-page{
+</label>
 
-padding:20px;
+<button
+type="button"
+id="forgotPassword"
+class="forgot-btn">
 
-}
+Forgot Password?
 
-.login-card{
+</button>
 
-padding:30px 20px;
+</div>
 
-}
+<button
+type="submit"
+class="login-btn"
+id="loginBtn">
 
-.logo-area img{
+LOGIN
 
-width:100px;
+</button>
 
-}
+<div
+id="loginMessage"
+class="login-message">
 
-.logo-area h1{
+</div>
 
-font-size:30px;
+</form>
+<div class="login-features">
 
-}
+<div class="feature-item">
 
-.login-card h2{
+<span>🔒</span>
 
-font-size:28px;
+<p>Firebase Secure Authentication</p>
 
-}
+</div>
 
-.remember-row{
+<div class="feature-item">
 
-flex-direction:column;
+<span>🛡️</span>
 
-align-items:flex-start;
+<p>Single Admin Access</p>
 
-}
+</div>
 
-.login-features{
+<div class="feature-item">
 
-grid-template-columns:1fr;
+<span>⏱️</span>
 
-}
+<p>10 Minutes Auto Logout</p>
 
-.security-card{
+</div>
 
-padding:18px;
+<div class="feature-item">
 
-}
+<span>📱</span>
 
-}
-@media(max-width:480px){
+<p>100% Mobile Responsive</p>
 
-.login-page{
+</div>
 
-padding:15px;
+<div class="feature-item">
 
-}
+<span>☁️</span>
 
-.login-card{
+<p>Realtime Firestore Database</p>
 
-padding:20px 15px;
+</div>
 
-border-radius:16px;
+<div class="feature-item">
 
-}
+<span>📊</span>
 
-.logo-area img{
+<p>Professional Admin Dashboard</p>
 
-width:80px;
+</div>
 
-}
+</div>
 
-.logo-area h1{
+</div>
 
-font-size:24px;
+</div>
+<div class="security-info">
 
-}
+<div class="security-card">
 
-.logo-area p{
+<h3>Security Features</h3>
 
-font-size:14px;
+<ul>
 
-}
+<li>✅ Firebase Authentication</li>
 
-.login-card h2{
+<li>✅ Single Admin Login</li>
 
-font-size:24px;
+<li>✅ Auto Logout After 10 Minutes</li>
 
-}
+<li>✅ Back Button Protection</li>
 
-.subtitle{
+<li>✅ Session Authentication</li>
 
-font-size:13px;
+<li>✅ Firestore Database Security</li>
 
-}
+<li>✅ Mobile Friendly Login</li>
 
-.input-group input{
+<li>✅ Fast & Secure Access</li>
 
-padding:14px;
+</ul>
 
-font-size:14px;
+</div>
 
-}
+</div>
 
-.login-btn{
+<div class="version-info">
 
-padding:14px;
+<p>
 
-font-size:15px;
+VIP Number Bazar
 
-}
+<span>V5 Professional</span>
 
-.feature-item{
+</p>
 
-padding:10px;
+</div>
+<div class="footer-links">
 
-}
+<a href="index.html">
 
-.feature-item span{
+← Back To Website
 
-font-size:18px;
+</a>
 
-}
+<span>|</span>
 
-.feature-item p{
+<a href="https://wa.me/" target="_blank">
 
-font-size:12px;
+WhatsApp Support
 
-}
+</a>
 
-.security-card h3{
+</div>
 
-font-size:18px;
+</div>
 
-}
+</div>
 
-.security-card ul li{
+<script type="module" src="login.js"></script>
+<script>
 
-font-size:13px;
+if (window.history.replaceState) {
 
-}
+    window.history.replaceState(
 
-.footer-links{
+        null,
 
-flex-direction:column;
+        null,
 
-gap:10px;
+        window.location.href
 
-}
+    );
 
 }
 
-img{
+</script>
 
-max-width:100%;
+</body>
 
-height:auto;
-
-display:block;
-
-}
+</html>
