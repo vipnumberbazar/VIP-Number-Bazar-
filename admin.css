@@ -813,3 +813,31 @@ margin-left:0;
 }
 
 }
+.menu-toggle{
+    display:none;
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    background:#facc15;
+    color:#111827;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .sidebar-menu{
+        display:none;
+    }
+
+    .sidebar-menu.show{
+        display:block;
+    }
+
+}
