@@ -407,11 +407,13 @@ function startLogoutTimer() {
 
     logoutTimer = setTimeout(() => {
 
-        document.body.innerHTML = "<h1 style='color:red;text-align:center;margin-top:100px'>TIMEOUT WORKING</h1>";
+        localStorage.clear();
+sessionStorage.clear();
 
-   }, 5 * 60 * 1000);
+alert("10 Minutes Inactive.\nPlease Login Again.");
 
-}
+window.location.href = "./login.html";
+    }, 10 * 60 * 1000);
 
 ["click", "mousemove", "keydown", "touchstart", "scroll"].forEach(event => {
 
@@ -420,7 +422,6 @@ function startLogoutTimer() {
 });
 
 startLogoutTimer();
-alert("Timer Started");
 // ===========================
 // BLOCK BACK BUTTON
 // ===========================
