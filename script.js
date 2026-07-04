@@ -335,3 +335,13 @@ async function loadCounts(){
 }
 
 loadCounts();
+window.addEventListener("load", async () => {
+  try {
+    await addDoc(collection(db, "visitors"), {
+      time: serverTimestamp(),
+      userAgent: navigator.userAgent
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
