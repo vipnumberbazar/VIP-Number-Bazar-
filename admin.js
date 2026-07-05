@@ -921,6 +921,48 @@ vipForm.addEventListener("submit", async (e) => {
     loadDashboard();
 });
 // =======================================
+// VIP Modal Controls
+// =======================================
+
+const addVipBtn = document.getElementById("addVipBtn");
+const vipModal = document.getElementById("vipModal");
+const closeVipModal = document.getElementById("closeVipModal");
+const cancelVipBtn = document.getElementById("cancelVipBtn");
+
+addVipBtn.addEventListener("click", () => {
+
+    document.getElementById("vipForm").reset();
+
+    document.getElementById("vipDocId").value = "";
+
+    document.getElementById("vipModalTitle").innerText = "Add VIP Number";
+
+    vipModal.classList.add("active");
+
+});
+
+closeVipModal.addEventListener("click", () => {
+
+    vipModal.classList.remove("active");
+
+});
+
+cancelVipBtn.addEventListener("click", () => {
+
+    vipModal.classList.remove("active");
+
+});
+
+window.addEventListener("click", (e) => {
+
+    if (e.target === vipModal) {
+
+        vipModal.classList.remove("active");
+
+    }
+
+});
+// =======================================
 // Real Time Dashboard
 // =======================================
 
