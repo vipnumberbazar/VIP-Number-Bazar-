@@ -7,13 +7,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 
 <meta http-equiv="Pragma" content="no-cache">
 
 <meta http-equiv="Expires" content="0">
 
-<title>VIP Number Bazar | Admin Panel</title>
+<title>
+
+VIP NUMBER BAZAR | Admin Panel
+
+</title>
 
 <link rel="icon" href="favicon.ico">
 
@@ -25,6 +29,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
 
 <body>
@@ -35,7 +41,17 @@
 
 <div class="loader-circle"></div>
 
-<h2>Loading Dashboard...</h2>
+<h2>
+
+VIP NUMBER BAZAR
+
+</h2>
+
+<p>
+
+Loading Admin Panel...
+
+</p>
 
 </div>
 
@@ -47,84 +63,121 @@
 
 <div class="sidebar-logo">
 
-<img src="logo.png" alt="Logo">
+<img src="logo.png">
 
-<h2>VIP NUMBER BAZAR</h2>
+<h2>
 
-<p>V5 Professional</p>
+VIP NUMBER BAZAR
+
+</h2>
+
+<p>
+
+V6 Professional
+
+</p>
 
 </div>
 
-<nav class="sidebar-menu">
-<ul>
+<ul class="sidebar-menu">
 
 <li class="active" data-page="dashboard">
 
-<i>🏠</i>
+<i class="fa-solid fa-chart-line"></i>
 
-<span>Dashboard</span>
+<span>
+
+Dashboard
+
+</span>
 
 </li>
 
 <li data-page="vipNumbers">
 
-<i>📱</i>
+<i class="fa-solid fa-mobile-screen-button"></i>
 
-<span>VIP Numbers</span>
+<span>
+
+VIP Numbers
+
+</span>
 
 </li>
 
 <li data-page="orders">
 
-<i>🛒</i>
+<i class="fa-solid fa-cart-shopping"></i>
 
-<span>Orders</span>
+<span>
+
+Orders
+
+</span>
 
 </li>
 
 <li data-page="customers">
 
-<i>👥</i>
+<i class="fa-solid fa-users"></i>
 
-<span>Customers</span>
+<span>
+
+Customers
+
+</span>
 
 </li>
 
 <li data-page="visitors">
 
-<i>📈</i>
+<i class="fa-solid fa-chart-column"></i>
 
-<span>Visitors</span>
+<span>
+
+Visitors
+
+</span>
 
 </li>
 
 <li data-page="notifications">
 
-<i>🔔</i>
+<i class="fa-solid fa-bell"></i>
 
-<span>Notifications</span>
+<span>
+
+Notifications
+
+</span>
 
 </li>
 
 <li data-page="analytics">
 
-<i>📊</i>
+<i class="fa-solid fa-chart-pie"></i>
 
-<span>Analytics</span>
+<span>
+
+Analytics
+
+</span>
 
 </li>
 
 <li data-page="settings">
 
-<i>⚙️</i>
+<i class="fa-solid fa-gear"></i>
 
-<span>Settings</span>
+<span>
+
+Settings
+
+</span>
 
 </li>
 
 </ul>
-
-</nav>
 
 </aside>
 
@@ -132,27 +185,23 @@
 
 <header class="topbar">
 
-<div class="topbar-left">
-
 <h1 id="pageTitle">
 
 Dashboard
 
 </h1>
 
-</div>
-
 <div class="topbar-right">
 
-<div class="admin-profile">
+<img src="logo.png">
 
-<img src="logo.png" alt="Admin">
+<span>
 
-<span>Administrator</span>
+Administrator
 
-</div>
+</span>
 
-<button id="logoutBtn" class="logout-btn">
+<button id="logoutBtn">
 
 Logout
 
@@ -161,104 +210,157 @@ Logout
 </div>
 
 </header>
+
 <section id="dashboardPage" class="page active">
 
 <div class="dashboard-grid">
 
 <div class="dashboard-card blue">
 
-<h2 id="totalVipNumbers">0</h2>
+<h2 id="totalVipNumbers">
 
-<p>Total VIP Numbers</p>
+0
+
+</h2>
+
+<p>
+
+Total VIP Numbers
+
+</p>
 
 </div>
 
 <div class="dashboard-card green">
 
-<h2 id="availableNumbers">0</h2>
+<h2 id="availableNumbers">
 
-<p>Available Numbers</p>
+0
+
+</h2>
+
+<p>
+
+Available
+
+</p>
 
 </div>
 
 <div class="dashboard-card red">
 
-<h2 id="soldNumbers">0</h2>
+<h2 id="soldNumbers">
 
-<p>Sold Numbers</p>
+0
+
+</h2>
+
+<p>
+
+Sold
+
+</p>
 
 </div>
 
 <div class="dashboard-card orange">
 
-<h2 id="totalOrders">0</h2>
+<h2 id="totalOrders">
 
-<p>Total Orders</p>
+0
+
+</h2>
+
+<p>
+
+Orders
+
+</p>
 
 </div>
 
 <div class="dashboard-card purple">
 
-<h2 id="totalCustomers">0</h2>
+<h2 id="totalCustomers">
 
-<p>Total Customers</p>
+0
+
+</h2>
+
+<p>
+
+Customers
+
+</p>
 
 </div>
 
 <div class="dashboard-card cyan">
 
-<h2 id="totalVisitors">0</h2>
+<h2 id="totalVisitors">
 
-<p>Total Visitors</p>
+0
 
-</div>
+</h2>
 
-<div class="dashboard-card gold">
+<p>
 
-<h2 id="todayVisitors">0</h2>
+Visitors
 
-<p>Today's Visitors</p>
-
-</div>
-
-<div class="dashboard-card dark">
-
-<h2 id="totalRevenue">₹0</h2>
-
-<p>Total Revenue</p>
+</p>
 
 </div>
 
 </div>
-
 <div class="dashboard-charts">
 
 <div class="chart-card">
 
-<h3>Sales Analytics</h3>
+<h3>
 
-<canvas id="salesChart"></canvas>
+Sales Analytics
+
+</h3>
+
+<canvas id="salesChart">
+
+</canvas>
 
 </div>
 
 <div class="chart-card">
 
-<h3>Visitors Analytics</h3>
+<h3>
 
-<canvas id="visitorChart"></canvas>
+Visitors Analytics
+
+</h3>
+
+<canvas id="visitorChart">
+
+</canvas>
 
 </div>
 
 </div>
 
 </section>
-<section id="vipNumbersPage" class="page">
+
+<section
+id="vipNumbersPage"
+class="page">
 
 <div class="page-header">
 
-<h2>VIP Numbers Management</h2>
+<h2>
 
-<button id="addVipBtn" class="primary-btn">
+VIP Numbers Management
+
+</h2>
+
+<button
+id="addVipBtn"
+class="primary-btn">
 
 + Add VIP Number
 
@@ -273,27 +375,67 @@ type="text"
 id="searchVip"
 placeholder="Search VIP Number...">
 
-<select id="filterStatus">
+<select
+id="filterStatus">
 
-<option value="all">All Status</option>
+<option value="all">
 
-<option value="available">Available</option>
+All Status
 
-<option value="sold">Sold</option>
+</option>
+
+<option value="Available">
+
+Available
+
+</option>
+
+<option value="Sold">
+
+Sold
+
+</option>
+
+<option value="Deleted">
+
+Deleted
+
+</option>
 
 </select>
 
-<select id="filterCategory">
+<select
+id="filterCategory">
 
-<option value="all">All Category</option>
+<option value="all">
 
-<option value="gold">Gold</option>
+All Category
 
-<option value="silver">Silver</option>
+</option>
 
-<option value="platinum">Platinum</option>
+<option value="Gold">
 
-<option value="premium">Premium</option>
+Gold
+
+</option>
+
+<option value="Silver">
+
+Silver
+
+</option>
+
+<option value="Premium">
+
+Premium
+
+</option>
+
+<option value="Platinum">
+
+Platinum
+
+</option>
 
 </select>
 
@@ -307,27 +449,66 @@ placeholder="Search VIP Number...">
 
 <tr>
 
-<th>No.</th>
+<th>
 
-<th>VIP Number</th>
+#
 
-<th>Price</th>
+</th>
 
-<th>Category</th>
+<th>
 
-<th>Operator</th>
+VIP Number
 
-<th>Status</th>
+</th>
 
-<th>Views</th>
+<th>
 
-<th>Actions</th>
+Price
+
+</th>
+
+<th>
+
+Operator
+
+th>
+
+<th>
+
+Category
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+<th>
+
+Views
+
+</th>
+
+<th>
+
+Featured
+
+</th>
+
+<th>
+
+Actions
+
+</th>
 
 </tr>
 
 </thead>
 
-<tbody id="vipTableBody">
+<tbody
+id="vipTableBody">
 
 </tbody>
 
@@ -336,11 +517,18 @@ placeholder="Search VIP Number...">
 </div>
 
 </section>
-<section id="ordersPage" class="page">
+
+<section
+id="ordersPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Orders Management</h2>
+<h2>
+
+Orders Management
+
+</h2>
 
 </div>
 
@@ -352,29 +540,66 @@ placeholder="Search VIP Number...">
 
 <tr>
 
-<th>Order ID</th>
+<th>
 
-<th>Customer</th>
+Order ID
 
-<th>Mobile</th>
+</th>
 
-<th>VIP Number</th>
+<th>
 
-<th>Amount</th>
+Customer
 
-<th>Payment</th>
+</th>
 
-<th>Status</th>
+<th>
 
-<th>Date</th>
+Mobile
 
-<th>Action</th>
+</th>
+
+<th>
+
+VIP Number
+
+</th>
+
+<th>
+
+Amount
+
+</th>
+
+<th>
+
+Payment
+
+</th>
+
+<th>
+
+Status
+
+</th>
+
+<th>
+
+Date
+
+</th>
+
+<th>
+
+Action
+
+</th>
 
 </tr>
 
 </thead>
 
-<tbody id="ordersTableBody">
+<tbody
+id="ordersTableBody">
 
 </tbody>
 
@@ -383,12 +608,17 @@ placeholder="Search VIP Number...">
 </div>
 
 </section>
-
-<section id="customersPage" class="page">
+<section
+id="customersPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Customers</h2>
+<h2>
+
+Customers
+
+</h2>
 
 </div>
 
@@ -420,7 +650,8 @@ placeholder="Search VIP Number...">
 
 </thead>
 
-<tbody id="customersTableBody">
+<tbody
+id="customersTableBody">
 
 </tbody>
 
@@ -429,11 +660,18 @@ placeholder="Search VIP Number...">
 </div>
 
 </section>
-<section id="visitorsPage" class="page">
+
+<section
+id="visitorsPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Visitors Analytics</h2>
+<h2>
+
+Visitors Analytics
+
+</h2>
 
 </div>
 
@@ -441,33 +679,65 @@ placeholder="Search VIP Number...">
 
 <div class="dashboard-card blue">
 
-<h2 id="todayVisitCard">0</h2>
+<h2 id="todayVisitCard">
 
-<p>Today Visitors</p>
+0
+
+</h2>
+
+<p>
+
+Today Visitors
+
+</p>
 
 </div>
 
 <div class="dashboard-card green">
 
-<h2 id="weekVisitCard">0</h2>
+<h2 id="weekVisitCard">
 
-<p>This Week</p>
+0
+
+</h2>
+
+<p>
+
+This Week
+
+</p>
 
 </div>
 
 <div class="dashboard-card purple">
 
-<h2 id="monthVisitCard">0</h2>
+<h2 id="monthVisitCard">
 
-<p>This Month</p>
+0
+
+</h2>
+
+<p>
+
+This Month
+
+</p>
 
 </div>
 
 <div class="dashboard-card orange">
 
-<h2 id="allVisitCard">0</h2>
+<h2 id="allVisitCard">
 
-<p>All Visitors</p>
+0
+
+</h2>
+
+<p>
+
+Total Visitors
+
+</p>
 
 </div>
 
@@ -497,7 +767,8 @@ placeholder="Search VIP Number...">
 
 </thead>
 
-<tbody id="visitorTableBody">
+<tbody
+id="visitorTableBody">
 
 </tbody>
 
@@ -507,13 +778,21 @@ placeholder="Search VIP Number...">
 
 </section>
 
-<section id="notificationsPage" class="page">
+<section
+id="notificationsPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Notifications</h2>
+<h2>
 
-<button id="clearNotificationBtn" class="danger-btn">
+Notifications
+
+</h2>
+
+<button
+id="clearNotificationBtn"
+class="danger-btn">
 
 Clear All
 
@@ -521,16 +800,25 @@ Clear All
 
 </div>
 
-<div id="notificationList" class="notification-list">
+<div
+id="notificationList"
+class="notification-list">
 
 </div>
 
 </section>
-<section id="analyticsPage" class="page">
+
+<section
+id="analyticsPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Analytics Dashboard</h2>
+<h2>
+
+Analytics
+
+</h2>
 
 </div>
 
@@ -538,33 +826,65 @@ Clear All
 
 <div class="dashboard-card blue">
 
-<h2 id="todaySales">₹0</h2>
+<h2 id="todaySales">
 
-<p>Today's Sales</p>
+₹0
+
+</h2>
+
+<p>
+
+Today's Sales
+
+</p>
 
 </div>
 
 <div class="dashboard-card green">
 
-<h2 id="weeklySales">₹0</h2>
+<h2 id="weeklySales">
 
-<p>Weekly Sales</p>
+₹0
+
+</h2>
+
+<p>
+
+Weekly Sales
+
+</p>
 
 </div>
 
 <div class="dashboard-card purple">
 
-<h2 id="monthlySales">₹0</h2>
+<h2 id="monthlySales">
 
-<p>Monthly Sales</p>
+₹0
+
+</h2>
+
+<p>
+
+Monthly Sales
+
+</p>
 
 </div>
 
 <div class="dashboard-card orange">
 
-<h2 id="yearlySales">₹0</h2>
+<h2 id="yearlySales">
 
-<p>Yearly Sales</p>
+₹0
+
+</h2>
+
+<p>
+
+Yearly Sales
+
+</p>
 
 </div>
 
@@ -572,37 +892,49 @@ Clear All
 
 <div class="chart-card">
 
-<h3>Revenue Report</h3>
+<canvas
+id="revenueChart">
 
-<canvas id="revenueChart"></canvas>
+</canvas>
 
 </div>
 
 <div class="chart-card">
 
-<h3>Orders Report</h3>
+<canvas
+id="ordersChart">
 
-<canvas id="ordersChart"></canvas>
+</canvas>
 
 </div>
 
 </section>
-
-<section id="settingsPage" class="page">
+<section
+id="settingsPage"
+class="page">
 
 <div class="page-header">
 
-<h2>Website Settings</h2>
+<h2>
+
+Website Settings
+
+</h2>
 
 </div>
 
-<form id="settingsForm">
+<form
+id="settingsForm">
 
 <div class="form-grid">
 
 <div class="form-group">
 
-<label>Website Name</label>
+<label>
+
+Website Name
+
+</label>
 
 <input
 type="text"
@@ -612,17 +944,26 @@ id="siteName">
 
 <div class="form-group">
 
-<label>WhatsApp Number</label>
+<label>
+
+WhatsApp Number
+
+</label>
 
 <input
 type="text"
-id="whatsappNumber">
+id="whatsappNumber"
+value="8070424242">
 
 </div>
 
 <div class="form-group">
 
-<label>Email Address</label>
+<label>
+
+Email
+
+</label>
 
 <input
 type="email"
@@ -632,7 +973,11 @@ id="siteEmail">
 
 <div class="form-group">
 
-<label>Instagram Link</label>
+<label>
+
+Instagram
+
+</label>
 
 <input
 type="text"
@@ -640,10 +985,13 @@ id="instagramLink">
 
 </div>
 
-</div>
 <div class="form-group">
 
-<label>Facebook Link</label>
+<label>
+
+Facebook
+
+</label>
 
 <input
 type="text"
@@ -653,7 +1001,11 @@ id="facebookLink">
 
 <div class="form-group">
 
-<label>YouTube Link</label>
+<label>
+
+YouTube
+
+</label>
 
 <input
 type="text"
@@ -663,25 +1015,98 @@ id="youtubeLink">
 
 <div class="form-group">
 
-<label>Office Address</label>
+<label>
+
+Owner Name
+
+</label>
+
+<input
+type="text"
+value="Maldev Thakor">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Owner Mobile
+
+</label>
+
+<input
+type="text"
+value="6354312829">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Support Name
+
+</label>
+
+<input
+type="text"
+value="RUDRA Zarvariya">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Support Mobile
+
+</label>
+
+<input
+type="text"
+value="8070424242">
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Office Address
+
+</label>
 
 <textarea
 id="officeAddress"
-rows="3"></textarea>
+rows="4">
+
+</textarea>
 
 </div>
 
 <div class="form-group">
 
-<label>Website Theme</label>
+<label>
 
-<select id="websiteTheme">
+Theme
 
-<option value="dark">Dark</option>
+</label>
 
-<option value="light">Light</option>
+<select
+id="websiteTheme">
 
-<option value="auto">Auto</option>
+<option value="dark">
+
+Dark
+
+</option>
+
+<option value="light">
+
+Light
+
+</option>
 
 </select>
 
@@ -689,13 +1114,26 @@ rows="3"></textarea>
 
 <div class="form-group">
 
-<label>Maintenance Mode</label>
+<label>
 
-<select id="maintenanceMode">
+Maintenance Mode
 
-<option value="off">OFF</option>
+</label>
 
-<option value="on">ON</option>
+<select
+id="maintenanceMode">
+
+<option value="off">
+
+OFF
+
+</option>
+
+<option value="on">
+
+ON
+
+</option>
 
 </select>
 
@@ -703,7 +1141,11 @@ rows="3"></textarea>
 
 <div class="form-group">
 
-<label>Upload Logo</label>
+<label>
+
+Upload Logo
+
+</label>
 
 <input
 type="file"
@@ -714,7 +1156,11 @@ accept="image/*">
 
 <div class="form-group">
 
-<label>Upload Banner</label>
+<label>
+
+Upload Banner
+
+</label>
 
 <input
 type="file"
@@ -748,9 +1194,13 @@ Reset
 </form>
 
 </section>
-<!-- Add / Edit VIP Number Modal -->
+<!-- ========================================= -->
+<!-- Add / Edit VIP Modal -->
+<!-- ========================================= -->
 
-<div id="vipModal" class="modal">
+<div
+id="vipModal"
+class="modal">
 
 <div class="modal-content">
 
@@ -772,7 +1222,8 @@ class="close-btn">
 
 </div>
 
-<form id="vipForm">
+<form
+id="vipForm">
 
 <input
 type="hidden"
@@ -782,59 +1233,52 @@ id="vipDocId">
 
 <div class="form-group">
 
-<label>VIP Number</label>
+<label>
+
+VIP Number
+
+</label>
 
 <input
 type="text"
 id="vipNumber"
-placeholder="Enter VIP Number"
 required>
 
 </div>
 
 <div class="form-group">
 
-<label>Price</label>
+<label>
+
+Price
+
+</label>
 
 <input
 type="number"
 id="vipPrice"
-placeholder="Enter Price"
 required>
 
 </div>
 
 <div class="form-group">
 
-<label>Category</label>
+<label>
 
-<select id="vipCategory">
+Operator
 
-<option value="Gold">Gold</option>
+</label>
 
-<option value="Silver">Silver</option>
+<select
+id="vipOperator">
 
-<option value="Premium">Premium</option>
+<option>Jio</option>
 
-<option value="Platinum">Platinum</option>
+<option>Airtel</option>
 
-</select>
+<option>Vi</option>
 
-</div>
-
-<div class="form-group">
-
-<label>Operator</label>
-
-<select id="vipOperator">
-
-<option value="Jio">Jio</option>
-
-<option value="Airtel">Airtel</option>
-
-<option value="Vi">Vi</option>
-
-<option value="BSNL">BSNL</option>
+<option>BSNL</option>
 
 </select>
 
@@ -842,13 +1286,22 @@ required>
 
 <div class="form-group">
 
-<label>Status</label>
+<label>
 
-<select id="vipStatus">
+Category
 
-<option value="Available">Available</option>
+</label>
 
-<option value="Sold">Sold</option>
+<select
+id="vipCategory">
+
+<option>Gold</option>
+
+<option>Silver</option>
+
+<option>Premium</option>
+
+<option>Platinum</option>
 
 </select>
 
@@ -856,15 +1309,62 @@ required>
 
 <div class="form-group">
 
-<label>Featured</label>
+<label>
 
-<select id="vipFeatured">
+Status
 
-<option value="false">No</option>
+</label>
 
-<option value="true">Yes</option>
+<select
+id="vipStatus">
+
+<option>Available</option>
+
+<option>Sold</option>
 
 </select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Featured
+
+</label>
+
+<select
+id="vipFeatured">
+
+<option value="true">
+
+Yes
+
+</option>
+
+<option value="false">
+
+No
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+VIP Image
+
+</label>
+
+<input
+type="file"
+id="vipImage"
+accept="image/*">
 
 </div>
 
@@ -896,23 +1396,24 @@ Cancel
 </div>
 
 </div>
-<!-- Delete Confirmation Modal -->
 
-<div id="deleteModal" class="modal">
+<!-- Delete Modal -->
+
+<div
+id="deleteModal"
+class="modal">
 
 <div class="modal-content small-modal">
 
-<div class="modal-header">
+<h2>
 
-<h2>Delete VIP Number</h2>
+Delete VIP Number
 
-</div>
-
-<div class="modal-body">
+</h2>
 
 <p>
 
-Are you sure you want to delete this VIP Number?
+Are you sure?
 
 </p>
 
@@ -920,14 +1421,11 @@ Are you sure you want to delete this VIP Number?
 type="hidden"
 id="deleteVipId">
 
-</div>
-
 <div class="form-actions">
 
 <button
 id="confirmDeleteBtn"
-class="danger-btn"
-type="button">
+class="danger-btn">
 
 Delete
 
@@ -935,8 +1433,7 @@ Delete
 
 <button
 id="cancelDeleteBtn"
-class="secondary-btn"
-type="button">
+class="secondary-btn">
 
 Cancel
 
@@ -948,118 +1445,36 @@ Cancel
 
 </div>
 
-<!-- Loading Overlay -->
-
-<div id="loadingOverlay" class="loading-overlay">
+<div
+id="loadingOverlay"
+class="loading-overlay">
 
 <div class="loading-box">
 
-<div class="spinner"></div>
-
-<h3>Please Wait...</h3>
-
-<p>Processing Request</p>
+<div class="spinner">
 
 </div>
 
-</div>
+<h3>
 
-<!-- Toast Notification -->
+Please Wait...
 
-<div id="toast" class="toast">
-
-<span id="toastMessage">
-
-Success
-
-</span>
+</h3>
 
 </div>
-<!-- Image Preview Modal -->
-
-<div id="imagePreviewModal" class="modal">
-
-<div class="modal-content image-modal">
-
-<div class="modal-header">
-
-<h2>Image Preview</h2>
-
-<span
-id="closeImagePreview"
-class="close-btn">
-
-&times;
-
-</span>
-
-</div>
-
-<div class="modal-body">
-
-<img
-id="previewImage"
-src=""
-alt="Preview">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Notification Popup -->
-
-<div id="notificationPopup" class="notification-popup">
-
-<div class="notification-header">
-
-<h3>🔔 Notifications</h3>
-
-<button
-id="closeNotificationPopup"
-class="icon-btn">
-
-✖
-
-</button>
 
 </div>
 
 <div
-id="notificationPopupList"
-class="notification-popup-list">
+id="toast"
+class="toast">
 
-</div>
+<span
+id="toastMessage">
 
-</div>
+Success
 
-<!-- Floating Action Button -->
-
-<button
-id="scrollTopBtn"
-class="scroll-top-btn">
-
-↑
-
-</button>
-<footer class="admin-footer">
-
-<p>
-
-© 2026 VIP Number Bazar V5 Professional
-
-</p>
-
-<p>
-
-Developed with Firebase & GitHub Pages
-
-</p>
-
-</footer>
-
-</main>
+</span>
 
 </div>
 
@@ -1071,27 +1486,6 @@ src="admin.js">
 
 </script>
 
-<script>
-
-history.replaceState(
-
-null,
-
-"",
-
-location.href
-
-);
-
-window.onpopstate=function(){
-
-history.go(1);
-
-};
-
-</script>
-
 </body>
 
 </html>
-
