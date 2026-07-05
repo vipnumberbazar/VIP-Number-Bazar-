@@ -726,7 +726,29 @@ window.deleteVip = async function(id) {
     loadingOverlay.classList.remove("active");
 
 };
+window.restoreVip = async function(id) {
+    loadingOverlay.classList.add("active");
 
+    try {
+        await updateDoc(
+            doc(db, "vipNumbers", id),
+            {
+                deleted: false,
+                updatedAt: serverTimestamp()
+            }
+        );
+
+        showToast("VIP Number Restored");
+        loadVipNumbers();
+        loadDashboard();
+
+    } catch (error) {
+        console.error(error);
+        showToast("Restore Failed", "error");
+    }
+
+    loadingOverlay.classList.remove("active");
+};
 window.updateOrderStatus = async function(id) {
 
     await updateDoc(
