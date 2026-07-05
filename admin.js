@@ -658,11 +658,37 @@ function showToast(message, type = "success") {
 // VIP Number Actions
 // =======================================
 
-window.editVip = async function(id) {
+window.editVip = async function(id){
 
-    showToast("Edit feature will open.", "success");
+const snapshot=await getDocs(vipNumbersRef);
 
-    console.log("Edit VIP:", id);
+snapshot.forEach((docItem)=>{
+
+if(docItem.id===id){
+
+const data=docItem.data();
+
+document.getElementById("vipDocId").value=id;
+
+document.getElementById("vipNumber").value=data.number;
+
+document.getElementById("vipPrice").value=data.price;
+
+document.getElementById("vipCategory").value=data.category;
+
+document.getElementById("vipOperator").value=data.operator;
+
+document.getElementById("vipStatus").value=data.status;
+
+document.getElementById("vipFeatured").value=String(data.featured);
+
+document.getElementById("vipModalTitle").innerText="Edit VIP Number";
+
+document.getElementById("vipModal").classList.add("active");
+
+}
+
+});
 
 };
 
