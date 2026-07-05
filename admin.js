@@ -227,7 +227,10 @@ async function loadVipNumbers() {
     snapshot.forEach((docItem) => {
 
         const data = docItem.data();
-
+        
+if (data.deleted === true) {
+    return;
+}
         vipTableBody.innerHTML += `
 
 <tr>
