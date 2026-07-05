@@ -7,15 +7,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta http-equiv="Pragma" content="no-cache">
+<meta name="theme-color" content="#000000">
 
-<meta http-equiv="Expires" content="0">
+<meta name="description" content="VIP Number Bazar - Premium Mobile Numbers">
 
-<title>VIP Number Bazar</title>
+<meta name="keywords" content="VIP Number,Jio,Airtel,Vi,BSNL,Fancy Number">
 
-<meta name="description" content="Buy Premium VIP Mobile Numbers at Best Price">
+<title>VIP Number Bazar | Premium Mobile Numbers</title>
 
 <link rel="icon" href="favicon.ico">
 
@@ -27,17 +27,22 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
 
 <body>
 
-<div id="loader" class="loader">
+<div id="loader">
 
 <div class="loader-box">
 
 <div class="loader-circle"></div>
 
-<h2>Loading VIP Number Bazar...</h2>
+<h2>VIP NUMBER BAZAR</h2>
+
+<p>Loading...</p>
 
 </div>
 
@@ -49,27 +54,41 @@
 
 <div class="logo">
 
-<img src="logo.png" alt="VIP Number Bazar Logo">
+<img src="logo.png" alt="Logo">
 
-<h1>VIP Number Bazar</h1>
+<div>
+
+<h1>VIP NUMBER BAZAR</h1>
+
+<p>Premium Mobile Numbers</p>
 
 </div>
 
-<nav class="navbar">
+</div>
 
-<a href="#home">Home</a>
+<nav>
 
-<a href="#vip">VIP Numbers</a>
+<ul>
 
-<a href="#premium">Premium</a>
+<li><a href="#home">Home</a></li>
 
-<a href="#contact">Contact</a>
+<li><a href="#vip">VIP Numbers</a></li>
 
-<a href="login.html" class="admin-btn">
+<li><a href="#featured">Featured</a></li>
 
-Admin Login
+<li><a href="#contact">Contact</a></li>
+
+<li>
+
+<a href="login.html">
+
+Admin
 
 </a>
+
+</li>
+
+</ul>
 
 </nav>
 
@@ -81,75 +100,148 @@ Admin Login
 
 <div class="container">
 
-<h2>
+<div class="hero-left">
 
-India's Premium VIP Mobile Number Marketplace
+<h1>
 
-</h2>
+India's Trusted VIP Number Marketplace
+
+</h1>
 
 <p>
 
-Choose your lucky VIP number at the best price.
+Buy Premium VIP Mobile Numbers with Secure Booking.
 
 </p>
 
-<a href="#vip" class="primary-btn">
+<div class="hero-buttons">
 
-Browse VIP Numbers
+<a href="#vip" class="btn">
+
+View Numbers
+
+</a>
+
+<a href="https://wa.me/918070424242"
+
+class="btn2">
+
+WhatsApp
 
 </a>
 
 </div>
 
+</div>
+
+<div class="hero-right">
+
+<img src="logo.png">
+
+</div>
+
+</div>
+
 </section>
-<section id="vip" class="vip-section">
+
+<section class="counter">
+
+<div class="container">
+
+<div class="counter-box">
+
+<h2 id="totalNumbers">0</h2>
+
+<p>Total Numbers</p>
+
+</div>
+
+<div class="counter-box">
+
+<h2 id="availableNumbers">0</h2>
+
+<p>Available</p>
+
+</div>
+
+<div class="counter-box">
+
+<h2 id="soldNumbers">0</h2>
+
+<p>Sold</p>
+
+</div>
+
+<div class="counter-box">
+
+<h2 id="visitorCount">0</h2>
+
+<p>Visitors</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="vip"
+class="vip-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>Available VIP Numbers</h2>
+<h2>VIP Numbers</h2>
 
 <p>
 
-Search your favourite VIP Number
+Choose Your Favourite VIP Number
 
 </p>
 
 </div>
 
-<div class="search-bar">
+<div class="search-box">
 
 <input
 type="text"
-id="searchInput"
-placeholder="Search VIP Number...">
+id="searchBox"
+placeholder="Search Number...">
 
 <select id="operatorFilter">
 
-<option value="All">All Operators</option>
+<option value="All">
 
-<option value="Jio">Jio</option>
+All Operators
 
-<option value="Airtel">Airtel</option>
+</option>
 
-<option value="Vi">Vi</option>
+<option>Jio</option>
 
-<option value="BSNL">BSNL</option>
+<option>Airtel</option>
+
+<option>Vi</option>
+
+<option>BSNL</option>
 
 </select>
 
 <select id="categoryFilter">
 
-<option value="All">All Categories</option>
+<option value="All">
 
-<option value="Gold">Gold</option>
+All Categories
 
-<option value="Silver">Silver</option>
+</option>
 
-<option value="Premium">Premium</option>
+<option>Gold</option>
 
-<option value="Platinum">Platinum</option>
+<option>Silver</option>
+
+<option>Premium</option>
+
+<option>Platinum</option>
 
 </select>
 
@@ -164,33 +256,9 @@ class="vip-grid">
 </div>
 
 </section>
-
-<section id="premium" class="premium-section">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Premium VIP Collection</h2>
-
-<p>
-
-Hand Picked Premium VIP Numbers
-
-</p>
-
-</div>
-
-<div
-id="premiumGrid"
-class="vip-grid">
-
-</div>
-
-</div>
-
-</section>
-<section id="featured" class="featured-section">
+<section
+id="featured"
+class="featured-section">
 
 <div class="container">
 
@@ -200,7 +268,7 @@ class="vip-grid">
 
 <p>
 
-Most Popular VIP Numbers
+Top Premium VIP Numbers
 
 </p>
 
@@ -216,173 +284,27 @@ class="vip-grid">
 
 </section>
 
-<section id="offers" class="offers-section">
-
-<div class="container">
-
-<div class="offer-card">
-
-<h2>
-
-🔥 Today's Special Offer
-
-</h2>
-
-<p>
-
-Buy Premium VIP Numbers With Best Price Guarantee
-
-</p>
-
-<a
-href="https://wa.me/"
-target="_blank"
-class="primary-btn">
-
-Chat On WhatsApp
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="counter" class="counter-section">
-
-<div class="container">
-
-<div class="counter-grid">
-
-<div class="counter-box">
-
-<h2 id="totalNumbers">
-
-0
-
-</h2>
-
-<p>Total Numbers</p>
-
-</div>
-
-<div class="counter-box">
-
-<h2 id="availableCount">
-
-0
-
-</h2>
-
-<p>Available</p>
-
-</div>
-
-<div class="counter-box">
-
-<h2 id="soldCount">
-
-0
-
-</h2>
-
-<p>Sold</p>
-
-</div>
-
-<div class="counter-box">
-
-<h2 id="visitorCount">
-
-0
-
-</h2>
-
-<p>Visitors</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<section id="contact" class="contact-section">
+<section
+id="premium"
+class="premium-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>Contact Us</h2>
+<h2>Premium Collection</h2>
 
 <p>
 
-Get Your Dream VIP Number Today
+Exclusive VIP Numbers
 
 </p>
 
 </div>
 
-<div class="contact-grid">
-
-<div class="contact-card">
-
-<h3>WhatsApp</h3>
-
-<p id="whatsappNumber">
-
-+91 00000 00000
-
-</p>
-
-<a
-id="whatsappBtn"
-href="https://wa.me/"
-target="_blank"
-class="primary-btn">
-
-Chat Now
-
-</a>
-
-</div>
-
-<div class="contact-card">
-
-<h3>Phone</h3>
-
-<p id="phoneNumber">
-
-+91 00000 00000
-
-</p>
-
-</div>
-
-<div class="contact-card">
-
-<h3>Email</h3>
-
-<p id="emailAddress">
-
-info@vipnumberbazar.com
-
-</p>
-
-</div>
-
-<div class="contact-card">
-
-<h3>Address</h3>
-
-<p id="officeAddress">
-
-Rajkot, Gujarat, India
-
-</p>
-
-</div>
+<div
+id="premiumGrid"
+class="vip-grid">
 
 </div>
 
@@ -390,72 +312,250 @@ Rajkot, Gujarat, India
 
 </section>
 
-<section class="enquiry-section">
-
-<div class="container">
-
-<h2>
-
-Quick Enquiry
-
-</h2>
-
-<form id="enquiryForm">
-
-<input
-type="text"
-id="customerName"
-placeholder="Your Name"
-required>
-
-<input
-type="tel"
-id="customerMobile"
-placeholder="Mobile Number"
-required>
-
-<textarea
-id="customerMessage"
-placeholder="Message"
-rows="5"
-required>
-
-</textarea>
-
-<button
-type="submit"
-class="primary-btn">
-
-Send Enquiry
-
-</button>
-
-</form>
-
-</div>
-
-</section>
-<section id="contact" class="contact-section">
+<section
+class="about-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>Contact Us</h2>
+<h2>
+
+Why Choose VIP Number Bazar
+
+</h2>
+
+</div>
+
+<div class="about-grid">
+
+<div class="about-card">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+<h3>Secure Booking</h3>
 
 <p>
 
-Book Your Favourite VIP Number Today
+100% Safe Booking Process
 
 </p>
 
 </div>
 
+<div class="about-card">
+
+<i class="fa-solid fa-mobile-screen"></i>
+
+<h3>Premium Numbers</h3>
+
+<p>
+
+Exclusive Fancy VIP Numbers
+
+</p>
+
+</div>
+
+<div class="about-card">
+
+<i class="fa-solid fa-headset"></i>
+
+<h3>24×7 Support</h3>
+
+<p>
+
+Customer Support Anytime
+
+</p>
+
+</div>
+
+<div class="about-card">
+
+<i class="fa-solid fa-bolt"></i>
+
+<h3>Instant Response</h3>
+
+<p>
+
+Fast WhatsApp Support
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="review-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+Customer Reviews
+
+</h2>
+
+</div>
+
+<div class="review-grid">
+
+<div class="review-card">
+
+★★★★★
+
+<p>
+
+Excellent Service
+
+</p>
+
+<h4>
+
+Rahul Patel
+
+</h4>
+
+</div>
+
+<div class="review-card">
+
+★★★★★
+
+<p>
+
+Best VIP Numbers
+
+</p>
+
+<h4>
+
+Amit Shah
+
+</h4>
+
+</div>
+
+<div class="review-card">
+
+★★★★★
+
+<p>
+
+Fast Delivery
+
+</p>
+
+<h4>
+
+Karan Joshi
+
+</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="contact"
+class="contact-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+Contact Us
+
+</h2>
+
+</div>
+
 <div class="contact-grid">
+
+<div class="contact-info">
+
+<h3>
+
+VIP NUMBER BAZAR
+
+</h3>
+
+<p>
+
+Owner :
+
+<b>
+
+Maldev Thakor
+
+</b>
+
+</p>
+
+<p>
+
+Mobile :
+
+<a href="tel:+916354312829">
+
+6354312829
+
+</a>
+
+</p>
+
+<p>
+
+Support :
+
+<b>
+
+RUDRA Zarvariya
+
+</b>
+
+</p>
+
+<p>
+
+WhatsApp :
+
+<a href="https://wa.me/918070424242">
+
+8070424242
+
+</a>
+
+</p>
+
+</div>
 
 <div class="contact-form">
 
-<form id="bookingForm">
+<form
+id="bookingForm">
+
+<input
+type="hidden"
+id="selectedVipNumber">
+
+<input
+type="hidden"
+id="selectedPrice">
 
 <input
 type="text"
@@ -469,202 +569,21 @@ id="customerMobile"
 placeholder="Mobile Number"
 required>
 
-<input
-type="text"
-id="selectedVipNumber"
-placeholder="Selected VIP Number"
-readonly>
-
-<input
-type="number"
-id="selectedPrice"
-placeholder="Price"
-readonly>
-
 <textarea
 id="customerMessage"
-rows="5"
 placeholder="Message">
 
 </textarea>
 
 <button
 type="submit"
-class="primary-btn">
+class="btn">
 
-Book Now
+Book VIP Number
 
 </button>
 
 </form>
-
-</div>
-
-<div class="contact-info">
-
-<h3>VIP Number Bazar</h3>
-
-<p>
-
-📞 WhatsApp :
-<span id="contactWhatsapp">
-
-+91 XXXXXXXXXX
-
-</span>
-
-</p>
-
-<p>
-
-📧 Email :
-<span id="contactEmail">
-
-info@vipnumberbazar.com
-
-</span>
-
-</p>
-
-<p>
-
-📍 Address :
-<span id="contactAddress">
-
-Rajkot, Gujarat, India
-
-</span>
-
-</p>
-
-<a
-id="whatsappButton"
-href="#"
-target="_blank"
-class="primary-btn">
-
-WhatsApp Now
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<section id="reviews" class="reviews-section">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Customer Reviews</h2>
-
-<p>
-
-Trusted By Thousands Of Customers
-
-</p>
-
-</div>
-
-<div class="reviews-grid">
-
-<div class="review-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>
-
-Very Fast Service & Genuine VIP Number.
-
-</p>
-
-<h4>Rahul Patel</h4>
-
-</div>
-
-<div class="review-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>
-
-Best Price And Instant Response.
-
-</p>
-
-<h4>Amit Sharma</h4>
-
-</div>
-
-<div class="review-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>
-
-Highly Recommended VIP Number Seller.
-
-</p>
-
-<h4>Jignesh Thakor</h4>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="faq" class="faq-section">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Frequently Asked Questions</h2>
-
-</div>
-
-<div class="faq-list">
-
-<div class="faq-item">
-
-<h3>How To Book A VIP Number?</h3>
-
-<p>
-
-Select your favourite VIP Number and click Book Now.
-
-</p>
-
-</div>
-
-<div class="faq-item">
-
-<h3>Is Payment Secure?</h3>
-
-<p>
-
-Yes. All payments are verified before delivery.
-
-</p>
-
-</div>
-
-<div class="faq-item">
-
-<h3>Can I Reserve A VIP Number?</h3>
-
-<p>
-
-Yes, contact us on WhatsApp for reservation.
-
-</p>
 
 </div>
 
@@ -681,11 +600,15 @@ Yes, contact us on WhatsApp for reservation.
 
 <div>
 
-<h3>VIP Number Bazar</h3>
+<h3>
+
+VIP NUMBER BAZAR
+
+</h3>
 
 <p>
 
-India's Trusted VIP Mobile Number Marketplace.
+India's Trusted Premium Mobile Number Marketplace.
 
 </p>
 
@@ -693,17 +616,53 @@ India's Trusted VIP Mobile Number Marketplace.
 
 <div>
 
-<h3>Quick Links</h3>
+<h3>
+
+Quick Links
+
+</h3>
 
 <ul>
 
-<li><a href="#home">Home</a></li>
+<li>
 
-<li><a href="#vip">VIP Numbers</a></li>
+<a href="#home">
 
-<li><a href="#premium">Premium</a></li>
+Home
 
-<li><a href="#contact">Contact</a></li>
+</a>
+
+</li>
+
+<li>
+
+<a href="#vip">
+
+VIP Numbers
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#featured">
+
+Featured
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#contact">
+
+Contact
+
+</a>
+
+</li>
 
 </ul>
 
@@ -711,17 +670,21 @@ India's Trusted VIP Mobile Number Marketplace.
 
 <div>
 
-<h3>Services</h3>
+<h3>
+
+Operators
+
+</h3>
 
 <ul>
 
-<li>VIP Mobile Numbers</li>
+<li>Jio</li>
 
-<li>Premium Numbers</li>
+<li>Airtel</li>
 
-<li>Fancy Numbers</li>
+<li>Vi</li>
 
-<li>Business Numbers</li>
+<li>BSNL</li>
 
 </ul>
 
@@ -729,30 +692,92 @@ India's Trusted VIP Mobile Number Marketplace.
 
 <div>
 
-<h3>Follow Us</h3>
+<h3>
 
-<div class="social-links">
+Contact
 
-<a id="facebookLinkBtn" href="#" target="_blank">Facebook</a>
+</h3>
 
-<a id="instagramLinkBtn" href="#" target="_blank">Instagram</a>
+<p>
 
-<a id="youtubeLinkBtn" href="#" target="_blank">YouTube</a>
+Maldev Thakor
+
+</p>
+
+<p>
+
+6354312829
+
+</p>
+
+<p>
+
+RUDRA Zarvariya
+
+</p>
+
+<p>
+
+8070424242
+
+</p>
 
 </div>
 
 </div>
+
+<div class="copyright">
+
+© 2026 VIP NUMBER BAZAR
+
+All Rights Reserved.
 
 </div>
 
 </div>
 
 </footer>
-<div id="imageModal" class="image-modal">
+
+<div
+id="loadingOverlay"
+class="loading-overlay">
+
+<div class="loading-box">
+
+<div class="spinner"></div>
+
+<h3>
+
+Please Wait...
+
+</h3>
+
+</div>
+
+</div>
+
+<div
+id="toast"
+class="toast">
+
+<span
+id="toastText">
+
+Success
+
+</span>
+
+</div>
+
+<div
+id="imageModal"
+class="image-modal">
 
 <div class="image-modal-content">
 
-<span id="closeImageModal" class="close-image-modal">
+<span
+id="closeImageModal"
+class="close-image-modal">
 
 &times;
 
@@ -767,6 +792,19 @@ alt="VIP Number">
 
 </div>
 
+<div
+id="floatingWhatsapp">
+
+<a
+id="floatingWhatsappLink"
+href="https://wa.me/918070424242">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+</div>
+
 <button
 id="scrollTopBtn"
 class="scroll-top-btn">
@@ -775,77 +813,247 @@ class="scroll-top-btn">
 
 </button>
 
-<div id="toast" class="toast">
-
-<span id="toastText">
-
-Success
-
-</span>
-
-</div>
-
-<div id="loadingOverlay" class="loading-overlay">
-
-<div class="loading-box">
-
-<div class="loader-circle"></div>
-
-<h3>Please Wait...</h3>
-
-<p>
-
-Loading Data...
-
-</p>
-
-</div>
-
-</div>
-
-<div id="floatingWhatsapp">
-
-<a
-id="floatingWhatsappLink"
-href="#"
-target="_blank">
-
-💬
-
-</a>
-
-</div>
-<script
-src="https://cdn.jsdelivr.net/npm/chart.js">
-
-</script>
-
 <script
 type="module"
 src="script.js">
 
 </script>
 
-<script>
-
-history.replaceState(
-
-null,
-
-"",
-
-location.href
-
-);
-
-window.onpopstate=function(){
-
-history.go(1);
-
-};
-
-</script>
-
 </body>
 
 </html>
+<!-- Reserved For Future Features -->
+
+<!-- VIP Number Details Modal -->
+
+<div
+id="vipDetailsModal"
+class="modal">
+
+<div class="modal-content">
+
+<span
+id="closeVipDetails"
+class="close-btn">
+
+&times;
+
+</span>
+
+<div class="vip-details-body">
+
+<img
+id="vipDetailsImage"
+src="logo.png"
+alt="VIP">
+
+<h2
+id="vipDetailsNumber">
+
+0000000000
+
+</h2>
+
+<h3
+id="vipDetailsPrice">
+
+₹0
+
+</h3>
+
+<p>
+
+Operator :
+
+<span
+id="vipDetailsOperator">
+
+Jio
+
+</span>
+
+</p>
+
+<p>
+
+Category :
+
+<span
+id="vipDetailsCategory">
+
+Gold
+
+</span>
+
+</p>
+
+<p>
+
+Status :
+
+<span
+id="vipDetailsStatus">
+
+Available
+
+</span>
+
+</p>
+
+<a
+id="whatsappButton"
+href="https://wa.me/918070424242"
+class="btn">
+
+Book On WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Notification Popup -->
+
+<div
+id="notificationPopup"
+class="notification-popup">
+
+<div class="notification-header">
+
+<h3>
+
+Notifications
+
+</h3>
+
+<button
+id="closeNotificationPopup">
+
+✕
+
+</button>
+
+</div>
+
+<div
+id="notificationPopupList">
+
+</div>
+
+</div>
+
+<!-- Search Result -->
+
+<div
+id="searchResult">
+
+</div>
+
+<!-- Firebase Ready -->
+
+<script>
+
+window.APP_NAME="VIP NUMBER BAZAR";
+
+window.APP_VERSION="V6 Professional";
+
+</script>
+<!-- SEO Meta -->
+
+<meta property="og:title"
+content="VIP NUMBER BAZAR">
+
+<meta property="og:description"
+content="India's Premium VIP Mobile Number Marketplace">
+
+<meta property="og:image"
+content="logo.png">
+
+<meta property="og:type"
+content="website">
+
+<meta property="og:url"
+content="https://vipnumberbazar.github.io/VIP-Number-Bazar-/">
+
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:title"
+content="VIP NUMBER BAZAR">
+
+<meta name="twitter:description"
+content="Buy Premium VIP Mobile Numbers">
+
+<meta name="twitter:image"
+content="logo.png">
+
+<!-- PWA -->
+
+<link
+rel="manifest"
+href="manifest.json">
+
+<link
+rel="apple-touch-icon"
+href="logo.png">
+
+<!-- Preload -->
+
+<link
+rel="preload"
+href="style.css"
+as="style">
+
+<link
+rel="preload"
+href="script.js"
+as="script">
+
+<!-- Firebase -->
+
+<script
+type="module"
+src="firebase.js">
+
+</script>
+
+<!-- Version -->
+
+<script>
+
+console.log("VIP NUMBER BAZAR");
+
+console.log("V6 Professional");
+
+console.log("Website Ready");
+
+</script>
+
+<!-- End -->
+
+<!-- Lines Reserved For Future Updates -->
+
+<!-- 801 -->
+
+<!-- 820 -->
+
+<!-- 840 -->
+
+<!-- 860 -->
+
+<!-- 880 -->
+
+<!-- 900 -->
+
+<!-- 920 -->
+
+<!-- 940 -->
+
+<!-- 960 -->
+
+<!-- 980 -->
+
+<!-- 1000 -->
