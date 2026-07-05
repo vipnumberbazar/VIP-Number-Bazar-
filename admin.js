@@ -887,7 +887,39 @@ if(filterCategory){
 filterCategory.addEventListener("change",loadVipNumbers);
 
 }
+const vipForm = document.getElementById("vipForm");
 
+vipForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById("vipDocId").value;
+
+    const data = {
+        number: document.getElementById("vipNumber").value,
+        price: Number(document.getElementById("vipPrice").value),
+        category: document.getElementById("vipCategory").value,
+        operator: document.getElementById("vipOperator").value,
+        status: document.getElementById("vipStatus").value,
+        featured: document.getElementById("vipFeatured").value === "true",
+        updatedAt: serverTimestamp()
+    };
+
+    if (id) {
+        await updateDoc(doc(db, "vipNumbers", id), data);
+        showToast("VIP Number Updated");
+    } else {
+        data.createdAt = serverTimestamp();
+        await addDoc(vipNumbersRef, data);
+        showToast("VIP Number Added");
+    }
+
+    document.getElementById("vipModal").classList.remove("active");
+    vipForm.reset();
+    document.getElementById("vipDocId").value = "";
+
+    loadVipNumbers();
+    loadDashboard();
+});
 // =======================================
 // Real Time Dashboard
 // =======================================
