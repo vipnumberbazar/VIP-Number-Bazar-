@@ -657,40 +657,34 @@ function showToast(message, type = "success") {
 // =======================================
 // VIP Number Actions
 // =======================================
-
 window.editVip = async function(id){
 
-const snapshot=await getDocs(vipNumbersRef);
+    const snapshot = await getDocs(vipNumbersRef);
 
-snapshot.forEach((docItem)=>{
+    snapshot.forEach((docItem)=>{
 
-if(docItem.id===id){
+        if(docItem.id===id){
 
-const data=docItem.data();
+            const data = docItem.data();
 
-document.getElementById("vipDocId").value=id;
+            document.getElementById("vipDocId").value = id;
+            document.getElementById("vipNumber").value = data.number;
+            document.getElementById("vipPrice").value = data.price;
+            document.getElementById("vipCategory").value = data.category;
+            document.getElementById("vipOperator").value = data.operator;
+            document.getElementById("vipStatus").value = data.status;
+            document.getElementById("vipFeatured").value = String(data.featured);
 
-document.getElementById("vipNumber").value=data.number;
+            document.getElementById("vipModalTitle").innerText = "Edit VIP Number";
 
-document.getElementById("vipPrice").value=data.price;
+            document.getElementById("vipModal").classList.add("active");
 
-document.getElementById("vipCategory").value=data.category;
+        }
 
-document.getElementById("vipOperator").value=data.operator;
-
-document.getElementById("vipStatus").value=data.status;
-
-document.getElementById("vipFeatured").value=String(data.featured);
-
-document.getElementById("vipModalTitle").innerText="Edit VIP Number";
-
-document.getElementById("vipModal").classList.add("active");
-
-}
-
-});
+    });
 
 };
+
 
 window.deleteVip = async function(id) {
 
