@@ -694,11 +694,13 @@ window.deleteVip = async function(id) {
 
     try {
 
-        await deleteDoc(
-
-            doc(db, "vipNumbers", id)
-
-        );
+        await updateDoc(
+    doc(db,"vipNumbers",id),
+    {
+        deleted: true,
+        deletedAt: serverTimestamp()
+    }
+);
 
         showToast("VIP Number Deleted");
 
