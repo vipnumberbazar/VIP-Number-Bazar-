@@ -1,10 +1,11 @@
-// =======================================
-// VIP Number Bazar V5 Professional
+// ===========================================
+// VIP NUMBER BAZAR V6 PROFESSIONAL
 // script.js
 // Part 1
-// =======================================
+// Lines 1-200
+// ===========================================
 
-import {
+import{
 
 db,
 
@@ -12,9 +13,11 @@ vipNumbersRef,
 
 ordersRef,
 
-customersRef,
-
 visitorsRef,
+
+notificationsRef,
+
+settingsRef,
 
 collection,
 
@@ -22,636 +25,89 @@ addDoc,
 
 getDocs,
 
+getDoc,
+
+doc,
+
 query,
 
 orderBy,
 
 where,
 
-doc,
+limit,
 
-updateDoc,
-
-increment,
+onSnapshot,
 
 serverTimestamp,
 
-onSnapshot
+increment,
 
-} from "./firebase.js";
+updateDoc
+
+}from "./firebase.js";
+
+// ===========================================
+// DOM
+// ===========================================
 
 const loader=document.getElementById("loader");
 
 const vipGrid=document.getElementById("vipNumbersGrid");
 
-const premiumGrid=document.getElementById("premiumGrid");
-
 const featuredGrid=document.getElementById("featuredGrid");
 
-const searchInput=document.getElementById("searchInput");
+const premiumGrid=document.getElementById("premiumGrid");
+
+const searchBox=document.getElementById("searchBox");
 
 const operatorFilter=document.getElementById("operatorFilter");
 
 const categoryFilter=document.getElementById("categoryFilter");
 
-const bookingForm=document.getElementById("bookingForm");
+const totalNumbers=document.getElementById("totalNumbers");
+
+const availableNumbers=document.getElementById("availableNumbers");
+
+const soldNumbers=document.getElementById("soldNumbers");
+
+const visitorCount=document.getElementById("visitorCount");
 
 const loadingOverlay=document.getElementById("loadingOverlay");
 
 const toast=document.getElementById("toast");
 
 const toastText=document.getElementById("toastText");
-// =======================================
-// Initial Load
-// =======================================
 
-document.addEventListener("DOMContentLoaded",async()=>{
+const bookingForm=document.getElementById("bookingForm");
 
-loader.style.display="flex";
+const scrollTopBtn=document.getElementById("scrollTopBtn");
 
-await loadVipNumbers();
+const imageModal=document.getElementById("imageModal");
 
-await loadCounters();
+const modalImage=document.getElementById("modalImage");
 
-await saveVisitor();
+const closeImageModal=document.getElementById("closeImageModal");
+
+// ===========================================
+// Loader
+// ===========================================
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
 
 loader.style.display="none";
 
-});
-
-// =======================================
-// Load VIP Numbers
-// =======================================
-
-async function loadVipNumbers(){
-
-vipGrid.innerHTML="";
-
-premiumGrid.innerHTML="";
-
-featuredGrid.innerHTML="";
-
-const snapshot=await getDocs(
-
-query(
-
-vipNumbersRef,
-
-orderBy("createdAt","desc")
-
-)
-
-);
-
-snapshot.forEach(docItem=>{
-
-const data=docItem.data();
-
-createVipCard(docItem.id,data);
+},800);
 
 });
 
-}
-
-// =======================================
-// Create VIP Card
-// =======================================
-
-function createVipCard(id,data){
-
-const card=createCard(id,data);
-
-vipGrid.appendChild(card);
-
-if(data.category==="Premium"){
-
-premiumGrid.appendChild(
-
-createCard(id,data)
-
-);
-
-}
-
-if(data.featured===true){
-
-featuredGrid.appendChild(
-
-createCard(id,data)
-
-);
-
-}
-
-}
-// =======================================
-// Create Card
-// =======================================
-
-function createCard(id,data){
-
-const card=document.createElement("div");
-
-card.className="vip-card";
-
-card.innerHTML=`
-
-<img
-class="vip-image"
-src="${data.image||'logo.png'}"
-alt="VIP">
-
-<div class="vip-content">
-
-<div class="vip-number">
-
-${data.number}
-
-</div>
-
-<div class="vip-price">
-
-₹${Number(data.price||0).toLocaleString()}
-
-</div>
-
-<div class="vip-details">
-
-<span>
-
-${data.operator}
-
-</span>
-
-<span class="vip-status ${String(data.status).toLowerCase()}">
-
-${data.status}
-
-</span>
-
-</div>
-
-<a
-href="#contact"
-class="buy-btn"
-onclick="selectVip('${id}')">
-
-Book Now
-
-</a>
-
-</div>
-
-`;
-
-return card;
-
-}
-
-// =======================================
-// Select VIP
-// =======================================
-
-window.selectVip=function(id){
-
-document.getElementById("selectedVipNumber").value=id;
-
-document.getElementById("contact").scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-};
-// =======================================
-// Booking Form
-// =======================================
-
-bookingForm.addEventListener("submit",async(e)=>{
-
-e.preventDefault();
-
-loadingOverlay.classList.add("show");
-
-const order={
-
-customerName:document.getElementById("customerName").value,
-
-mobile:document.getElementById("customerMobile").value,
-
-vipNumber:document.getElementById("selectedVipNumber").value,
-
-price:document.getElementById("selectedPrice").value,
-
-message:document.getElementById("customerMessage").value,
-
-status:"Pending",
-
-paymentStatus:"Pending",
-
-createdAt:serverTimestamp()
-
-};
-
-try{
-
-await addDoc(
-
-ordersRef,
-
-order
-
-);
-
-showToast(
-
-"Booking Submitted"
-
-);
-
-bookingForm.reset();
-
-}catch(error){
-
-console.error(error);
-
-showToast(
-
-"Booking Failed",
-
-"error"
-
-);
-
-}
-
-loadingOverlay.classList.remove("show");
-
-});
-
-// =======================================
-// Save Customer
-// =======================================
-
-async function saveCustomer(data){
-
-await addDoc(
-
-customersRef,
-
-{
-
-...data,
-
-createdAt:serverTimestamp()
-
-}
-
-);
-
-}
-// =======================================
-// Save Customer + Visitor
-// =======================================
-
-bookingForm.addEventListener("submit",async()=>{
-
-await saveCustomer({
-
-name:document.getElementById("customerName").value,
-
-mobile:document.getElementById("customerMobile").value,
-
-whatsapp:document.getElementById("customerMobile").value,
-
-city:"",
-
-totalOrders:1,
-
-totalSpent:Number(
-
-document.getElementById("selectedPrice").value||0
-
-),
-
-status:"Active"
-
-});
-
-});
-
-async function saveVisitor(){
-
-await addDoc(
-
-visitorsRef,
-
-{
-
-device:navigator.platform,
-
-browser:navigator.userAgent,
-
-country:"Unknown",
-
-city:"Unknown",
-
-ip:"Hidden",
-
-createdAt:serverTimestamp()
-
-}
-
-);
-
-}
-// =======================================
-// Counters
-// =======================================
-
-async function loadCounters(){
-
-const vipSnapshot=await getDocs(vipNumbersRef);
-
-let total=0;
-
-let available=0;
-
-let sold=0;
-
-vipSnapshot.forEach(docItem=>{
-
-const data=docItem.data();
-
-total++;
-
-if(data.status==="Available"){
-
-available++;
-
-}else{
-
-sold++;
-
-}
-
-});
-
-document.getElementById("totalNumbers").textContent=total;
-
-document.getElementById("availableCount").textContent=available;
-
-document.getElementById("soldCount").textContent=sold;
-
-const visitorSnapshot=await getDocs(visitorsRef);
-
-document.getElementById("visitorCount").textContent=
-
-visitorSnapshot.size;
-
-}
-
-// =======================================
-// Realtime Update
-// =======================================
-
-onSnapshot(vipNumbersRef,()=>{
-
-loadVipNumbers();
-
-loadCounters();
-
-});
-// =======================================
-// Search & Filter
-// =======================================
-
-function filterVipCards(){
-
-const keyword=searchInput.value.toLowerCase();
-
-const operator=operatorFilter.value;
-
-const category=categoryFilter.value;
-
-document.querySelectorAll(".vip-card").forEach(card=>{
-
-const text=card.innerText.toLowerCase();
-
-const operatorMatch=
-
-operator==="All"||
-
-text.includes(operator.toLowerCase());
-
-const categoryMatch=
-
-category==="All"||
-
-text.includes(category.toLowerCase());
-
-const searchMatch=
-
-text.includes(keyword);
-
-if(searchMatch&&operatorMatch&&categoryMatch){
-
-card.style.display="block";
-
-}else{
-
-card.style.display="none";
-
-}
-
-});
-
-}
-
-searchInput.addEventListener(
-
-"input",
-
-filterVipCards
-
-);
-
-operatorFilter.addEventListener(
-
-"change",
-
-filterVipCards
-
-);
-
-categoryFilter.addEventListener(
-
-"change",
-
-filterVipCards
-
-);
-// =======================================
-// WhatsApp Booking
-// =======================================
-
-const whatsappButton=
-
-document.getElementById(
-
-"whatsappButton"
-
-);
-
-bookingForm.addEventListener(
-
-"submit",
-
-()=>{
-
-const name=
-
-document.getElementById(
-
-"customerName"
-
-).value;
-
-const mobile=
-
-document.getElementById(
-
-"customerMobile"
-
-).value;
-
-const number=
-
-document.getElementById(
-
-"selectedVipNumber"
-
-).value;
-
-const price=
-
-document.getElementById(
-
-"selectedPrice"
-
-).value;
-
-const text=
-
-`Hello VIP Number Bazar
-
-Name : ${name}
-
-Mobile : ${mobile}
-
-VIP Number : ${number}
-
-Price : ₹${price}`;
-
-const url=
-
-`https://wa.me/?text=${encodeURIComponent(text)}`;
-
-whatsappButton.href=url;
-
-document.getElementById(
-
-"floatingWhatsappLink"
-
-).href=url;
-
-});
-// =======================================
-// Image Preview
-// =======================================
-
-const imageModal=
-
-document.getElementById(
-
-"imageModal"
-
-);
-
-const modalImage=
-
-document.getElementById(
-
-"modalImage"
-
-);
-
-const closeImageModal=
-
-document.getElementById(
-
-"closeImageModal"
-
-);
-
-window.previewImage=function(src){
-
-modalImage.src=src;
-
-imageModal.classList.add(
-
-"show"
-
-);
-
-};
-
-closeImageModal.addEventListener(
-
-"click",
-
-()=>{
-
-imageModal.classList.remove(
-
-"show"
-
-);
-
-}
-
-);
-
-imageModal.addEventListener(
-
-"click",
-
-(e)=>{
-
-if(e.target===imageModal){
-
-imageModal.classList.remove(
-
-"show"
-
-);
-
-}
-
-});
-// =======================================
-// Toast + Loading
-// =======================================
-
-function showToast(message,type="success"){
-
-toast.className="toast";
-
-if(type!=="success"){
-
-toast.classList.add(type);
-
-}
+// ===========================================
+// Toast
+// ===========================================
+
+function showToast(message){
 
 toastText.textContent=message;
 
@@ -665,35 +121,668 @@ toast.classList.remove("show");
 
 }
 
-function showLoading(){
+// ===========================================
+// Loading
+// ===========================================
 
-loadingOverlay.classList.add("show");
+function startLoading(){
 
-}
-
-function hideLoading(){
-
-loadingOverlay.classList.remove("show");
+loadingOverlay.classList.add("active");
 
 }
 
-// =======================================
-// Scroll To Top
-// =======================================
+function stopLoading(){
 
-const scrollTopBtn=
+loadingOverlay.classList.remove("active");
 
-document.getElementById(
+}
 
-"scrollTopBtn"
+// ===========================================
+// Visitor Counter
+// ===========================================
+
+async function saveVisitor(){
+
+try{
+
+await addDoc(
+
+visitorsRef,
+
+{
+
+device:navigator.userAgent,
+
+createdAt:serverTimestamp()
+
+}
 
 );
 
-window.addEventListener(
+}catch(e){
 
-"scroll",
+console.log(e);
 
-()=>{
+}
+
+}
+
+// ===========================================
+// Dashboard Counter
+// ===========================================
+
+async function loadCounters(){
+
+const snapshot=await getDocs(vipNumbersRef);
+
+let total=0;
+
+let available=0;
+
+let sold=0;
+
+snapshot.forEach((item)=>{
+
+const data=item.data();
+
+if(data.deleted===true)return;
+
+total++;
+
+if(data.status==="Available")available++;
+
+if(data.status==="Sold")sold++;
+
+});
+
+totalNumbers.textContent=total;
+
+availableNumbers.textContent=available;
+
+soldNumbers.textContent=sold;
+
+}
+
+saveVisitor();
+
+loadCounters();
+// ===========================================
+// Load VIP Numbers
+// ===========================================
+
+async function loadVipNumbers(){
+
+vipGrid.innerHTML="";
+
+const snapshot=await getDocs(
+
+query(
+
+vipNumbersRef,
+
+orderBy("createdAt","desc")
+
+)
+
+);
+
+snapshot.forEach((docItem)=>{
+
+const data=docItem.data();
+
+if(data.deleted===true)return;
+
+const search=searchBox.value.toLowerCase();
+
+const operator=operatorFilter.value;
+
+const category=categoryFilter.value;
+
+if(
+
+search!=="" &&
+
+!String(data.number)
+
+.toLowerCase()
+
+.includes(search)
+
+)return;
+
+if(
+
+operator!=="All" &&
+
+data.operator!==operator
+
+)return;
+
+if(
+
+category!=="All" &&
+
+data.category!==category
+
+)return;
+
+vipGrid.innerHTML+=`
+
+<div class="vip-card fade">
+
+<div class="vip-image">
+
+<img src="${data.image||'logo.png'}">
+
+</div>
+
+<div class="vip-content">
+
+<div class="vip-number">
+
+${data.number}
+
+</div>
+
+<div class="vip-price">
+
+₹${Number(data.price).toLocaleString()}
+
+</div>
+
+<div class="vip-meta">
+
+<span>
+
+${data.operator}
+
+</span>
+
+<span>
+
+${data.category}
+
+</span>
+
+</div>
+
+<div class="vip-meta">
+
+<span class="status ${String(data.status).toLowerCase()}">
+
+${data.status}
+
+</span>
+
+<span>
+
+👁 ${data.views||0}
+
+</span>
+
+</div>
+
+<div class="vip-actions">
+
+<button
+
+class="buy-btn"
+
+onclick="bookVip(
+
+'${docItem.id}',
+
+'${data.number}',
+
+'${data.price}'
+
+)">
+
+Book Now
+
+</button>
+
+<button
+
+class="whatsapp-btn"
+
+onclick="openWhatsapp(
+
+'${data.number}',
+
+'${data.price}'
+
+)">
+
+WhatsApp
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+// ===========================================
+// Featured Numbers
+// ===========================================
+
+async function loadFeatured(){
+
+featuredGrid.innerHTML="";
+
+const snapshot=await getDocs(
+
+query(
+
+vipNumbersRef,
+
+where("featured","==",true),
+
+orderBy("createdAt","desc"),
+
+limit(8)
+
+)
+
+);
+
+snapshot.forEach((docItem)=>{
+
+const data=docItem.data();
+
+if(data.deleted===true)return;
+
+featuredGrid.innerHTML+=`
+
+<div class="vip-card">
+
+<div class="vip-image">
+
+<img src="${data.image||'logo.png'}">
+
+</div>
+
+<div class="vip-content">
+
+<div class="vip-number">
+
+${data.number}
+
+</div>
+
+<div class="vip-price">
+
+₹${Number(data.price).toLocaleString()}
+
+</div>
+
+<span class="badge featured">
+
+Featured
+
+</span>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+// ===========================================
+// Premium VIP Numbers
+// ===========================================
+
+async function loadPremium(){
+
+premiumGrid.innerHTML="";
+
+const snapshot=await getDocs(
+
+query(
+
+vipNumbersRef,
+
+where("category","==","Premium"),
+
+orderBy("createdAt","desc"),
+
+limit(12)
+
+)
+
+);
+
+snapshot.forEach((docItem)=>{
+
+const data=docItem.data();
+
+if(data.deleted===true)return;
+
+premiumGrid.innerHTML+=`
+
+<div class="vip-card fade">
+
+<div class="vip-image">
+
+<img src="${data.image||'logo.png'}">
+
+</div>
+
+<div class="vip-content">
+
+<div class="vip-number">
+
+${data.number}
+
+</div>
+
+<div class="vip-price">
+
+₹${Number(data.price).toLocaleString()}
+
+</div>
+
+<div class="vip-meta">
+
+<span>${data.operator}</span>
+
+<span>${data.category}</span>
+
+</div>
+
+<div class="vip-actions">
+
+<button
+
+class="buy-btn"
+
+onclick="bookVip(
+
+'${docItem.id}',
+
+'${data.number}',
+
+'${data.price}'
+
+)">
+
+Book Now
+
+</button>
+
+<button
+
+class="whatsapp-btn"
+
+onclick="openWhatsapp(
+
+'${data.number}',
+
+'${data.price}'
+
+)">
+
+WhatsApp
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+// ===========================================
+// Search & Filter
+// ===========================================
+
+searchBox.addEventListener(
+
+"input",
+
+loadVipNumbers
+
+);
+
+operatorFilter.addEventListener(
+
+"change",
+
+loadVipNumbers
+
+);
+
+categoryFilter.addEventListener(
+
+"change",
+
+loadVipNumbers
+
+);
+
+// ===========================================
+// Book VIP
+// ===========================================
+
+window.bookVip=function(
+
+id,
+
+number,
+
+price
+
+){
+
+document.getElementById(
+
+"selectedVipNumber"
+
+).value=number;
+
+document.getElementById(
+
+"selectedPrice"
+
+).value=price;
+
+window.scrollTo({
+
+top:document.getElementById(
+
+"contact"
+
+).offsetTop-80,
+
+behavior:"smooth"
+
+});
+
+showToast(
+
+"Selected VIP Number"
+
+);
+
+updateDoc(
+
+doc(
+
+db,
+
+"vipNumbers",
+
+id
+
+),
+
+{
+
+views:increment(1)
+
+}
+
+).catch(()=>{});
+
+};
+
+// ===========================================
+// WhatsApp
+// ===========================================
+
+window.openWhatsapp=function(
+
+number,
+
+price
+
+){
+
+const message=
+
+`Hello VIP Number Bazar,
+
+I want this VIP Number
+
+${number}
+
+Price ₹${price}`;
+
+window.open(
+
+"https://wa.me/918070424242?text="+
+
+encodeURIComponent(message),
+
+"_blank"
+
+);
+
+};
+
+// ===========================================
+// Load All
+// ===========================================
+
+loadVipNumbers();
+
+loadFeatured();
+
+loadPremium();
+// ===========================================
+// Booking Form
+// ===========================================
+
+bookingForm.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+startLoading();
+
+try{
+
+const customerName=document.getElementById("customerName").value.trim();
+
+const customerMobile=document.getElementById("customerMobile").value.trim();
+
+const customerMessage=document.getElementById("customerMessage").value.trim();
+
+const vipNumber=document.getElementById("selectedVipNumber").value;
+
+const vipPrice=document.getElementById("selectedPrice").value;
+
+await addDoc(
+
+ordersRef,
+
+{
+
+customerName,
+
+mobile:customerMobile,
+
+message:customerMessage,
+
+vipNumber,
+
+price:Number(vipPrice),
+
+status:"Pending",
+
+paymentStatus:"Pending",
+
+createdAt:serverTimestamp()
+
+}
+
+);
+
+showToast("Booking Submitted");
+
+bookingForm.reset();
+
+}catch(error){
+
+console.log(error);
+
+showToast("Booking Failed");
+
+}
+
+stopLoading();
+
+});
+
+// ===========================================
+// Image Preview
+// ===========================================
+
+window.openImage=function(src){
+
+modalImage.src=src;
+
+imageModal.classList.add("active");
+
+};
+
+closeImageModal.addEventListener("click",()=>{
+
+imageModal.classList.remove("active");
+
+});
+
+window.addEventListener("click",(e)=>{
+
+if(e.target===imageModal){
+
+imageModal.classList.remove("active");
+
+}
+
+});
+
+// ===========================================
+// Scroll Button
+// ===========================================
+
+window.addEventListener("scroll",()=>{
 
 if(window.scrollY>300){
 
@@ -705,15 +794,9 @@ scrollTopBtn.classList.remove("show");
 
 }
 
-}
+});
 
-);
-
-scrollTopBtn.addEventListener(
-
-"click",
-
-()=>{
+scrollTopBtn.addEventListener("click",()=>{
 
 window.scrollTo({
 
@@ -724,167 +807,177 @@ behavior:"smooth"
 });
 
 });
-// =======================================
-// Settings Load
-// =======================================
 
-async function loadSettings(){
+// ===========================================
+// Realtime Update
+// ===========================================
 
-const snapshot=await getDocs(
+onSnapshot(vipNumbersRef,()=>{
 
-collection(db,"settings")
+loadCounters();
 
-);
+loadVipNumbers();
 
-snapshot.forEach(docItem=>{
+loadFeatured();
+
+loadPremium();
+
+});
+
+// ===========================================
+// Notification
+// ===========================================
+
+onSnapshot(
+
+query(
+
+notificationsRef,
+
+orderBy("createdAt","desc"),
+
+limit(10)
+
+),
+
+(snapshot)=>{
+
+const list=document.getElementById("notificationPopupList");
+
+if(!list)return;
+
+list.innerHTML="";
+
+snapshot.forEach((docItem)=>{
 
 const data=docItem.data();
 
-document.getElementById(
+list.innerHTML+=`
 
-"contactWhatsapp"
+<div class="notification-item">
 
-).textContent=data.whatsapp||"";
+<h4>${data.title||"Notification"}</h4>
 
-document.getElementById(
+<p>${data.message||""}</p>
 
-"contactEmail"
+</div>
 
-).textContent=data.email||"";
-
-document.getElementById(
-
-"contactAddress"
-
-).textContent=data.address||"";
-
-document.getElementById(
-
-"facebookLinkBtn"
-
-).href=data.facebook||"#";
-
-document.getElementById(
-
-"instagramLinkBtn"
-
-).href=data.instagram||"#";
-
-document.getElementById(
-
-"youtubeLinkBtn"
-
-).href=data.youtube||"#";
-
-document.getElementById(
-
-"floatingWhatsappLink"
-
-).href=
-
-`https://wa.me/${data.whatsapp}`;
-
-document.getElementById(
-
-"whatsappButton"
-
-).href=
-
-`https://wa.me/${data.whatsapp}`;
+`;
 
 });
 
 }
 
-loadSettings();
-// =======================================
-// Realtime Sync
-// =======================================
+);
+// ===========================================
+// Settings Loader
+// ===========================================
 
-onSnapshot(vipNumbersRef,()=>{
+async function loadSettings(){
 
-loadVipNumbers();
+try{
 
-loadCounters();
+const settingsDoc=await getDoc(
 
-});
+doc(
 
-onSnapshot(ordersRef,()=>{
+db,
 
-loadCounters();
+"settings",
 
-});
+"website"
 
-onSnapshot(customersRef,()=>{
-
-loadCounters();
-
-});
-
-onSnapshot(visitorsRef,()=>{
-
-loadCounters();
-
-});
-
-// =======================================
-// Prevent Back
-// =======================================
-
-history.replaceState(
-
-null,
-
-"",
-
-location.href
+)
 
 );
 
-window.onpopstate=function(){
+if(settingsDoc.exists()){
 
-history.go(1);
+const data=settingsDoc.data();
 
-};
+document.title=data.siteName||"VIP NUMBER BAZAR";
 
-// =======================================
-// Disable Right Click
-// =======================================
+const whatsappLink=document.getElementById("floatingWhatsappLink");
 
-document.addEventListener(
+if(whatsappLink){
 
-"contextmenu",
+whatsappLink.href="https://wa.me/91"+(data.whatsapp||"8070424242");
 
-e=>e.preventDefault()
+}
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+// ===========================================
+// Visitor Counter
+// ===========================================
+
+onSnapshot(
+
+visitorsRef,
+
+(snapshot)=>{
+
+visitorCount.textContent=snapshot.size;
+
+}
 
 );
-// =======================================
-// Auto Refresh + Notification
-// =======================================
+
+// ===========================================
+// Auto Refresh
+// ===========================================
 
 setInterval(()=>{
 
 loadCounters();
 
+loadVipNumbers();
+
+loadFeatured();
+
+loadPremium();
+
 },30000);
 
-onSnapshot(
+// ===========================================
+// Notification Popup
+// ===========================================
 
-vipNumbersRef,
+const notificationPopup=
 
-(snapshot)=>{
+document.getElementById(
 
-showToast(
-
-"VIP Numbers Updated"
+"notificationPopup"
 
 );
 
-console.log(
+const closeNotificationPopup=
 
-"Total VIP Numbers :",
+document.getElementById(
 
-snapshot.size
+"closeNotificationPopup"
+
+);
+
+if(closeNotificationPopup){
+
+closeNotificationPopup.addEventListener(
+
+"click",
+
+()=>{
+
+notificationPopup.classList.remove(
+
+"active"
 
 );
 
@@ -892,58 +985,31 @@ snapshot.size
 
 );
 
-window.addEventListener(
+}
 
-"online",
+// ===========================================
+// Keyboard Shortcut
+// ===========================================
 
-()=>{
+document.addEventListener(
 
-showToast(
+"keydown",
 
-"Internet Connected"
+(e)=>{
 
-);
+if(e.key==="Escape"){
+
+imageModal.classList.remove("active");
+
+notificationPopup.classList.remove("active");
 
 }
 
-);
-
-window.addEventListener(
-
-"offline",
-
-()=>{
-
-showToast(
-
-"No Internet Connection",
-
-"error"
-
-);
-
 }
 
-);
-
-// =======================================
-// Hide Loader
-// =======================================
-
-window.addEventListener(
-
-"load",
-
-()=>{
-
-loader.style.display="none";
-
-});
-// =======================================
-// Final Initialization
-// =======================================
-
-window.addEventListener("DOMContentLoaded",()=>{
+// ===========================================
+// Initialize
+// ===========================================
 
 loadSettings();
 
@@ -951,34 +1017,40 @@ loadCounters();
 
 loadVipNumbers();
 
-});
+loadFeatured();
 
-// =======================================
-// Global Functions
-// =======================================
+loadPremium();
+
+// ===========================================
+// Export
+// ===========================================
 
 window.showToast=showToast;
 
-window.previewImage=previewImage;
+window.loadVipNumbers=loadVipNumbers;
 
-window.selectVip=selectVip;
+window.loadFeatured=loadFeatured;
 
-// =======================================
+window.loadPremium=loadPremium;
+
+window.loadCounters=loadCounters;
+
+// ===========================================
 // Version
-// =======================================
+// ===========================================
 
-const APP_NAME="VIP Number Bazar";
+const APP_NAME="VIP NUMBER BAZAR";
 
-const APP_VERSION="V5 Professional";
+const APP_VERSION="V6 Professional";
 
 console.log(APP_NAME);
 
 console.log(APP_VERSION);
 
-console.log("Website Ready");
+console.log("Website Module Ready");
 
-// =======================================
+// ===========================================
 // End Of File
-// =======================================
+// ===========================================
 
 export{};
