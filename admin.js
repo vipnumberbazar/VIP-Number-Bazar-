@@ -133,22 +133,8 @@ initializeAdmin();
 // Initialize
 // =======================================
 
-function initializeAdmin(){
-
-loadDashboard();
-
-loadVipNumbers();
-
-loadOrders();
-
-loadCustomers();
-
-loadVisitors();
-
-loadNotifications();
-
-loadSettings();
-
+function initializeAdmin() {
+    loader.style.display = "none";
 }
 
 // =======================================
