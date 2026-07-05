@@ -374,13 +374,9 @@ if(
 
 await signOut(auth);
 
-window.location.replace(
+window.location.replace("login.html");
 
-"login.html"
-
-);
-
-}
+});
 
 // =======================================
 // Auto Refresh
