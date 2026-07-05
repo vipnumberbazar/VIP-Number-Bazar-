@@ -274,7 +274,11 @@ onclick="deleteVip('${docItem.id}')">
 Delete
 
 </button>
-
+<button
+class="action-btn restore"
+onclick="restoreVip('${docItem.id}')">
+Restore
+</button>
 </td>
 
 </tr>
