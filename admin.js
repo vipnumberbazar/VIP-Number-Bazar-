@@ -963,6 +963,63 @@ window.addEventListener("click", (e) => {
 
 });
 // =======================================
+// Delete Modal Controls
+// =======================================
+
+const deleteModal = document.getElementById("deleteModal");
+
+const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+
+const deleteVipId = document.getElementById("deleteVipId");
+
+window.deleteVip = function(id){
+
+    deleteVipId.value = id;
+
+    deleteModal.classList.add("active");
+
+};
+
+confirmDeleteBtn.addEventListener("click", async ()=>{
+
+    const id = deleteVipId.value;
+
+    if(!id) return;
+
+    loadingOverlay.classList.add("active");
+
+    try{
+
+        await deleteDoc(doc(db,"vipNumbers",id));
+
+        showToast("VIP Number Deleted");
+
+        deleteModal.classList.remove("active");
+
+        loadVipNumbers();
+
+        loadDashboard();
+
+    }catch(e){
+
+        console.error(e);
+
+        showToast("Delete Failed","error");
+
+    }
+
+    loadingOverlay.classList.remove("active");
+
+});
+
+cancelDeleteBtn.addEventListener("click",()=>{
+
+    deleteModal.classList.remove("active");
+
+});
+// =======================================
 // Real Time Dashboard
 // =======================================
 
