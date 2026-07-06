@@ -400,18 +400,9 @@ console.log("script.js Final Loaded");
 // Loader Fix
 // ===============================
 
-window.addEventListener("load",()=>{
-
-const loader=document.getElementById("loader");
-
-if(loader){
-
-setTimeout(()=>{
-
-loader.style.display="none";
-
-},500);
-
-}
-
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.style.display = "none";
+    }
 });
