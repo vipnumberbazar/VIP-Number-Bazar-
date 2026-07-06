@@ -4,22 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
-
-<meta http-equiv="Pragma" content="no-cache">
-
-<meta http-equiv="Expires" content="0">
-
-<title>
-
-VIP NUMBER BAZAR | Admin Panel
-
-</title>
-
-<link rel="icon" href="favicon.ico">
+<title>VIP NUMBER BAZAR | Admin</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -29,7 +16,8 @@ VIP NUMBER BAZAR | Admin Panel
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -41,17 +29,9 @@ VIP NUMBER BAZAR | Admin Panel
 
 <div class="loader-circle"></div>
 
-<h2>
+<h2>VIP NUMBER BAZAR</h2>
 
-VIP NUMBER BAZAR
-
-</h2>
-
-<p>
-
-Loading Admin Panel...
-
-</p>
+<p>Loading Admin Panel...</p>
 
 </div>
 
@@ -61,47 +41,31 @@ Loading Admin Panel...
 
 <aside class="sidebar">
 
-<div class="sidebar-logo">
+<div class="logo">
 
 <img src="logo.png">
 
-<h2>
+<h2>VIP NUMBER BAZAR</h2>
 
-VIP NUMBER BAZAR
-
-</h2>
-
-<p>
-
-V6 Professional
-
-</p>
+<p>V7 BUILD</p>
 
 </div>
 
-<ul class="sidebar-menu">
+<ul>
 
 <li class="active" data-page="dashboard">
 
-<i class="fa-solid fa-chart-line"></i>
-
-<span>
+<i class="fa-solid fa-house"></i>
 
 Dashboard
 
-</span>
-
 </li>
 
-<li data-page="vipNumbers">
+<li data-page="vip">
 
-<i class="fa-solid fa-mobile-screen-button"></i>
-
-<span>
+<i class="fa-solid fa-mobile-screen"></i>
 
 VIP Numbers
-
-</span>
 
 </li>
 
@@ -109,11 +73,7 @@ VIP Numbers
 
 <i class="fa-solid fa-cart-shopping"></i>
 
-<span>
-
 Orders
-
-</span>
 
 </li>
 
@@ -121,47 +81,7 @@ Orders
 
 <i class="fa-solid fa-users"></i>
 
-<span>
-
 Customers
-
-</span>
-
-</li>
-
-<li data-page="visitors">
-
-<i class="fa-solid fa-chart-column"></i>
-
-<span>
-
-Visitors
-
-</span>
-
-</li>
-
-<li data-page="notifications">
-
-<i class="fa-solid fa-bell"></i>
-
-<span>
-
-Notifications
-
-</span>
-
-</li>
-
-<li data-page="analytics">
-
-<i class="fa-solid fa-chart-pie"></i>
-
-<span>
-
-Analytics
-
-</span>
 
 </li>
 
@@ -169,37 +89,11 @@ Analytics
 
 <i class="fa-solid fa-gear"></i>
 
-<span>
-
 Settings
-
-</span>
 
 </li>
 
 </ul>
-
-</aside>
-
-<main class="main-content">
-
-<header class="topbar">
-
-<h1 id="pageTitle">
-
-Dashboard
-
-</h1>
-
-<div class="topbar-right">
-
-<img src="logo.png">
-
-<span>
-
-Administrator
-
-</span>
 
 <button id="logoutBtn">
 
@@ -207,15 +101,27 @@ Logout
 
 </button>
 
-</div>
+</aside>
+
+<main class="content">
+
+<header>
+
+<h1 id="pageTitle">
+
+Dashboard
+
+</h1>
 
 </header>
 
-<section id="dashboardPage" class="page active">
+<section
+id="dashboardPage"
+class="page active">
 
-<div class="dashboard-grid">
+<div class="cards">
 
-<div class="dashboard-card blue">
+<div class="card">
 
 <h2 id="totalVipNumbers">
 
@@ -223,15 +129,11 @@ Logout
 
 </h2>
 
-<p>
-
-Total VIP Numbers
-
-</p>
+<p>Total VIP</p>
 
 </div>
 
-<div class="dashboard-card green">
+<div class="card">
 
 <h2 id="availableNumbers">
 
@@ -239,15 +141,11 @@ Total VIP Numbers
 
 </h2>
 
-<p>
-
-Available
-
-</p>
+<p>Available</p>
 
 </div>
 
-<div class="dashboard-card red">
+<div class="card">
 
 <h2 id="soldNumbers">
 
@@ -255,15 +153,11 @@ Available
 
 </h2>
 
-<p>
-
-Sold
-
-</p>
+<p>Sold</p>
 
 </div>
 
-<div class="dashboard-card orange">
+<div class="card">
 
 <h2 id="totalOrders">
 
@@ -271,92 +165,20 @@ Sold
 
 </h2>
 
-<p>
-
-Orders
-
-</p>
-
-</div>
-
-<div class="dashboard-card purple">
-
-<h2 id="totalCustomers">
-
-0
-
-</h2>
-
-<p>
-
-Customers
-
-</p>
-
-</div>
-
-<div class="dashboard-card cyan">
-
-<h2 id="totalVisitors">
-
-0
-
-</h2>
-
-<p>
-
-Visitors
-
-</p>
-
-</div>
-
-</div>
-<div class="dashboard-charts">
-
-<div class="chart-card">
-
-<h3>
-
-Sales Analytics
-
-</h3>
-
-<canvas id="salesChart">
-
-</canvas>
-
-</div>
-
-<div class="chart-card">
-
-<h3>
-
-Visitors Analytics
-
-</h3>
-
-<canvas id="visitorChart">
-
-</canvas>
+<p>Orders</p>
 
 </div>
 
 </div>
 
 </section>
-
 <section
-id="vipNumbersPage"
+id="vipPage"
 class="page">
 
 <div class="page-header">
 
-<h2>
-
-VIP Numbers Management
-
-</h2>
+<h2>VIP Numbers</h2>
 
 <button
 id="addVipBtn"
@@ -373,69 +195,13 @@ class="primary-btn">
 <input
 type="text"
 id="searchVip"
-placeholder="Search VIP Number...">
+placeholder="Search VIP Number">
 
-<select
-id="filterStatus">
+<select id="filterStatus">
 
-<option value="all">
-
-All Status
-
-</option>
-
-<option value="Available">
-
-Available
-
-</option>
-
-<option value="Sold">
-
-Sold
-
-</option>
-
-<option value="Deleted">
-
-Deleted
-
-</option>
-
-</select>
-
-<select
-id="filterCategory">
-
-<option value="all">
-
-All Category
-
-</option>
-
-<option value="Gold">
-
-Gold
-
-</option>
-
-<option value="Silver">
-
-Silver
-
-</option>
-
-<option value="Premium">
-
-Premium
-
-</option>
-
-<option value="Platinum">
-
-Platinum
-
-</option>
+<option value="all">All Status</option>
+<option value="Available">Available</option>
+<option value="Sold">Sold</option>
 
 </select>
 
@@ -443,72 +209,27 @@ Platinum
 
 <div class="table-responsive">
 
-<table class="vip-table">
+<table>
 
 <thead>
 
 <tr>
 
-<th>
+<th>#</th>
 
-#
+<th>VIP Number</th>
 
-</th>
+<th>Price</th>
 
-<th>
+<th>Status</th>
 
-VIP Number
-
-</th>
-
-<th>
-
-Price
-
-</th>
-
-<th>
-
-Operator
-
-th>
-
-<th>
-
-Category
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-<th>
-
-Views
-
-</th>
-
-<th>
-
-Featured
-
-</th>
-
-<th>
-
-Actions
-
-</th>
+<th>Action</th>
 
 </tr>
 
 </thead>
 
-<tbody
-id="vipTableBody">
+<tbody id="vipTableBody">
 
 </tbody>
 
@@ -522,109 +243,41 @@ id="vipTableBody">
 id="ordersPage"
 class="page">
 
-<div class="page-header">
+<h2>Orders</h2>
 
-<h2>
-
-Orders Management
-
-</h2>
-
-</div>
-
-<div class="table-responsive">
-
-<table class="orders-table">
+<table>
 
 <thead>
 
 <tr>
 
-<th>
+<th>Customer</th>
 
-Order ID
+<th>VIP Number</th>
 
-</th>
+<th>Price</th>
 
-<th>
-
-Customer
-
-</th>
-
-<th>
-
-Mobile
-
-</th>
-
-<th>
-
-VIP Number
-
-</th>
-
-<th>
-
-Amount
-
-</th>
-
-<th>
-
-Payment
-
-</th>
-
-<th>
-
-Status
-
-</th>
-
-<th>
-
-Date
-
-</th>
-
-<th>
-
-Action
-
-</th>
+<th>Status</th>
 
 </tr>
 
 </thead>
 
-<tbody
-id="ordersTableBody">
+<tbody id="ordersTableBody">
 
 </tbody>
 
 </table>
 
-</div>
-
 </section>
+
 <section
 id="customersPage"
 class="page">
 
-<div class="page-header">
+<h2>Customers</h2>
 
-<h2>
-
-Customers
-
-</h2>
-
-</div>
-
-<div class="table-responsive">
-
-<table class="customers-table">
+<table>
 
 <thead>
 
@@ -634,544 +287,37 @@ Customers
 
 <th>Mobile</th>
 
-<th>WhatsApp</th>
-
 <th>City</th>
-
-<th>Total Orders</th>
-
-<th>Total Spend</th>
-
-<th>Status</th>
-
-<th>Action</th>
 
 </tr>
 
 </thead>
 
-<tbody
-id="customersTableBody">
+<tbody id="customersTableBody">
 
 </tbody>
 
 </table>
 
-</div>
-
 </section>
 
-<section
-id="visitorsPage"
-class="page">
-
-<div class="page-header">
-
-<h2>
-
-Visitors Analytics
-
-</h2>
-
-</div>
-
-<div class="dashboard-grid">
-
-<div class="dashboard-card blue">
-
-<h2 id="todayVisitCard">
-
-0
-
-</h2>
-
-<p>
-
-Today Visitors
-
-</p>
-
-</div>
-
-<div class="dashboard-card green">
-
-<h2 id="weekVisitCard">
-
-0
-
-</h2>
-
-<p>
-
-This Week
-
-</p>
-
-</div>
-
-<div class="dashboard-card purple">
-
-<h2 id="monthVisitCard">
-
-0
-
-</h2>
-
-<p>
-
-This Month
-
-</p>
-
-</div>
-
-<div class="dashboard-card orange">
-
-<h2 id="allVisitCard">
-
-0
-
-</h2>
-
-<p>
-
-Total Visitors
-
-</p>
-
-</div>
-
-</div>
-
-<div class="table-responsive">
-
-<table class="visitor-table">
-
-<thead>
-
-<tr>
-
-<th>Date</th>
-
-<th>Device</th>
-
-<th>Browser</th>
-
-<th>Country</th>
-
-<th>City</th>
-
-<th>IP</th>
-
-</tr>
-
-</thead>
-
-<tbody
-id="visitorTableBody">
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-<section
-id="notificationsPage"
-class="page">
-
-<div class="page-header">
-
-<h2>
-
-Notifications
-
-</h2>
-
-<button
-id="clearNotificationBtn"
-class="danger-btn">
-
-Clear All
-
-</button>
-
-</div>
-
-<div
-id="notificationList"
-class="notification-list">
-
-</div>
-
-</section>
-
-<section
-id="analyticsPage"
-class="page">
-
-<div class="page-header">
-
-<h2>
-
-Analytics
-
-</h2>
-
-</div>
-
-<div class="dashboard-grid">
-
-<div class="dashboard-card blue">
-
-<h2 id="todaySales">
-
-₹0
-
-</h2>
-
-<p>
-
-Today's Sales
-
-</p>
-
-</div>
-
-<div class="dashboard-card green">
-
-<h2 id="weeklySales">
-
-₹0
-
-</h2>
-
-<p>
-
-Weekly Sales
-
-</p>
-
-</div>
-
-<div class="dashboard-card purple">
-
-<h2 id="monthlySales">
-
-₹0
-
-</h2>
-
-<p>
-
-Monthly Sales
-
-</p>
-
-</div>
-
-<div class="dashboard-card orange">
-
-<h2 id="yearlySales">
-
-₹0
-
-</h2>
-
-<p>
-
-Yearly Sales
-
-</p>
-
-</div>
-
-</div>
-
-<div class="chart-card">
-
-<canvas
-id="revenueChart">
-
-</canvas>
-
-</div>
-
-<div class="chart-card">
-
-<canvas
-id="ordersChart">
-
-</canvas>
-
-</div>
-
-</section>
 <section
 id="settingsPage"
 class="page">
 
-<div class="page-header">
+<h2>Settings</h2>
 
-<h2>
-
-Website Settings
-
-</h2>
-
-</div>
-
-<form
-id="settingsForm">
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-
-Website Name
-
-</label>
+<form id="settingsForm">
 
 <input
 type="text"
-id="siteName">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-WhatsApp Number
-
-</label>
+id="siteName"
+placeholder="Website Name">
 
 <input
 type="text"
 id="whatsappNumber"
-value="8070424242">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Email
-
-</label>
-
-<input
-type="email"
-id="siteEmail">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Instagram
-
-</label>
-
-<input
-type="text"
-id="instagramLink">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Facebook
-
-</label>
-
-<input
-type="text"
-id="facebookLink">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-YouTube
-
-</label>
-
-<input
-type="text"
-id="youtubeLink">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Owner Name
-
-</label>
-
-<input
-type="text"
-value="Maldev Thakor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Owner Mobile
-
-</label>
-
-<input
-type="text"
-value="6354312829">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Support Name
-
-</label>
-
-<input
-type="text"
-value="RUDRA Zarvariya">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Support Mobile
-
-</label>
-
-<input
-type="text"
-value="8070424242">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Office Address
-
-</label>
-
-<textarea
-id="officeAddress"
-rows="4">
-
-</textarea>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Theme
-
-</label>
-
-<select
-id="websiteTheme">
-
-<option value="dark">
-
-Dark
-
-</option>
-
-<option value="light">
-
-Light
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Maintenance Mode
-
-</label>
-
-<select
-id="maintenanceMode">
-
-<option value="off">
-
-OFF
-
-</option>
-
-<option value="on">
-
-ON
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Upload Logo
-
-</label>
-
-<input
-type="file"
-id="logoUpload"
-accept="image/*">
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Upload Banner
-
-</label>
-
-<input
-type="file"
-id="bannerUpload"
-accept="image/*">
-
-</div>
-
-</div>
-
-<div class="form-actions">
+placeholder="WhatsApp Number">
 
 <button
 type="submit"
@@ -1181,30 +327,14 @@ Save Settings
 
 </button>
 
-<button
-type="reset"
-class="secondary-btn">
-
-Reset
-
-</button>
-
-</div>
-
 </form>
 
 </section>
-<!-- ========================================= -->
-<!-- Add / Edit VIP Modal -->
-<!-- ========================================= -->
+<!-- VIP Modal -->
 
-<div
-id="vipModal"
-class="modal">
+<div id="vipModal" class="modal">
 
 <div class="modal-content">
-
-<div class="modal-header">
 
 <h2 id="vipModalTitle">
 
@@ -1212,111 +342,25 @@ Add VIP Number
 
 </h2>
 
-<span
-id="closeVipModal"
-class="close-btn">
-
-&times;
-
-</span>
-
-</div>
-
-<form
-id="vipForm">
+<form id="vipForm">
 
 <input
 type="hidden"
 id="vipDocId">
 
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-
-VIP Number
-
-</label>
-
 <input
 type="text"
 id="vipNumber"
+placeholder="VIP Number"
 required>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Price
-
-</label>
 
 <input
 type="number"
 id="vipPrice"
+placeholder="Price"
 required>
 
-</div>
-
-<div class="form-group">
-
-<label>
-
-Operator
-
-</label>
-
-<select
-id="vipOperator">
-
-<option>Jio</option>
-
-<option>Airtel</option>
-
-<option>Vi</option>
-
-<option>BSNL</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Category
-
-</label>
-
-<select
-id="vipCategory">
-
-<option>Gold</option>
-
-<option>Silver</option>
-
-<option>Premium</option>
-
-<option>Platinum</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-Status
-
-</label>
-
-<select
-id="vipStatus">
+<select id="vipStatus">
 
 <option>Available</option>
 
@@ -1324,59 +368,11 @@ id="vipStatus">
 
 </select>
 
-</div>
-
-<div class="form-group">
-
-<label>
-
-Featured
-
-</label>
-
-<select
-id="vipFeatured">
-
-<option value="true">
-
-Yes
-
-</option>
-
-<option value="false">
-
-No
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-
-VIP Image
-
-</label>
-
-<input
-type="file"
-id="vipImage"
-accept="image/*">
-
-</div>
-
-</div>
-
-<div class="form-actions">
-
 <button
 type="submit"
 class="primary-btn">
 
-Save VIP Number
+Save
 
 </button>
 
@@ -1389,88 +385,29 @@ Cancel
 
 </button>
 
-</div>
-
 </form>
 
 </div>
 
 </div>
 
-<!-- Delete Modal -->
-
-<div
-id="deleteModal"
-class="modal">
-
-<div class="modal-content small-modal">
-
-<h2>
-
-Delete VIP Number
-
-</h2>
-
-<p>
-
-Are you sure?
-
-</p>
-
-<input
-type="hidden"
-id="deleteVipId">
-
-<div class="form-actions">
-
-<button
-id="confirmDeleteBtn"
-class="danger-btn">
-
-Delete
-
-</button>
-
-<button
-id="cancelDeleteBtn"
-class="secondary-btn">
-
-Cancel
-
-</button>
-
-</div>
-
-</div>
-
-</div>
+<!-- Loading -->
 
 <div
 id="loadingOverlay"
 class="loading-overlay">
 
-<div class="loading-box">
-
-<div class="spinner">
+<div class="spinner"></div>
 
 </div>
 
-<h3>
-
-Please Wait...
-
-</h3>
-
-</div>
-
-</div>
+<!-- Toast -->
 
 <div
 id="toast"
 class="toast">
 
-<span
-id="toastMessage">
+<span id="toastMessage">
 
 Success
 
@@ -1478,13 +415,15 @@ Success
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script
 type="module"
 src="admin.js">
 
 </script>
+
+</main>
+
+</div>
 
 </body>
 
