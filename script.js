@@ -84,3 +84,106 @@ loadVipNumbers();
 
 console.log("VIP NUMBER BAZAR V7");
 console.log("script.js Part 1 Loaded");
+// ======================================
+// VIP NUMBER BAZAR V7
+// script.js - Part 2
+// Search + Filter
+// ======================================
+
+// Search Box
+const searchInput = document.getElementById("searchInput");
+
+let allVipNumbers = [];
+
+// Render VIP Cards
+function renderVipNumbers(list){
+
+    if(!vipGrid) return;
+
+    vipGrid.innerHTML = "";
+
+    if(list.length === 0){
+
+        vipGrid.innerHTML = `
+        <div class="vip-card">
+            <h3>No VIP Number Found</h3>
+        </div>
+        `;
+
+        return;
+    }
+
+    list.forEach(item=>{
+
+        vipGrid.innerHTML += createVipCard(item);
+
+    });
+
+}
+
+// Load & Store Data
+async function loadVipNumbers(){
+
+    try{
+
+        const snap = await getDocs(vipNumbersRef);
+
+        allVipNumbers = [];
+
+        snap.forEach(doc=>{
+
+            allVipNumbers.push(doc.data());
+
+        });
+
+        renderVipNumbers(allVipNumbers);
+
+    }catch(error){
+
+        console.log(error);
+
+        vipGrid.innerHTML = `
+        <div class="vip-card">
+            <h3>Failed To Load Data</h3>
+        </div>
+        `;
+
+    }
+
+}
+
+// Search
+if(searchInput){
+
+searchInput.addEventListener("input",()=>{
+
+const value = searchInput.value.trim();
+
+if(value===""){
+
+renderVipNumbers(allVipNumbers);
+
+return;
+
+}
+
+const filtered = allVipNumbers.filter(item=>{
+
+return item.number.includes(value);
+
+});
+
+renderVipNumbers(filtered);
+
+});
+
+}
+
+// Live Refresh
+onSnapshot(vipNumbersRef,()=>{
+
+loadVipNumbers();
+
+});
+
+console.log("script.js Part 2 Ready");
