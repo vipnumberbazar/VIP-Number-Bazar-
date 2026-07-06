@@ -395,3 +395,23 @@ async function initializeWebsite() {
 initializeWebsite();
 
 console.log("script.js Final Loaded");
+// ===============================
+// VIP NUMBER BAZAR V7 BUILD
+// Loader Fix
+// ===============================
+
+window.addEventListener("load",()=>{
+
+const loader=document.getElementById("loader");
+
+if(loader){
+
+setTimeout(()=>{
+
+loader.style.display="none";
+
+},500);
+
+}
+
+});
