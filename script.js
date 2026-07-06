@@ -187,3 +187,63 @@ loadVipNumbers();
 });
 
 console.log("script.js Part 2 Ready");
+// ======================================
+// VIP NUMBER BAZAR V7
+// script.js - Part 3
+// WhatsApp + Helpers
+// ======================================
+
+// Open WhatsApp
+window.openWhatsApp = function(number, price){
+
+    const message =
+`Hello VIP NUMBER BAZAR,
+
+I want to buy this VIP Number.
+
+Number : ${number}
+Price : ₹${price}`;
+
+    window.open(
+        "https://wa.me/918070424242?text=" +
+        encodeURIComponent(message),
+        "_blank"
+    );
+
+};
+
+// Format Price
+function formatPrice(price){
+
+    return "₹" + Number(price).toLocaleString("en-IN");
+
+}
+
+// Update Card
+function createVipCard(data){
+
+return `
+
+<div class="vip-card">
+
+<h3>${data.number}</h3>
+
+<p>${formatPrice(data.price)}</p>
+
+<p>${data.status}</p>
+
+<button
+class="btn"
+onclick="openWhatsApp('${data.number}','${data.price}')">
+
+Buy Now
+
+</button>
+
+</div>
+
+`;
+
+}
+
+console.log("script.js Part 3 Loaded");
