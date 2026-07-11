@@ -4,17 +4,25 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>VIP NUMBER BAZAR | Admin</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | VIP NUMBER BAZAR</title>
+
+<link rel="icon" href="../logo.png">
 
 <link rel="stylesheet" href="admin.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -22,6 +30,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </head>
 
 <body>
+
+<!-- Loader -->
 
 <div id="loader" class="loader">
 
@@ -31,181 +41,142 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <h2>VIP NUMBER BAZAR</h2>
 
-<p>Loading Admin Panel...</p>
+<p>Loading Dashboard...</p>
 
 </div>
 
 </div>
 
-<div class="admin-layout">
+<!-- Sidebar -->
 
 <aside class="sidebar">
 
-<div class="logo">
+<div class="sidebar-logo">
 
-<img src="logo.png">
+<img src="../logo.png" alt="VIP NUMBER BAZAR">
 
 <h2>VIP NUMBER BAZAR</h2>
 
-<p>V7 BUILD</p>
-
 </div>
 
-<ul>
+<ul class="menu">
 
-<li class="active" data-page="dashboard">
-
-<i class="fa-solid fa-house"></i>
-
+<li class="active">
+<i class="fa-solid fa-gauge"></i>
 Dashboard
-
 </li>
 
-<li data-page="vip">
-
-<i class="fa-solid fa-mobile-screen"></i>
-
+<li>
+<i class="fa-solid fa-mobile-screen-button"></i>
 VIP Numbers
-
 </li>
 
-<li data-page="orders">
-
+<li>
 <i class="fa-solid fa-cart-shopping"></i>
-
 Orders
-
 </li>
 
-<li data-page="customers">
-
+<li>
 <i class="fa-solid fa-users"></i>
-
 Customers
-
 </li>
 
-<li data-page="settings">
+<li>
+<i class="fa-solid fa-chart-line"></i>
+Analytics
+</li>
 
+<li>
+<i class="fa-solid fa-bell"></i>
+Notifications
+</li>
+
+<li>
 <i class="fa-solid fa-gear"></i>
-
 Settings
+</li>
 
+<li onclick="logout()">
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
 </li>
 
 </ul>
 
-<button id="logoutBtn">
-
-Logout
-
-</button>
-
 </aside>
 
-<main class="content">
+<!-- Main -->
 
-<header>
+<div class="main-content">
 
-<h1 id="pageTitle">
+<header class="topbar">
 
-Dashboard
+<h1>Dashboard</h1>
 
-</h1>
+<div class="admin-user">
+
+<img src="../logo.png" alt="Admin">
+
+<span>Administrator</span>
+
+</div>
 
 </header>
+<!-- Dashboard Cards -->
 
-<section
-id="dashboardPage"
-class="page active">
+<section class="dashboard">
 
 <div class="cards">
 
 <div class="card">
 
-<h2 id="totalVipNumbers">
+<i class="fa-solid fa-mobile-screen-button"></i>
 
-0
+<h2 id="totalVip">0</h2>
 
-</h2>
-
-<p>Total VIP</p>
+<p>Total VIP Numbers</p>
 
 </div>
 
 <div class="card">
 
-<h2 id="availableNumbers">
+<i class="fa-solid fa-cart-shopping"></i>
 
-0
+<h2 id="totalOrders">0</h2>
 
-</h2>
-
-<p>Available</p>
+<p>Total Orders</p>
 
 </div>
 
 <div class="card">
 
-<h2 id="soldNumbers">
+<i class="fa-solid fa-users"></i>
 
-0
+<h2 id="totalCustomers">0</h2>
 
-</h2>
-
-<p>Sold</p>
+<p>Total Customers</p>
 
 </div>
 
 <div class="card">
 
-<h2 id="totalOrders">
+<i class="fa-solid fa-eye"></i>
 
-0
+<h2 id="totalVisitors">0</h2>
 
-</h2>
-
-<p>Orders</p>
+<p>Total Visitors</p>
 
 </div>
 
 </div>
 
 </section>
-<section
-id="vipPage"
-class="page">
 
-<div class="page-header">
+<!-- Recent Orders -->
 
-<h2>VIP Numbers</h2>
+<section class="table-section">
 
-<button
-id="addVipBtn"
-class="primary-btn">
-
-+ Add VIP Number
-
-</button>
-
-</div>
-
-<div class="toolbar">
-
-<input
-type="text"
-id="searchVip"
-placeholder="Search VIP Number">
-
-<select id="filterStatus">
-
-<option value="all">All Status</option>
-<option value="Available">Available</option>
-<option value="Sold">Sold</option>
-
-</select>
-
-</div>
+<h2>Recent Orders</h2>
 
 <div class="table-responsive">
 
@@ -215,21 +186,33 @@ placeholder="Search VIP Number">
 
 <tr>
 
-<th>#</th>
+<th>Name</th>
+
+<th>Mobile</th>
 
 <th>VIP Number</th>
 
-<th>Price</th>
+<th>Payment</th>
 
 <th>Status</th>
 
-<th>Action</th>
+<th>Date</th>
 
 </tr>
 
 </thead>
 
-<tbody id="vipTableBody">
+<tbody id="ordersTable">
+
+<tr>
+
+<td colspan="6">
+
+Loading Orders...
+
+</td>
+
+</tr>
 
 </tbody>
 
@@ -239,43 +222,13 @@ placeholder="Search VIP Number">
 
 </section>
 
-<section
-id="ordersPage"
-class="page">
+<!-- Latest Customers -->
 
-<h2>Orders</h2>
+<section class="table-section">
 
-<table>
+<h2>Latest Customers</h2>
 
-<thead>
-
-<tr>
-
-<th>Customer</th>
-
-<th>VIP Number</th>
-
-<th>Price</th>
-
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-<tbody id="ordersTableBody">
-
-</tbody>
-
-</table>
-
-</section>
-
-<section
-id="customersPage"
-class="page">
-
-<h2>Customers</h2>
+<div class="table-responsive">
 
 <table>
 
@@ -289,141 +242,70 @@ class="page">
 
 <th>City</th>
 
+<th>Date</th>
+
 </tr>
 
 </thead>
 
-<tbody id="customersTableBody">
+<tbody id="customersTable">
+
+<tr>
+
+<td colspan="4">
+
+Loading Customers...
+
+</td>
+
+</tr>
 
 </tbody>
 
 </table>
 
-</section>
-
-<section
-id="settingsPage"
-class="page">
-
-<h2>Settings</h2>
-
-<form id="settingsForm">
-
-<input
-type="text"
-id="siteName"
-placeholder="Website Name">
-
-<input
-type="text"
-id="whatsappNumber"
-placeholder="WhatsApp Number">
-
-<button
-type="submit"
-class="primary-btn">
-
-Save Settings
-
-</button>
-
-</form>
+</div>
 
 </section>
-<!-- VIP Modal -->
+<!-- Footer -->
 
-<div id="vipModal" class="modal">
+<footer class="admin-footer">
 
-<div class="modal-content">
+<p>
 
-<h2 id="vipModalTitle">
+© 2026 VIP NUMBER BAZAR. All Rights Reserved.
 
-Add VIP Number
+</p>
 
-</h2>
-
-<form id="vipForm">
-
-<input
-type="hidden"
-id="vipDocId">
-
-<input
-type="text"
-id="vipNumber"
-placeholder="VIP Number"
-required>
-
-<input
-type="number"
-id="vipPrice"
-placeholder="Price"
-required>
-
-<select id="vipStatus">
-
-<option>Available</option>
-
-<option>Sold</option>
-
-</select>
-
-<button
-type="submit"
-class="primary-btn">
-
-Save
-
-</button>
-
-<button
-type="button"
-id="cancelVipBtn"
-class="secondary-btn">
-
-Cancel
-
-</button>
-
-</form>
+</footer>
 
 </div>
 
-</div>
+<!-- JavaScript Files -->
 
-<!-- Loading -->
+<script type="module" src="../firebase.js"></script>
 
-<div
-id="loadingOverlay"
-class="loading-overlay">
+<script type="module" src="admin.js"></script>
 
-<div class="spinner"></div>
+<script type="module" src="dashboard.js"></script>
 
-</div>
+<script type="module" src="vip.js"></script>
 
-<!-- Toast -->
+<script type="module" src="orders.js"></script>
 
-<div
-id="toast"
-class="toast">
+<script type="module" src="customers.js"></script>
 
-<span id="toastMessage">
+<script type="module" src="visitors.js"></script>
 
-Success
+<script type="module" src="analytics.js"></script>
 
-</span>
+<script type="module" src="notifications.js"></script>
 
-</div>
+<script type="module" src="reports.js"></script>
 
-<script
-type="module"
-src="admin.js">
+<script type="module" src="settings.js"></script>
 
-</script>
-
-</main>
-
-</div>
+<script type="module" src="backup.js"></script>
 
 </body>
 
