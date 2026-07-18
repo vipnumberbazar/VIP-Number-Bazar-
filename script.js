@@ -1,124 +1,202 @@
-// ==========================================
-// VIP NUMBER BAZAR ENTERPRISE v1.0
-// script.js Part 1
-// ==========================================
+/*==================================================
+VIP NUMBER BAZAR
+script.js
+Part 1 / 8
+==================================================*/
 
-import {
-    vipNumbersRef,
-    getDocs
-} from "./firebase.js";
+"use strict";
 
-// ==============================
-// DOM Elements
-// ==============================
+/*==================================================
+DOM ELEMENTS
+==================================================*/
+
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+const vipList = document.getElementById("vipList");
+
+const detailsModal = document.getElementById("detailsModal");
+const modalBody = document.getElementById("modalBody");
+const closeModal = document.getElementById("closeModal");
 
 const loader = document.getElementById("loader");
-const vipGrid = document.getElementById("vipNumbersGrid");
-const searchInput = document.getElementById("searchInput");
 
-// ==============================
-// Variables
-// ==============================
+const backToTop = document.getElementById("backToTop");
+
+/*==================================================
+GLOBAL VARIABLES
+==================================================*/
 
 let vipNumbers = [];
+
 let filteredNumbers = [];
 
-// ==============================
-// Loader
-// ==============================
+let selectedNumber = null;
 
-function showLoader() {
-    if (loader) loader.style.display = "flex";
-}
+/*==================================================
+HELPER FUNCTIONS
+==================================================*/
 
-function hideLoader() {
-    if (loader) loader.style.display = "none";
-}
+function showLoader(){
 
-// ==============================
-// Price Formatter
-// ==============================
+if(loader){
 
-function formatPrice(price) {
-    return "₹" + Number(price).toLocaleString("en-IN");
-}
-
-// ==============================
-// Status Badge
-// ==============================
-
-function getStatusBadge(status) {
-
-    if (!status) {
-        return `<span class="badge available">AVAILABLE</span>`;
-    }
-
-    if (status.toLowerCase() === "sold") {
-        return `<span class="badge sold">SOLD</span>`;
-    }
-
-    return `<span class="badge available">AVAILABLE</span>`;
-}
-
-// ==============================
-// VIP Card
-// ==============================
-
-function createCard(item) {
-
-    return `
-
-<div class="vip-card">
-
-<div class="vip-top">
-
-<h2>${item.number}</h2>
-
-${getStatusBadge(item.status)}
-
-</div>
-
-<h3>${formatPrice(item.price)}</h3>
-
-<button
-class="btn"
-onclick="buyNumber('${item.number}','${item.price}')"
-${item.status === "Sold" ? "disabled" : ""}>
-
-${item.status === "Sold" ? "SOLD" : "BOOK NOW"}
-
-</button>
-
-</div>
-
-`;
+loader.style.display="flex";
 
 }
 
-console.log("VIP NUMBER BAZAR");
-console.log("script.js Part 1 Loaded");
-// ==========================================
-// VIP NUMBER BAZAR ENTERPRISE v1.0
-// script.js Part 2
-// ==========================================
+}
 
-// ==============================
-// Render VIP Cards
-// ==============================
+function hideLoader(){
 
-function renderCards(list) {
+if(loader){
 
-    if (!vipGrid) return;
+loader.style.display="none";
 
-    vipGrid.innerHTML = "";
+}
 
-    if (list.length === 0) {
+}
 
-        vipGrid.innerHTML = `
+function showModal(){
 
-<div class="vip-card">
+if(detailsModal){
 
-<h2>No VIP Numbers Found</h2>
+detailsModal.classList.add("active");
+
+}
+
+}
+
+function hideModal(){
+
+if(detailsModal){
+
+detailsModal.classList.remove("active");
+
+}
+
+}
+
+function formatPrice(price){
+
+return "₹" + Number(price).toLocaleString("en-IN");
+
+}
+
+function clearVipCards(){
+
+if(vipList){
+
+vipList.innerHTML="";
+
+}
+
+}
+
+/*==================================================
+INITIAL LOADER
+==================================================*/
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+hideLoader();
+
+},800);
+
+});
+/*==================================================
+SEARCH FUNCTIONALITY
+==================================================*/
+
+function filterVipNumbers(keyword){
+
+if(!keyword){
+
+filteredNumbers=[...vipNumbers];
+
+renderVipCards(filteredNumbers);
+
+return;
+
+}
+
+keyword=keyword.toString().trim().toLowerCase();
+
+filteredNumbers=vipNumbers.filter(item=>{
+
+const number=(item.number||"").toString().toLowerCase();
+
+const operator=(item.operator||"").toString().toLowerCase();
+
+const category=(item.category||"").toString().toLowerCase();
+
+const price=(item.price||"").toString();
+
+return(
+
+number.includes(keyword) ||
+
+operator.includes(keyword) ||
+
+category.includes(keyword) ||
+
+price.includes(keyword)
+
+);
+
+});
+
+renderVipCards(filteredNumbers);
+
+}
+
+/*==================================================
+SEARCH EVENTS
+==================================================*/
+
+if(searchBtn){
+
+searchBtn.addEventListener("click",()=>{
+
+filterVipNumbers(searchInput.value);
+
+});
+
+}
+
+if(searchInput){
+
+searchInput.addEventListener("keyup",(e)=>{
+
+filterVipNumbers(e.target.value);
+
+});
+
+searchInput.addEventListener("keypress",(e)=>{
+
+if(e.key==="Enter"){
+
+filterVipNumbers(searchInput.value);
+
+}
+
+});
+
+}
+
+/*==================================================
+NO DATA MESSAGE
+==================================================*/
+
+function showNoData(){
+
+vipList.innerHTML=`
+
+<div class="no-data">
+
+<h2>No VIP Number Found</h2>
 
 <p>Please try another search.</p>
 
@@ -126,59 +204,500 @@ function renderCards(list) {
 
 `;
 
-        return;
-    }
+}
+/*==================================================
+RENDER VIP CARDS
+==================================================*/
 
-    list.forEach(item => {
+function renderVipCards(data){
 
-        vipGrid.innerHTML += createCard(item);
+if(!vipList) return;
 
-    });
+clearVipCards();
+
+if(!data || data.length===0){
+
+showNoData();
+
+return;
 
 }
 
-// ==============================
-// Load VIP Numbers
-// ==============================
+data.forEach((item,index)=>{
 
-async function loadVipNumbers() {
+const card=document.createElement("div");
 
-    try {
+card.className="vip-card";
 
-        showLoader();
+card.innerHTML=`
 
-        const snapshot = await getDocs(vipNumbersRef);
+<span class="badge">
 
-        vipNumbers = [];
+${item.featured ? "Featured" : (item.category || "VIP")}
 
-        snapshot.forEach(doc => {
+</span>
 
-            vipNumbers.push({
+<h2>${item.number}</h2>
 
-                id: doc.id,
-                ...doc.data()
+<p>${item.operator}</p>
 
-            });
+<h3>${formatPrice(item.price)}</h3>
 
-        });
+<div class="card-buttons">
 
-        filteredNumbers = [...vipNumbers];
+<button
+class="details-btn"
+data-index="${index}">
 
-        renderCards(filteredNumbers);
+Details
 
-        hideLoader();
+</button>
 
-    } catch (error) {
+<a
+class="buy-btn"
+target="_blank"
+href="https://wa.me/918070424242?text=I%20want%20to%20buy%20VIP%20Number%20${item.number}">
 
-        console.error("Load Error:", error);
+Buy Now
 
-        hideLoader();
+</a>
 
-        vipGrid.innerHTML = `
+</div>
 
-<div class="vip-card">
+`;
 
-<h2>Failed to Load Data</h2>
+vipList.appendChild(card);
+
+});
+
+bindDetailsButtons();
+
+}
+
+/*==================================================
+INITIAL RENDER
+==================================================*/
+
+function loadVipCards(){
+
+filteredNumbers=[...vipNumbers];
+
+renderVipCards(filteredNumbers);
+
+}
+/*==================================================
+DETAILS MODAL
+==================================================*/
+
+function bindDetailsButtons(){
+
+const buttons=document.querySelectorAll(".details-btn");
+
+buttons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const index=button.dataset.index;
+
+selectedNumber=filteredNumbers[index];
+
+openDetailsModal(selectedNumber);
+
+});
+
+});
+
+}
+
+function openDetailsModal(item){
+
+if(!item) return;
+
+modalBody.innerHTML=`
+
+<h2>${item.number}</h2>
+
+<p><strong>Operator :</strong> ${item.operator}</p>
+
+<p><strong>Category :</strong> ${item.category}</p>
+
+<p><strong>Price :</strong> ${formatPrice(item.price)}</p>
+
+<p><strong>Status :</strong> ${item.status || "Available"}</p>
+
+<p><strong>Description :</strong></p>
+
+<p>
+
+${item.description || "Premium VIP Mobile Number available for instant booking."}
+
+</p>
+
+<a
+href="https://wa.me/918070424242?text=I want to buy VIP Number ${item.number}"
+target="_blank"
+class="gold-btn"
+style="margin-top:20px;display:inline-flex;">
+
+Book on WhatsApp
+
+</a>
+
+`;
+
+showModal();
+
+}
+
+/*==================================================
+MODAL EVENTS
+==================================================*/
+
+if(closeModal){
+
+closeModal.addEventListener("click",hideModal);
+
+}
+
+window.addEventListener("click",(e)=>{
+
+if(e.target===detailsModal){
+
+hideModal();
+
+}
+
+});
+
+window.addEventListener("keydown",(e)=>{
+
+if(e.key==="Escape"){
+
+hideModal();
+
+}
+
+});
+/*==================================================
+BACK TO TOP BUTTON
+==================================================*/
+
+window.addEventListener("scroll",()=>{
+
+const scrollTop=window.pageYOffset || document.documentElement.scrollTop;
+
+if(scrollTop>400){
+
+backToTop.classList.add("show");
+
+}else{
+
+backToTop.classList.remove("show");
+
+}
+
+});
+
+if(backToTop){
+
+backToTop.addEventListener("click",()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+});
+
+}
+
+/*==================================================
+SMOOTH NAVIGATION
+==================================================*/
+
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+
+link.addEventListener("click",(e)=>{
+
+const target=document.querySelector(link.getAttribute("href"));
+
+if(target){
+
+e.preventDefault();
+
+target.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+}
+
+});
+
+});
+
+/*==================================================
+HEADER SHADOW
+==================================================*/
+
+const header=document.querySelector("header");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>50){
+
+header.style.boxShadow="0 10px 25px rgba(0,0,0,.35)";
+
+}else{
+
+header.style.boxShadow="none";
+
+}
+
+});
+/*==================================================
+CATEGORY FILTER
+==================================================*/
+
+const categoryCards=document.querySelectorAll(".category-card");
+
+categoryCards.forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+const category=card.textContent.trim().toLowerCase();
+
+if(category==="all numbers"){
+
+filteredNumbers=[...vipNumbers];
+
+renderVipCards(filteredNumbers);
+
+return;
+
+}
+
+filteredNumbers=vipNumbers.filter(item=>{
+
+return(item.category||"").toLowerCase()===category;
+
+});
+
+renderVipCards(filteredNumbers);
+
+});
+
+});
+
+/*==================================================
+FEATURED FILTER
+==================================================*/
+
+function showFeaturedNumbers(){
+
+filteredNumbers=vipNumbers.filter(item=>item.featured===true);
+
+renderVipCards(filteredNumbers);
+
+}
+
+/*==================================================
+AVAILABLE FILTER
+==================================================*/
+
+function showAvailableNumbers(){
+
+filteredNumbers=vipNumbers.filter(item=>{
+
+return(item.status||"Available")==="Available";
+
+});
+
+renderVipCards(filteredNumbers);
+
+}
+
+/*==================================================
+PRICE SORT
+==================================================*/
+
+function sortPriceLowToHigh(){
+
+filteredNumbers.sort((a,b)=>Number(a.price)-Number(b.price));
+
+renderVipCards(filteredNumbers);
+
+}
+
+function sortPriceHighToLow(){
+
+filteredNumbers.sort((a,b)=>Number(b.price)-Number(a.price));
+
+renderVipCards(filteredNumbers);
+
+}
+/*==================================================
+UTILITY FUNCTIONS
+==================================================*/
+
+function getVipByNumber(number){
+
+return vipNumbers.find(item=>item.number===number);
+
+}
+
+function refreshVipList(){
+
+filteredNumbers=[...vipNumbers];
+
+renderVipCards(filteredNumbers);
+
+}
+
+function resetSearch(){
+
+if(searchInput){
+
+searchInput.value="";
+
+}
+
+refreshVipList();
+
+}
+
+/*==================================================
+LIVE SEARCH
+==================================================*/
+
+if(searchInput){
+
+searchInput.addEventListener("input",(e)=>{
+
+const keyword=e.target.value.trim().toLowerCase();
+
+if(keyword===""){
+
+refreshVipList();
+
+return;
+
+}
+
+filterVipNumbers(keyword);
+
+});
+
+}
+
+/*==================================================
+COPY NUMBER
+==================================================*/
+
+function copyVipNumber(number){
+
+navigator.clipboard.writeText(number)
+
+.then(()=>{
+
+alert("VIP Number Copied Successfully");
+
+})
+
+.catch(()=>{
+
+alert("Unable to Copy Number");
+
+});
+
+}
+
+/*==================================================
+CARD EVENTS
+==================================================*/
+
+document.addEventListener("click",(e)=>{
+
+const copyBtn=e.target.closest(".copy-number");
+
+if(copyBtn){
+
+const number=copyBtn.dataset.number;
+
+copyVipNumber(number);
+
+}
+
+});
+
+/*==================================================
+WINDOW ONLINE / OFFLINE
+==================================================*/
+
+window.addEventListener("offline",()=>{
+
+alert("No Internet Connection");
+
+});
+
+window.addEventListener("online",()=>{
+
+console.log("Internet Connected");
+
+});
+
+/*==================================================
+PAGE READY
+==================================================*/
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+showLoader();
+
+setTimeout(()=>{
+
+hideLoader();
+
+},500);
+
+});
+
+
+/*==================================================
+INITIALIZE APP
+==================================================*/
+
+async function initializeApp(){
+
+try{
+
+showLoader();
+
+if(typeof loadVipNumbers==="function"){
+
+await loadVipNumbers();
+
+}else{
+
+loadVipCards();
+
+}
+
+}catch(error){
+
+console.error(error);
+
+vipList.innerHTML=`
+
+<div class="no-data">
+
+<h2>Something Went Wrong</h2>
 
 <p>Please refresh the page.</p>
 
@@ -186,110 +705,47 @@ async function loadVipNumbers() {
 
 `;
 
-    }
+}finally{
+
+hideLoader();
 
 }
 
-// ==============================
-// Search
-// ==============================
-
-if (searchInput) {
-
-    searchInput.addEventListener("input", () => {
-
-        const keyword = searchInput.value
-            .trim()
-            .toLowerCase();
-
-        if (keyword === "") {
-
-            filteredNumbers = [...vipNumbers];
-
-        } else {
-
-            filteredNumbers = vipNumbers.filter(item =>
-
-                String(item.number)
-                .toLowerCase()
-                .includes(keyword)
-
-            );
-
-        }
-
-        renderCards(filteredNumbers);
-
-    });
-
 }
 
-console.log("script.js Part 2 Loaded");
-// ==========================================
-// VIP NUMBER BAZAR ENTERPRISE v1.0
-// script.js Part 3 (Final)
-// ==========================================
+/*==================================================
+WINDOW EVENTS
+==================================================*/
 
-// ==============================
-// WhatsApp Booking
-// ==============================
+window.addEventListener("load",()=>{
 
-window.buyNumber = function(number, price) {
-
-    const message =
-`Hello VIP NUMBER BAZAR,
-
-I want to book this VIP Number.
-
-VIP Number : ${number}
-
-Price : ₹${price}
-
-Please contact me.`;
-
-    window.open(
-        "https://wa.me/918070424242?text=" +
-        encodeURIComponent(message),
-        "_blank"
-    );
-
-};
-
-// ==============================
-// Initialize Website
-// ==============================
-
-async function initializeWebsite() {
-
-    await loadVipNumbers();
-
-}
-
-// ==============================
-// Page Loaded
-// ==============================
-
-window.addEventListener("load", () => {
-
-    initializeWebsite();
+initializeApp();
 
 });
 
-// ==============================
-// Service Worker
-// ==============================
+window.addEventListener("focus",()=>{
 
-if ("serviceWorker" in navigator) {
+if(searchInput && searchInput.value===""){
 
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker
-            .register("./sw.js")
-            .catch(error => console.log(error));
-
-    });
+refreshVipList();
 
 }
 
-console.log("VIP NUMBER BAZAR ENTERPRISE v1.0");
-console.log("script.js Ready");
+});
+
+/*==================================================
+GLOBAL FUNCTIONS
+==================================================*/
+
+window.showFeaturedNumbers=showFeaturedNumbers;
+window.showAvailableNumbers=showAvailableNumbers;
+window.sortPriceLowToHigh=sortPriceLowToHigh;
+window.sortPriceHighToLow=sortPriceHighToLow;
+window.resetSearch=resetSearch;
+
+/*==================================================
+END OF FILE
+==================================================*/
+
+
+
